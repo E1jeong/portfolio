@@ -19,24 +19,6 @@
   --font-mono: var(--font-jetbrains-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;       /* Deep slate background */
-    --surface: #1e293b;          /* Darker slate card surface */
-    --surface-hover: #1e293b;
-    --text: #f8fafc;             /* Bright white/slate text for reading */
-    --text-muted: #94a3b8;       /* Slate cool gray */
-    --text-light: #64748b;       /* Lighter slate gray for detail text */
-    --line: rgba(255, 255, 255, 0.05); /* Soft borders */
-    
-    /* Sage Green Accent for Dark Mode */
-    --accent: #10b981;
-    --accent-light: #34d399;
-    --accent-soft: rgba(16, 185, 129, 0.1);
-    --accent-strong: #34d399;
-  }
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -335,7 +317,6 @@ a {
 
 .project-card:hover {
   background-color: var(--surface);
-  border-color: rgba(16, 185, 12 emerald9, 0.25);
   border-color: rgba(16, 185, 129, 0.25);
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(16, 185, 129, 0.01), 0 28px 56px -12px rgba(16, 185, 129, 0.04);
@@ -409,13 +390,6 @@ a {
   transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  .tech-tag {
-    background: #1e293b;
-    border: 1px solid var(--line);
-  }
-}
-
 .tech-tag:hover {
   background-color: var(--accent) !important;
   color: #ffffff !important;
@@ -432,12 +406,6 @@ a {
   border-radius: 8px;
   padding: 16px 24px;
   margin-bottom: 28px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .project-meta-grid {
-    background: rgba(255, 255, 255, 0.02);
-  }
 }
 
 .meta-col {
