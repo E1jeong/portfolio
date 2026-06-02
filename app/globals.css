@@ -329,6 +329,7 @@ a {
   border-radius: 12px;
   padding: 44px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.015), 0 20px 48px -15px rgba(0, 0, 0, 0.025);
+  cursor: pointer;
   transition: border-color 0.35s ease, background-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
 }
 
@@ -551,6 +552,17 @@ a {
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
+.project-detail-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.project-card:hover .project-detail-link,
 .project-detail-link:hover {
   color: var(--accent-strong);
   border-color: var(--accent-strong);
