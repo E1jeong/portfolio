@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f9fa;      /* Clean, soft paper-like off-white background */
+  --background: #faf6eb;      /* Soft warm ivory background */
   --surface: #ffffff;         /* Pure white cards and container surface */
   --surface-hover: #f1f3f5;   /* Light grey for micro hover feed */
   --text: #111827;            /* Deep black/charcoal for premium typography readability */

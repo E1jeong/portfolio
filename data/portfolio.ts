@@ -31,7 +31,7 @@ export const profile = {
   contacts: [
     { label: "Email", href: "mailto:won9964@gmail.com" },
     { label: "GitHub", href: "https://github.com/E1jeong" },
-    { label: "Blog", href: "#" }
+    { label: "Blog", href: "https://still-coding.tistory.com/" }
   ]
 };
 
