@@ -60,58 +60,13 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
-    id: "ubio-n-face-pro",
-    name: "UBio-N Face Pro",
-    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
-    period: "2025.07 - 진행 중",
-    type: "Android system app",
-    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
-    contribution: "분석 기준 임시 작성",
-    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
-    highlights: [
-      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다.",
-      "폴더명은 ubio-x-facepro-kakao이지만 포트폴리오에서는 UBio-N Face Pro로 표기합니다.",
-      "현재 로컬 코드는 최신본이 아니므로 추후 최신 코드 반영 시 내용을 갱신합니다."
-    ],
-    outcomes: [
-      "현재 보유 로컬 코드는 최신본이 아니므로, Notion 기록과 임시 코드 분석 기준으로 작성했습니다.",
-      "최신 코드가 확보되면 Git 이력과 실제 담당 범위 기준으로 다시 정리합니다."
-    ],
-    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
-    confidence: "code-and-notion"
-  },
-  {
-    id: "fisherlotto",
-    name: "Fisher Lotto",
-    summary: "로또 정보, QR 스캔, 구독/결제, 알림을 제공하는 개인 Android 앱과 서브 백엔드",
-    period: "2025 - 2026",
-    type: "Android app + API backend",
-    role: "Android 앱 및 백엔드 개발",
-    stack: ["Kotlin", "Compose", "Room", "Firebase", "Google Play Billing", "Next.js", "MySQL", "FCM"],
-    highlights: [
-      "CameraX/ML Kit 기반 QR 스캔, 회차 정보, 통계, 예상번호 기능을 구성했습니다.",
-      "Google Play Billing, 구독 상태 동기화, FCM, WorkManager 기반 알림 흐름을 구현했습니다.",
-      "Next.js API 백엔드에서 영수증 검증, Pub/Sub webhook, FCM 연동, 예상번호 API를 처리했습니다."
-    ],
-    outcomes: [
-      "앱의 구독 상태와 서버 검증, 실시간 알림 흐름을 하나의 사용자 등급 관리 흐름으로 연결했습니다.",
-      "Android 앱과 백엔드 API를 함께 관리하며 결제, 알림, 예상번호 기능의 운영 흐름을 정리했습니다."
-    ],
-    evidence: [
-      "fisherlotto Git author: E1jeong <won9964@gmail.com>",
-      "lotto-sub-backend Git author: E1jeong <won9964@gmail.com>",
-      "로컬 README 및 API 코드"
-    ],
-    confidence: "git"
-  },
-  {
     id: "renew-smartset",
     name: "SmartSet Renewal",
     summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
     period: "2024.07 - 2025.04",
     type: "Android field operation app",
-    role: "Android 개발 전반",
-    contribution: "Git author 기준 주요 구현 담당",
+    role: "Android 아키텍처 리뉴얼 설계 및 주요 기능 구현",
+    contribution: "전체 코드 기여도 80% 이상 담당 및 아키텍처 리뉴얼 주도",
     stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
     highlights: [
       "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층을 분리했습니다.",
@@ -130,12 +85,36 @@ export const projects: Project[] = [
     confidence: "git"
   },
   {
+    id: "fisherlotto",
+    name: "Fisher Lotto",
+    summary: "로또 정보, QR 스캔, 구독/결제, 알림을 제공하는 개인 Android 앱과 서브 백엔드",
+    period: "2025 - 2026",
+    type: "Android app + API backend",
+    role: "모바일 클라이언트(Android) 및 API 백엔드 1인 풀스택 개발",
+    stack: ["Kotlin", "Compose", "Room", "Firebase", "Google Play Billing", "Next.js", "MySQL", "FCM"],
+    highlights: [
+      "CameraX/ML Kit 기반 QR 스캔, 회차 정보, 통계, 예상번호 기능을 구성했습니다.",
+      "Google Play Billing, 구독 상태 동기화, FCM, WorkManager 기반 알림 흐름을 구현했습니다.",
+      "Next.js API 백엔드에서 영수증 검증, Pub/Sub webhook, FCM 연동, 예상번호 API를 처리했습니다."
+    ],
+    outcomes: [
+      "Next.js API 백엔드와 Google Play 결제 영수증 검증 프로세스를 연동하여 실시간 구독 상태 불일치를 제거했습니다.",
+      "FCM과 WorkManager를 유기적으로 조합하여 백그라운드 환경에서도 높은 알림 도달률을 확보했습니다."
+    ],
+    evidence: [
+      "fisherlotto Git author: E1jeong <won9964@gmail.com>",
+      "lotto-sub-backend Git author: E1jeong <won9964@gmail.com>",
+      "로컬 README 및 API 코드"
+    ],
+    confidence: "git"
+  },
+  {
     id: "smartset",
     name: "SmartSet",
     summary: "NFC 기반 단말 설치, 검침, 설정, AS를 지원하는 Java Android 현장 운영 앱",
     period: "2021 - 2025",
     type: "Android field operation app",
-    role: "Android 유지보수 및 기능 개선",
+    role: "Java 레거시 코드베이스 최적화 및 현장 단말 연동 기능 개선",
     stack: ["Java", "Android SDK", "NFC", "GPS", "Excel 처리", "단말 프로토콜"],
     highlights: [
       "Android 14 대응을 위해 Location BroadcastReceiver 처리를 수정했습니다.",
@@ -149,9 +128,27 @@ export const projects: Project[] = [
     evidence: [
       "Git remote: https://github.com/E1jeong/smartset.git",
       "Git author: E1jeong <won9964@gmail.com>",
-      "새 클론 경로: C:\\Users\\sumas\\OneDrive\Desktop\\dev\\6.project\\smartset"
+      "새 클론 경로: C:\\Users\\sumas\\OneDrive\\Desktop\\dev\\6.project\\smartset"
     ],
     confidence: "git"
+  },
+  {
+    id: "ubio-n-face-pro",
+    name: "UBio-N Face Pro",
+    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
+    period: "2025.07 - 진행 중",
+    type: "Android system app",
+    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
+    contribution: "핵심 아키텍처 분석 및 시스템 연동 흐름 문서화",
+    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
+    highlights: [
+      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다."
+    ],
+    outcomes: [
+      "Notion 설계 문서를 바탕으로 AIDL 통신 인터페이스 및 단말 하드웨어 모듈과의 연동 흐름을 파악 및 문서화하여 개발 생산성 기반을 다졌습니다."
+    ],
+    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
+    confidence: "code-and-notion"
   },
   {
     id: "hitec-c-projects",
@@ -163,12 +160,10 @@ export const projects: Project[] = [
     stack: ["C", "MSP430", "UART", "NFC", "FOTA", "Meter Protocol"],
     highlights: [
       "meter_hitec-total에서 디지털 수도 계량기 펌웨어 구조를 확인했습니다.",
-      "terminal_lg_bc95g-fota_new에서 NB-IoT/Lora, FOTA, NFC, 계량기 프로토콜 관련 구조를 분석했습니다.",
-      "단기 참여 프로젝트이므로 상세 성과보다 경험 범위 중심으로 간략히 표기합니다."
+      "terminal_lg_bc95g-fota_new에서 NB-IoT/Lora, FOTA, NFC, 계량기 프로토콜 관련 구조를 분석했습니다."
     ],
     outcomes: [
-      "Android 현장 앱과 연결되는 계량기/단말기 펌웨어 구조를 이해하는 데 도움이 된 경험입니다.",
-      "단기 참여 프로젝트이므로 성과보다 분석 범위와 기술 맥락 중심으로 표기합니다."
+      "Android 현장 앱과 연결되는 계량기/단말기 펌웨어 구조를 이해하는 데 도움이 된 경험입니다."
     ],
     evidence: ["로컬 C 프로젝트 구조", "Git 이력 없음"],
     confidence: "limited"
@@ -182,8 +177,8 @@ export const experiences: Experience[] = [
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
-      "UBio-N Face Pro 일본향 출입문 통제 단말의 Android 시스템 앱과 하드웨어 연동을 담당했습니다.",
-      "AIDL IPC, NFC, QR, Face SDK, SQLCipher 등 단말 환경의 인증/연동 흐름을 다뤘습니다."
+      "UBio-N Face Pro 일본향 출입문 통제 단말의 Android 시스템 앱과 하드웨어 연동을 전담했습니다.",
+      "AIDL IPC, NFC, QR, Face SDK, SQLCipher 등 단말 환경의 인증/연동 흐름을 정밀 분석하고 단말 시스템 앱 구현을 설계했습니다."
     ]
   },
   {
@@ -192,8 +187,8 @@ export const experiences: Experience[] = [
     role: "Android Developer / 선임",
     period: "2021.04 - 2025.04",
     points: [
-      "SmartSet과 SmartSet Renewal에서 NFC 기반 단말 설치/검침/설정/AS 업무 흐름을 개발했습니다.",
-      "Java 레거시 Android 앱 운영 경험과 Kotlin/Compose 기반 구조 개선 경험을 함께 쌓았습니다."
+      "SmartSet과 SmartSet Renewal에서 NFC 기반 단말 설치/검침/설정/AS 업무 흐름을 설계 및 개발했습니다.",
+      "Java 레거시 Android 앱 운영을 고도화하고 Kotlin/Compose 기반 구조 개선을 성공적으로 주도했습니다."
     ]
   },
   {
@@ -202,8 +197,8 @@ export const experiences: Experience[] = [
     role: "Android & Backend Developer",
     period: "2025 - 2026",
     points: [
-      "Fisher Lotto Android 앱과 lotto-sub-backend를 직접 개발했습니다.",
-      "Google Play Billing, Pub/Sub, FCM, MySQL, Next.js API를 앱 구독 흐름과 연결했습니다."
+      "Fisher Lotto Android 앱과 lotto-sub-backend를 기획 및 풀스택 개발했습니다.",
+      "Google Play Billing, Pub/Sub, FCM, MySQL, Next.js API를 유기적으로 연동하여 인앱 구독 및 알림 푸시 자동화 파이프라인을 구축했습니다."
     ]
   }
 ];

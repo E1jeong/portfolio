@@ -1,13 +1,67 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { experiences, profile, projects, skillGroups } from "../data/portfolio";
 
-const confidenceLabels = {
-  git: "Git Verified",
-  "code-and-notion": "Code & Notion Based",
-  limited: "Limited Analysis"
-} as const;
+function MediaPlaceholder() {
+  return (
+    <div className="media-placeholder" aria-label="프로젝트 데모 미디어 준비 중">
+      <div className="placeholder-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+          <circle cx="9" cy="9" r="2" />
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+        </svg>
+      </div>
+      <span className="placeholder-text">Demo Media Pending</span>
+    </div>
+  );
+}
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState("about");
+
+  useEffect(() => {
+    const sections = document.querySelectorAll(".content-section");
+    const observerOptions = {
+      root: null,
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>, label: string, href: string) => {
+    if (href === "#") {
+      e.preventDefault();
+      alert(`${label} 링크는 현재 준비 중입니다.`);
+    }
+  };
+
   return (
     <div className="layout-container">
       {/* Left fixed sidebar */}
@@ -24,25 +78,37 @@ export default function Home() {
           <nav className="nav-menu" aria-label="섹션 이동 네비게이션">
             <ul>
               <li>
-                <a href="#about" className="nav-link">
+                <a
+                  href="#about"
+                  className={`nav-link ${activeSection === "about" ? "active" : ""}`}
+                >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">ABOUT</span>
                 </a>
               </li>
               <li>
-                <a href="#projects" className="nav-link">
+                <a
+                  href="#projects"
+                  className={`nav-link ${activeSection === "projects" ? "active" : ""}`}
+                >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">PROJECTS</span>
                 </a>
               </li>
               <li>
-                <a href="#skills" className="nav-link">
+                <a
+                  href="#skills"
+                  className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
+                >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">SKILLS</span>
                 </a>
               </li>
               <li>
-                <a href="#experience" className="nav-link">
+                <a
+                  href="#experience"
+                  className={`nav-link ${activeSection === "experience" ? "active" : ""}`}
+                >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">EXPERIENCE</span>
                 </a>
@@ -50,18 +116,18 @@ export default function Home() {
             </ul>
           </nav>
 
-          {/* Quick shortcuts for top projects */}
+          {/* Quick shortcuts for top projects (Sorted by priority in Guide) */}
           <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
             <p className="shortcuts-title">Featured Projects</p>
             <ul className="shortcuts-list">
               <li>
-                <a href="#ubio-n-face-pro" className="shortcut-link">UBio-N Face Pro</a>
+                <a href="#renew-smartset" className="shortcut-link">SmartSet Renewal</a>
               </li>
               <li>
                 <a href="#fisherlotto" className="shortcut-link">Fisher Lotto</a>
               </li>
               <li>
-                <a href="#renew-smartset" className="shortcut-link">SmartSet Renewal</a>
+                <a href="#smartset" className="shortcut-link">SmartSet</a>
               </li>
             </ul>
           </div>
@@ -71,9 +137,12 @@ export default function Home() {
               <a
                 key={contact.label}
                 href={contact.href}
-                className="contact-link"
+                className={`contact-link ${contact.href === "#" ? "disabled-link" : ""}`}
                 target={contact.href.startsWith("http") ? "_blank" : undefined}
                 rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                onClick={(e) => handleContactClick(e, contact.label, contact.href)}
+                aria-disabled={contact.href === "#" ? "true" : undefined}
+                tabIndex={contact.href === "#" ? -1 : undefined}
               >
                 {contact.label}
               </a>
@@ -129,6 +198,9 @@ export default function Home() {
                   ) : null}
                 </div>
 
+                {/* Media Placeholder for each project card */}
+                <MediaPlaceholder />
+
                 <div className="project-details">
                   <div className="details-block">
                     <h4 className="details-title">주요 업무 및 해결 내용</h4>
@@ -150,12 +222,14 @@ export default function Home() {
                 </div>
 
                 <footer className="project-card-footer">
-                  <span className="evidence-badge">
-                    {confidenceLabels[project.confidence]}
-                  </span>
                   {project.evidence && project.evidence.length > 0 && (
-                    <span className="evidence-details">
-                      ({project.evidence.join(" · ")})
+                    <span className="evidence-tags-wrapper">
+                      <span className="evidence-label-text">증적 자료:</span>
+                      {project.evidence.map((item, idx) => (
+                        <span key={idx} className="evidence-tag-item">
+                          {item}
+                        </span>
+                      ))}
                     </span>
                   )}
                   <Link
