@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { experiences, profile, projects, skillGroups } from "../data/portfolio";
 
 const confidenceLabels = {
@@ -157,6 +158,13 @@ export default function Home() {
                       ({project.evidence.join(" · ")})
                     </span>
                   )}
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="project-detail-link"
+                    aria-label={`${project.name} detail 보기`}
+                  >
+                    View Detail
+                  </Link>
                 </footer>
               </article>
             ))}
