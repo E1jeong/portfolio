@@ -60,29 +60,22 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
-    id: "renew-smartset",
-    name: "SmartSet Renewal",
-    summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
-    period: "2024.07 - 2025.04",
-    type: "Android field operation app",
-    role: "Android 아키텍처 리뉴얼 설계 및 주요 기능 구현",
-    contribution: "전체 코드 기여도 80% 이상 담당 및 아키텍처 리뉴얼 주도",
-    stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
+    id: "ubio-n-face-pro",
+    name: "UBio-N Face Pro",
+    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
+    period: "2025.07 - 진행 중",
+    type: "Android system app",
+    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
+    contribution: "핵심 아키텍처 분석 및 시스템 연동 흐름 문서화",
+    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
     highlights: [
-      "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층을 분리했습니다.",
-      "NFC 요청/응답 흐름, QR, 지도 클러스터링, 사진 업로드, 다국어 처리를 구현했습니다.",
-      "서버 SQLite 데이터를 Room 기반 로컬 데이터 구조로 이전하는 흐름을 정리했습니다."
+      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다."
     ],
     outcomes: [
-      "Java 레거시 앱의 현장 업무 흐름을 Kotlin/Compose 기반 구조로 재정리했습니다.",
-      "NFC, 지도, 사진, 데이터 이전처럼 현장 운영에 필요한 주요 흐름을 모듈화된 구조 안에 배치했습니다."
+      "Notion 설계 문서를 바탕으로 AIDL 통신 인터페이스 및 단말 하드웨어 모듈과의 연동 흐름을 파악 및 문서화하여 개발 생산성 기반을 다졌습니다."
     ],
-    evidence: [
-      "Git author: E1jeong <won9964@gmail.com>",
-      "Notion Smartset renewal 기록",
-      "로컬 코드 구조"
-    ],
-    confidence: "git"
+    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
+    confidence: "code-and-notion"
   },
   {
     id: "fisherlotto",
@@ -109,6 +102,31 @@ export const projects: Project[] = [
     confidence: "git"
   },
   {
+    id: "renew-smartset",
+    name: "SmartSet Renewal",
+    summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
+    period: "2024.07 - 2025.04",
+    type: "Android field operation app",
+    role: "Android 아키텍처 리뉴얼 설계 및 주요 기능 구현",
+    contribution: "전체 코드 기여도 80% 이상 담당 및 아키텍처 리뉴얼 주도",
+    stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
+    highlights: [
+      "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층을 분리했습니다.",
+      "NFC 요청/응답 흐름, QR, 지도 클러스터링, 사진 업로드, 다국어 처리를 구현했습니다.",
+      "서버 SQLite 데이터를 Room 기반 로컬 데이터 구조로 이전하는 흐름을 정리했습니다."
+    ],
+    outcomes: [
+      "Java 레거시 앱의 현장 업무 흐름을 Kotlin/Compose 기반 구조로 재정리했습니다.",
+      "NFC, 지도, 사진, 데이터 이전처럼 현장 운영에 필요한 주요 흐름을 모듈화된 구조 안에 배치했습니다."
+    ],
+    evidence: [
+      "Git author: E1jeong <won9964@gmail.com>",
+      "Notion Smartset renewal 기록",
+      "로컬 코드 구조"
+    ],
+    confidence: "git"
+  },
+  {
     id: "smartset",
     name: "SmartSet",
     summary: "NFC 기반 단말 설치, 검침, 설정, AS를 지원하는 Java Android 현장 운영 앱",
@@ -131,24 +149,6 @@ export const projects: Project[] = [
       "새 클론 경로: C:\\Users\\sumas\\OneDrive\\Desktop\\dev\\6.project\\smartset"
     ],
     confidence: "git"
-  },
-  {
-    id: "ubio-n-face-pro",
-    name: "UBio-N Face Pro",
-    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
-    period: "2025.07 - 진행 중",
-    type: "Android system app",
-    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
-    contribution: "핵심 아키텍처 분석 및 시스템 연동 흐름 문서화",
-    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
-    highlights: [
-      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다."
-    ],
-    outcomes: [
-      "Notion 설계 문서를 바탕으로 AIDL 통신 인터페이스 및 단말 하드웨어 모듈과의 연동 흐름을 파악 및 문서화하여 개발 생산성 기반을 다졌습니다."
-    ],
-    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
-    confidence: "code-and-notion"
   },
   {
     id: "hitec-c-projects",

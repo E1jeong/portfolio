@@ -116,18 +116,18 @@ export default function Home() {
             </ul>
           </nav>
 
-          {/* Quick shortcuts for top projects (Sorted by priority in Guide) */}
+          {/* Quick shortcuts for top projects (Sorted by Time Chronologically) */}
           <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
             <p className="shortcuts-title">Featured Projects</p>
             <ul className="shortcuts-list">
               <li>
-                <a href="#renew-smartset" className="shortcut-link">SmartSet Renewal</a>
+                <a href="#ubio-n-face-pro" className="shortcut-link">UBio-N Face Pro</a>
               </li>
               <li>
                 <a href="#fisherlotto" className="shortcut-link">Fisher Lotto</a>
               </li>
               <li>
-                <a href="#smartset" className="shortcut-link">SmartSet</a>
+                <a href="#renew-smartset" className="shortcut-link">SmartSet Renewal</a>
               </li>
             </ul>
           </div>
