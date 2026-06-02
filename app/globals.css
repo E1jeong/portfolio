@@ -15,7 +15,7 @@
   --accent-soft: #e6fcf5;     /* Soft Mint Green for badges and active backgrounds */
   --accent-strong: #047857;   /* Forest Green for readable highlighted tags and badge text */
   
-  --font-sans: var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
   --font-mono: var(--font-jetbrains-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
@@ -89,8 +89,7 @@ a {
 }
 
 .profile-title {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 0.08em;
@@ -138,7 +137,7 @@ a {
   gap: 12px;
   padding: 4px 0;
   color: var(--text-muted);
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   transition: color 0.3s ease;
@@ -179,8 +178,7 @@ a {
 }
 
 .shortcuts-title {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-light);
   text-transform: uppercase;
@@ -277,9 +275,8 @@ a {
 
 /* Section headings */
 .section-title {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--accent);
   letter-spacing: 0.15em;
   margin-bottom: 48px;
@@ -335,9 +332,8 @@ a {
 }
 
 .project-period {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--text-light);
 }
 
@@ -551,7 +547,6 @@ a {
   align-items: center;
   gap: 8px;
   margin-bottom: 36px;
-  font-family: var(--font-mono);
   font-size: 0.76rem;
   font-weight: 700;
   color: var(--text-muted);
@@ -602,8 +597,7 @@ a {
 
 .detail-section-title {
   margin-bottom: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
   color: var(--accent);
   letter-spacing: 0.12em;
@@ -660,8 +654,7 @@ a {
 .skills-row-title {
   width: 200px;
   flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 0.08em;
@@ -720,9 +713,8 @@ a {
 }
 
 .experience-period {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--text-muted);
 }
 
@@ -782,8 +774,7 @@ a {
   padding-top: 56px;
   border-top: 1px solid var(--line);
   color: var(--text-light);
-  font-size: 0.72rem;
-  font-family: var(--font-mono);
+  font-size: 0.74rem;
   letter-spacing: 0.02em;
 }
 
@@ -821,7 +812,6 @@ a {
 }
 
 .placeholder-text {
-  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
