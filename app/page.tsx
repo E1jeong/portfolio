@@ -154,7 +154,7 @@ export default function Home() {
       {/* Right scrollable content */}
       <main className="content-scroll">
         <section id="about" className="content-section" aria-labelledby="about-heading">
-          <h2 id="about-heading" className="sr-only">소개</h2>
+          <h2 id="about-heading" className="section-title">ABOUT</h2>
           <p className="lead-description">
             Android 시스템 레벨 앱 개발부터 하드웨어 연동, NFC/단말 프로토콜 분석 및 대응, 그리고 Google Play 결제 및 구독 기반 비즈니스 모델이 포함된 앱 개발을 엔드투엔드로 설계하고 개선해왔습니다.
           </p>
