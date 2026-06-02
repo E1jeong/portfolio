@@ -60,29 +60,25 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
-    id: "renew-smartset",
-    name: "SmartSet Renewal",
-    summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
-    period: "2024.07 - 2025.04",
-    type: "Android field operation app",
-    role: "Android 개발 전반",
-    contribution: "Git author 기준 주요 구현 담당",
-    stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
+    id: "ubio-n-face-pro",
+    name: "UBio-N Face Pro",
+    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
+    period: "2025.07 - 진행 중",
+    type: "Android system app",
+    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
+    contribution: "분석 기준 임시 작성",
+    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
     highlights: [
-      "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층을 분리했습니다.",
-      "NFC 요청/응답 흐름, QR, 지도 클러스터링, 사진 업로드, 다국어 처리를 구현했습니다.",
-      "서버 SQLite 데이터를 Room 기반 로컬 데이터 구조로 이전하는 흐름을 정리했습니다."
+      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다.",
+      "폴더명은 ubio-x-facepro-kakao이지만 포트폴리오에서는 UBio-N Face Pro로 표기합니다.",
+      "현재 로컬 코드는 최신본이 아니므로 추후 최신 코드 반영 시 내용을 갱신합니다."
     ],
     outcomes: [
-      "Java 레거시 앱의 현장 업무 흐름을 Kotlin/Compose 기반 구조로 재정리했습니다.",
-      "NFC, 지도, 사진, 데이터 이전처럼 현장 운영에 필요한 주요 흐름을 모듈화된 구조 안에 배치했습니다."
+      "현재 보유 로컬 코드는 최신본이 아니므로, Notion 기록과 임시 코드 분석 기준으로 작성했습니다.",
+      "최신 코드가 확보되면 Git 이력과 실제 담당 범위 기준으로 다시 정리합니다."
     ],
-    evidence: [
-      "Git author: E1jeong <won9964@gmail.com>",
-      "Notion Smartset renewal 기록",
-      "로컬 코드 구조"
-    ],
-    confidence: "git"
+    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
+    confidence: "code-and-notion"
   },
   {
     id: "fisherlotto",
@@ -109,6 +105,31 @@ export const projects: Project[] = [
     confidence: "git"
   },
   {
+    id: "renew-smartset",
+    name: "SmartSet Renewal",
+    summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
+    period: "2024.07 - 2025.04",
+    type: "Android field operation app",
+    role: "Android 개발 전반",
+    contribution: "Git author 기준 주요 구현 담당",
+    stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
+    highlights: [
+      "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층을 분리했습니다.",
+      "NFC 요청/응답 흐름, QR, 지도 클러스터링, 사진 업로드, 다국어 처리를 구현했습니다.",
+      "서버 SQLite 데이터를 Room 기반 로컬 데이터 구조로 이전하는 흐름을 정리했습니다."
+    ],
+    outcomes: [
+      "Java 레거시 앱의 현장 업무 흐름을 Kotlin/Compose 기반 구조로 재정리했습니다.",
+      "NFC, 지도, 사진, 데이터 이전처럼 현장 운영에 필요한 주요 흐름을 모듈화된 구조 안에 배치했습니다."
+    ],
+    evidence: [
+      "Git author: E1jeong <won9964@gmail.com>",
+      "Notion Smartset renewal 기록",
+      "로컬 코드 구조"
+    ],
+    confidence: "git"
+  },
+  {
     id: "smartset",
     name: "SmartSet",
     summary: "NFC 기반 단말 설치, 검침, 설정, AS를 지원하는 Java Android 현장 운영 앱",
@@ -128,30 +149,9 @@ export const projects: Project[] = [
     evidence: [
       "Git remote: https://github.com/E1jeong/smartset.git",
       "Git author: E1jeong <won9964@gmail.com>",
-      "새 클론 경로: C:\\Users\\sumas\\OneDrive\\Desktop\\dev\\6.project\\smartset"
+      "새 클론 경로: C:\\Users\\sumas\\OneDrive\Desktop\\dev\\6.project\\smartset"
     ],
     confidence: "git"
-  },
-  {
-    id: "ubio-n-face-pro",
-    name: "UBio-N Face Pro",
-    summary: "일본향 출입문 통제 단말의 Android 시스템 앱 및 하드웨어 연동 프로젝트",
-    period: "2025.07 - 진행 중",
-    type: "Android system app",
-    role: "Android 시스템 앱 연동 흐름 분석 및 담당 영역 정리",
-    contribution: "분석 기준 임시 작성",
-    stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
-    highlights: [
-      "SFX/SIU AIDL IPC, EAP-TLS Wi-Fi, QR API Key 인증, NFC IC 카드, Gesture 인증 흐름을 다뤘습니다.",
-      "폴더명은 ubio-x-facepro-kakao이지만 포트폴리오에서는 UBio-N Face Pro로 표기합니다.",
-      "현재 로컬 코드는 최신본이 아니므로 추후 최신 코드 반영 시 내용을 갱신합니다."
-    ],
-    outcomes: [
-      "현재 보유 로컬 코드는 최신본이 아니므로, Notion 기록과 임시 코드 분석 기준으로 작성했습니다.",
-      "최신 코드가 확보되면 Git 이력과 실제 담당 범위 기준으로 다시 정리합니다."
-    ],
-    evidence: ["Notion UBio-N Face Pro 기록", "로컬 코드 구조", "Git 이력 없음"],
-    confidence: "code-and-notion"
   },
   {
     id: "hitec-c-projects",
