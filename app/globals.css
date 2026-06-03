@@ -15,8 +15,8 @@
   --accent-soft: #e6fcf5;     /* Soft Mint Green for badges and active backgrounds */
   --accent-strong: #047857;   /* Forest Green for readable highlighted tags and badge text */
   
-  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-  --font-mono: var(--font-jetbrains-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
 * {
@@ -37,7 +37,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  letter-spacing: -0.02em; /* Tighter letter spacing for clean editorial look */
+  letter-spacing: 0;
 }
 
 a {
@@ -92,7 +92,7 @@ a {
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -100,7 +100,7 @@ a {
 .profile-name {
   font-size: 2.4rem;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.05;
   color: var(--accent);
 }
@@ -139,7 +139,7 @@ a {
   color: var(--text-muted);
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   transition: color 0.3s ease;
 }
 
@@ -182,7 +182,7 @@ a {
   font-weight: 700;
   color: var(--text-light);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   margin-bottom: 12px;
 }
 
@@ -264,7 +264,7 @@ a {
   line-height: 1.55;
   color: var(--text);
   margin-bottom: 24px;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .lead-subdescription {
@@ -278,7 +278,7 @@ a {
   font-size: 0.85rem;
   font-weight: 800;
   color: var(--accent);
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
   margin-bottom: 48px;
   position: relative;
   display: inline-block;
@@ -305,7 +305,7 @@ a {
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 44px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.015), 0 20px 48px -15px rgba(0, 0, 0, 0.025);
   cursor: pointer;
@@ -342,7 +342,7 @@ a {
   font-weight: 700;
   color: var(--accent-strong);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   background: var(--accent-soft);
   padding: 2px 8px;
   border-radius: 4px;
@@ -357,7 +357,7 @@ a {
   font-weight: 800;
   color: var(--text);
   margin-bottom: 10px;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   transition: color 0.3s ease;
 }
 
@@ -397,10 +397,9 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
   margin-bottom: 28px;
 }
 
@@ -415,7 +414,7 @@ a {
   font-weight: 700;
   color: var(--text-light);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 
 .meta-value {
@@ -443,7 +442,7 @@ a {
   font-weight: 800;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .details-list {
@@ -580,7 +579,7 @@ a {
   font-weight: 800;
   line-height: 1.06;
   color: var(--text);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .detail-summary {
@@ -600,7 +599,7 @@ a {
   font-size: 0.8rem;
   font-weight: 800;
   color: var(--accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -657,7 +656,7 @@ a {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -775,7 +774,7 @@ a {
   border-top: 1px solid var(--line);
   color: var(--text-light);
   font-size: 0.74rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 /* Media Placeholder Styles */
@@ -814,7 +813,7 @@ a {
 .placeholder-text {
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 

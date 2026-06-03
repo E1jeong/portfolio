@@ -152,7 +152,7 @@ export const projects: Project[] = [
   },
   {
     id: "hitec-c-projects",
-    name: "HiTec Embedded C Projects",
+    name: "Hitec Embedded C Projects",
     summary: "계량기 및 단말기 펌웨어 구조를 분석하고 일부 기능 흐름을 파악한 C 프로젝트",
     period: "2021 - 2025",
     type: "Embedded C",

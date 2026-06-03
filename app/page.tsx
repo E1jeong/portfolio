@@ -120,7 +120,7 @@ export default function Home() {
             </ul>
           </nav>
 
-          {/* Quick shortcuts for top projects (Sorted by Time Chronologically) */}
+          {/* Quick shortcuts for top projects */}
           <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
             <p className="shortcuts-title">Featured Projects</p>
             <ul className="shortcuts-list">
