@@ -25,9 +25,9 @@ export const profile = {
   name: "이원정",
   title: "Android Developer",
   summary:
-    "Android 시스템 앱, 하드웨어 연동, NFC/단말 프로토콜, 결제/구독 기반 앱을 개발해왔습니다.",
+    "문제를 끝까지 따라가 원인을 정리하고, 다시 고칠 수 있는 구조로 남기는 일을 좋아합니다.",
   subSummary:
-    "Java 기반 레거시 운영 경험과 Kotlin/Compose 기반 구조 개선 경험을 함께 가지고 있습니다.",
+    "기록과 코드 이력을 바탕으로 설명 가능한 개발을 지향하는 Android 개발자입니다.",
   contacts: [
     { label: "Email", href: "mailto:won9964@gmail.com" },
     { label: "GitHub", href: "https://github.com/E1jeong" },
