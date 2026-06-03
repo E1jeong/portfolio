@@ -160,10 +160,10 @@ export default function Home() {
         <section id="about" className="content-section" aria-labelledby="about-heading">
           <h2 id="about-heading" className="section-title">ABOUT</h2>
           <p className="lead-description">
-            현장 운영 앱, 출입통제 단말, 개인 Android 서비스처럼 하드웨어와 비즈니스 로직이 함께 맞물리는 제품을 다뤄왔습니다.
+            Android 모바일 앱에서 화면 구현, 데이터 흐름, 로컬 저장소, 백엔드 연동, 결제와 알림까지 사용자가 실제로 쓰는 기능을 설계하고 구현해왔습니다.
           </p>
           <p className="lead-subdescription">
-            NFC/단말 프로토콜, AIDL 기반 시스템 연동, Google Play Billing과 FCM 백엔드처럼 장애 지점이 여러 계층에 걸친 문제를 분석하고, 운영 가능한 구조로 정리하는 작업에 강점이 있습니다.
+            Kotlin/Compose 기반 앱 구조 개선 경험에 더해 NFC, 단말 프로토콜, AIDL 같은 하드웨어·시스템 연동 경험도 함께 갖고 있어 앱 내부 로직과 외부 연동 문제가 맞물린 상황을 안정적으로 정리할 수 있습니다.
           </p>
         </section>
 
