@@ -160,10 +160,10 @@ export default function Home() {
         <section id="about" className="content-section" aria-labelledby="about-heading">
           <h2 id="about-heading" className="section-title">ABOUT</h2>
           <p className="lead-description">
-            Android 시스템 레벨 앱 개발부터 하드웨어 연동, NFC/단말 프로토콜 분석 및 대응, 그리고 Google Play 결제 및 구독 기반 비즈니스 모델이 포함된 앱 개발을 엔드투엔드로 설계하고 개선해왔습니다.
+            현장 운영 앱, 출입통제 단말, 개인 Android 서비스처럼 하드웨어와 비즈니스 로직이 함께 맞물리는 제품을 다뤄왔습니다.
           </p>
           <p className="lead-subdescription">
-            Java 레거시 프로젝트의 안정적인 장기 운영과 Kotlin/Jetpack Compose 기반의 최신 아키텍처 재설계 경험을 균형 있게 활용하여 비즈니스의 성장과 개발 생산성을 돕습니다.
+            NFC/단말 프로토콜, AIDL 기반 시스템 연동, Google Play Billing과 FCM 백엔드처럼 장애 지점이 여러 계층에 걸친 문제를 분석하고, 운영 가능한 구조로 정리하는 작업에 강점이 있습니다.
           </p>
         </section>
 
