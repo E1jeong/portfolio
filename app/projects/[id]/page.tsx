@@ -3,6 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/portfolio";
 
+const confidenceLabels = {
+  git: "Git verified",
+  "code-and-notion": "Strong evidence",
+  limited: "Limited evidence"
+} as const;
+
 type ProjectDetailPageProps = {
   params: Promise<{
     id: string;
@@ -42,31 +48,6 @@ export async function generateMetadata({
   };
 }
 
-function MediaPlaceholder() {
-  return (
-    <div className="media-placeholder detail-media-placeholder" aria-label="프로젝트 데모 미디어 준비 중">
-      <div className="placeholder-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-          <circle cx="9" cy="9" r="2" />
-          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-        </svg>
-      </div>
-      <span className="placeholder-text">Project Demo Video & Screenshots (TBD)</span>
-    </div>
-  );
-}
-
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { id } = await params;
   const project = findProject(id);
@@ -86,13 +67,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <div className="project-meta-top">
             <span className="project-period">{project.period}</span>
             <span className="project-type-tag">{project.type}</span>
+            <span className={`confidence-badge confidence-${project.confidence}`}>
+              {confidenceLabels[project.confidence]}
+            </span>
           </div>
           <h1 className="detail-title">{project.name}</h1>
           <p className="detail-summary">{project.summary}</p>
         </header>
-
-        {/* Media Placeholder in detail page */}
-        <MediaPlaceholder />
 
         <section className="detail-section" aria-labelledby="role-heading">
           <h2 id="role-heading" className="detail-section-title">Role</h2>
@@ -110,6 +91,33 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
+        <section className="detail-section case-study-grid" aria-label="프로젝트 상세 흐름">
+          <div className="case-study-block">
+            <h2 className="detail-section-title">Background</h2>
+            <p>{project.background}</p>
+          </div>
+          <div className="case-study-block">
+            <h2 className="detail-section-title">Problem</h2>
+            <p>{project.problem}</p>
+          </div>
+          <div className="case-study-block case-study-wide">
+            <h2 className="detail-section-title">Actions</h2>
+            <ul className="details-list">
+              {project.actions.map((action, idx) => (
+                <li key={idx}>{action}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="case-study-block">
+            <h2 className="detail-section-title">Result</h2>
+            <p>{project.result}</p>
+          </div>
+          <div className="case-study-block">
+            <h2 className="detail-section-title">Learning</h2>
+            <p>{project.learning}</p>
+          </div>
+        </section>
+
         <section className="detail-section" aria-labelledby="stack-heading">
           <h2 id="stack-heading" className="detail-section-title">Stack</h2>
           <div className="project-tech-tags detail-tech-tags">
@@ -121,26 +129,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
-        <section className="detail-section detail-two-column">
-          <div className="details-block">
-            <h2 className="detail-section-title">Highlights</h2>
-            <ul className="details-list">
-              {project.highlights.map((highlight, idx) => (
-                <li key={idx}>{highlight}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="details-block">
-            <h2 className="detail-section-title">Outcomes</h2>
-            <ul className="details-list text-highlight">
-              {project.outcomes.map((outcome, idx) => (
-                <li key={idx}>{outcome}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         <section className="detail-section" aria-labelledby="evidence-heading">
           <h2 id="evidence-heading" className="detail-section-title">Evidence</h2>
           <ul className="detail-evidence-list">
@@ -148,6 +136,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <li key={idx}>{item}</li>
             ))}
           </ul>
+          <p className="public-disclosure">{project.publicDisclosure}</p>
         </section>
       </div>
     </main>

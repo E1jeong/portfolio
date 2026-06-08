@@ -32,11 +32,11 @@
 
 대표 프로젝트 우선순위:
 
-1. SmartSet Renewal
+1. UBio-N Face Pro
 2. Fisher Lotto + lotto-sub-backend
-3. SmartSet
-4. UBio-N Face Pro
-5. HiTec Embedded C Projects
+3. SmartSet Renewal
+4. SmartSet
+5. Hitec Embedded C Projects
 
 SmartSet은 새 클론 경로를 기준으로 작성합니다.
 
@@ -90,6 +90,14 @@ PowerShell 실행 정책 문제가 있으면:
 
 ```bash
 npm.cmd run build
+```
+
+## Validation
+
+Next.js 16 환경에서는 기존 `next lint` 스크립트 대신 TypeScript 검증을 사용합니다.
+
+```bash
+npm.cmd run lint
 ```
 
 ## Directory Structure

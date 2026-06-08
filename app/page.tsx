@@ -4,33 +4,21 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { experiences, profile, projects, skillGroups } from "../data/portfolio";
 
-function MediaPlaceholder() {
-  return (
-    <div className="media-placeholder" aria-label="프로젝트 데모 미디어 준비 중">
-      <div className="placeholder-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-          <circle cx="9" cy="9" r="2" />
-          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-        </svg>
-      </div>
-      <span className="placeholder-text">Demo Media Pending</span>
-    </div>
-  );
-}
+const confidenceLabels = {
+  git: "Git verified",
+  "code-and-notion": "Strong evidence",
+  limited: "Limited evidence"
+} as const;
+
+const coreStrengths = [
+  "Android 시스템 앱과 하드웨어 연동",
+  "NFC/단말 프로토콜 기반 현장 앱",
+  "Kotlin/Compose 구조 개선과 앱+BFF 구현"
+];
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("about");
+  const featuredProjects = projects.slice(0, 3);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,13 +46,6 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>, label: string, href: string) => {
-    if (href === "#") {
-      e.preventDefault();
-      alert(`${label} 링크는 현재 준비 중입니다.`);
-    }
-  };
 
   return (
     <div className="layout-container">
@@ -124,15 +105,11 @@ export default function Home() {
           <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
             <p className="shortcuts-title">Featured Projects</p>
             <ul className="shortcuts-list">
-              <li>
-                <a href="#ubio-n-face-pro" className="shortcut-link">UBio-N Face Pro</a>
-              </li>
-              <li>
-                <a href="#fisherlotto" className="shortcut-link">Fisher Lotto</a>
-              </li>
-              <li>
-                <a href="#renew-smartset" className="shortcut-link">SmartSet Renewal</a>
-              </li>
+              {featuredProjects.map((project) => (
+                <li key={project.id}>
+                  <a href={`#${project.id}`} className="shortcut-link">{project.name}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -144,7 +121,6 @@ export default function Home() {
                 className={`contact-link ${contact.href === "#" ? "disabled-link" : ""}`}
                 target={contact.href.startsWith("http") ? "_blank" : undefined}
                 rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                onClick={(e) => handleContactClick(e, contact.label, contact.href)}
                 aria-disabled={contact.href === "#" ? "true" : undefined}
                 tabIndex={contact.href === "#" ? -1 : undefined}
               >
@@ -157,6 +133,14 @@ export default function Home() {
 
       {/* Right scrollable content */}
       <main className="content-scroll">
+        <nav className="mobile-quick-nav" aria-label="모바일 빠른 이동">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          {featuredProjects.map((project) => (
+            <a key={project.id} href={`#${project.id}`}>{project.name}</a>
+          ))}
+        </nav>
+
         <section id="about" className="content-section" aria-labelledby="about-heading">
           <h2 id="about-heading" className="section-title">ABOUT</h2>
           <p className="lead-description">
@@ -165,6 +149,11 @@ export default function Home() {
           <p className="lead-subdescription">
             Kotlin/Compose 기반 앱 구조 개선 경험에 더해 NFC, 단말 프로토콜, AIDL 같은 하드웨어·시스템 연동 경험도 함께 갖고 있어 앱 내부 로직과 외부 연동 문제가 맞물린 상황을 안정적으로 정리할 수 있습니다.
           </p>
+          <ul className="strength-list about-strength-list" aria-label="핵심 강점">
+            {coreStrengths.map((strength) => (
+              <li key={strength}>{strength}</li>
+            ))}
+          </ul>
         </section>
 
         <section id="projects" className="content-section" aria-labelledby="projects-heading">
@@ -176,6 +165,9 @@ export default function Home() {
                   <div className="project-meta-top">
                     <span className="project-period">{project.period}</span>
                     <span className="project-type-tag">{project.type}</span>
+                    <span className={`confidence-badge confidence-${project.confidence}`}>
+                      {confidenceLabels[project.confidence]}
+                    </span>
                   </div>
                   <h3 className="project-card-title">{project.name}</h3>
                   <p className="project-card-summary">{project.summary}</p>
@@ -202,28 +194,7 @@ export default function Home() {
                   ) : null}
                 </div>
 
-                {/* Media Placeholder for each project card */}
-                <MediaPlaceholder />
-
-                <div className="project-details">
-                  <div className="details-block">
-                    <h4 className="details-title">주요 업무 및 해결 내용</h4>
-                    <ul className="details-list">
-                      {project.highlights.map((highlight, idx) => (
-                        <li key={idx}>{highlight}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="details-block">
-                    <h4 className="details-title">결과 및 성과</h4>
-                    <ul className="details-list text-highlight">
-                      {project.outcomes.map((outcome, idx) => (
-                        <li key={idx}>{outcome}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                <p className="project-result-preview">{project.outcomes[0]}</p>
 
                 <footer className="project-card-footer">
                   {project.evidence && project.evidence.length > 0 && (
