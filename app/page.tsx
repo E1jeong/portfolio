@@ -2,13 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { experiences, profile, projects, skillGroups } from "../data/portfolio";
-
-const confidenceLabels = {
-  git: "Git verified",
-  "code-and-notion": "Strong evidence",
-  limited: "Limited evidence"
-} as const;
 
 const coreStrengths = [
   "Android 시스템 앱과 하드웨어 연동",
@@ -17,8 +12,9 @@ const coreStrengths = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState("about");
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = projects;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +53,22 @@ export default function Home() {
             <h1 className="profile-name">{profile.name}</h1>
           </div>
 
+          {profile.currentCompany ? (
+            <p className="profile-company-info">
+              {profile.currentCompany}
+            </p>
+          ) : null}
+
+          {profile.email ? (
+            <p className="profile-email-direct">
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            </p>
+          ) : null}
+
           <p className="profile-summary">{profile.summary}</p>
-          <p className="profile-subsummary">{profile.subSummary}</p>
+          {profile.subSummary ? (
+            <p className="profile-subsummary">{profile.subSummary}</p>
+          ) : null}
 
           <nav className="nav-menu" aria-label="섹션 이동 네비게이션">
             <ul>
@@ -160,14 +170,16 @@ export default function Home() {
           <h2 id="projects-heading" className="section-title">PROJECTS</h2>
           <div className="project-list">
             {projects.map((project) => (
-              <article key={project.id} id={project.id} className="project-card">
+              <article 
+                key={project.id} 
+                id={project.id} 
+                className="project-card clickable-card"
+                onClick={() => router.push(`/projects/${project.id}`)}
+              >
                 <header className="project-card-header">
                   <div className="project-meta-top">
                     <span className="project-period">{project.period}</span>
                     <span className="project-type-tag">{project.type}</span>
-                    <span className={`confidence-badge confidence-${project.confidence}`}>
-                      {confidenceLabels[project.confidence]}
-                    </span>
                   </div>
                   <h3 className="project-card-title">{project.name}</h3>
                   <p className="project-card-summary">{project.summary}</p>
@@ -197,20 +209,11 @@ export default function Home() {
                 <p className="project-result-preview">{project.outcomes[0]}</p>
 
                 <footer className="project-card-footer">
-                  {project.evidence && project.evidence.length > 0 && (
-                    <span className="evidence-tags-wrapper">
-                      <span className="evidence-label-text">증적 자료:</span>
-                      {project.evidence.map((item, idx) => (
-                        <span key={idx} className="evidence-tag-item">
-                          {item}
-                        </span>
-                      ))}
-                    </span>
-                  )}
                   <Link
                     href={`/projects/${project.id}`}
                     className="project-detail-link"
                     aria-label={`${project.name} detail 보기`}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     View Detail
                   </Link>

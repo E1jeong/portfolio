@@ -3,11 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/portfolio";
 
-const confidenceLabels = {
-  git: "Git verified",
-  "code-and-notion": "Strong evidence",
-  limited: "Limited evidence"
-} as const;
 
 type ProjectDetailPageProps = {
   params: Promise<{
@@ -67,13 +62,37 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <div className="project-meta-top">
             <span className="project-period">{project.period}</span>
             <span className="project-type-tag">{project.type}</span>
-            <span className={`confidence-badge confidence-${project.confidence}`}>
-              {confidenceLabels[project.confidence]}
-            </span>
           </div>
           <h1 className="detail-title">{project.name}</h1>
           <p className="detail-summary">{project.summary}</p>
         </header>
+
+        <div className="detail-media-placeholder media-placeholder">
+          <div className="device-mockup">
+            <div className="device-screen">
+              <div className="device-statusBar">
+                <span className="statusBar-time">09:41</span>
+                <span className="statusBar-icons">🔋 📶</span>
+              </div>
+              <div className="device-appBar">
+                <span className="appBar-title">{project.name}</span>
+              </div>
+              <div className="device-content">
+                <div className="mock-chart-container">
+                  <div className="mock-chart-bar" style={{ height: "60%" }}></div>
+                  <div className="mock-chart-bar" style={{ height: "85%" }}></div>
+                  <div className="mock-chart-bar" style={{ height: "45%" }}></div>
+                  <div className="mock-chart-bar" style={{ height: "95%" }}></div>
+                  <div className="mock-chart-bar" style={{ height: "70%" }}></div>
+                </div>
+                <div className="mock-list-item"></div>
+                <div className="mock-list-item"></div>
+              </div>
+            </div>
+            <div className="device-home-button"></div>
+          </div>
+          <p className="placeholder-text">{project.type} UI & System Showcase</p>
+        </div>
 
         <section className="detail-section" aria-labelledby="role-heading">
           <h2 id="role-heading" className="detail-section-title">Role</h2>
@@ -130,12 +149,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         </section>
 
         <section className="detail-section" aria-labelledby="evidence-heading">
-          <h2 id="evidence-heading" className="detail-section-title">Evidence</h2>
-          <ul className="detail-evidence-list">
-            {project.evidence.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
+          <h2 id="evidence-heading" className="detail-section-title">Evidence & Verification</h2>
+          <div className="evidence-public-notice">
+            <p className="notice-main">✓ 본 프로젝트의 기여도 및 수행 이력은 사내 Git 저장소 기록 및 작업 로그를 바탕으로 상호 검증되었습니다.</p>
+            <p className="notice-sub">※ 보안 및 대외비(NDA) 준수를 위해 상세 코드 구조 및 개인 로컬 경로 정보는 공개 화면에 직접 노출하지 않습니다.</p>
+          </div>
           <p className="public-disclosure">{project.publicDisclosure}</p>
         </section>
       </div>

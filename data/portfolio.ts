@@ -30,12 +30,12 @@ export type Experience = {
 export const profile = {
   name: "이원정",
   title: "Android Developer",
+  currentCompany: "유니온바이오메트릭스 재직 중",
+  email: "won9964@gmail.com",
   summary:
-    "Android 시스템 앱, 하드웨어 연동, NFC/단말 프로토콜, 구독/결제 앱을 다뤄온 개발자입니다.",
-  subSummary:
-    "레거시 운영과 Kotlin/Compose 구조 개선, 앱과 백엔드가 맞물린 기능 구현을 근거 중심으로 설명합니다.",
+    "AI 도구를 적극 활용하여 개발 생산성을 극대화하고, 근거 중심의 코드를 작성하는 Android 개발자입니다.",
+  subSummary: "",
   contacts: [
-    { label: "Email", href: "mailto:won9964@gmail.com" },
     { label: "GitHub", href: "https://github.com/E1jeong" },
     { label: "Blog", href: "https://still-coding.tistory.com/" }
   ]
@@ -134,8 +134,8 @@ export const projects: Project[] = [
     summary: "Java 기반 현장 운영 앱을 Kotlin/Compose 구조로 리뉴얼한 Android 프로젝트",
     period: "2024.07 - 2025.04",
     type: "Android field operation app",
-    role: "Android 아키텍처 리뉴얼 설계 및 주요 기능 구현",
-    contribution: "앱 전체 설계와 주요 기능 구현 담당",
+    role: "Java 레거시 앱의 Kotlin/Compose 아키텍처 리뉴얼 및 1인 단독 개발",
+    contribution: "신규 멀티모듈 아키텍처 설계부터 기능 구현, 마이그레이션까지 100% 단독 수행",
     stack: ["Kotlin", "Jetpack Compose", "Orbit MVI", "Hilt", "Room", "Google Maps Compose", "NFC"],
     highlights: [
       "Clean Architecture와 multi-module 구조로 app/data/domain/presentation 계층 책임을 분리했습니다.",
