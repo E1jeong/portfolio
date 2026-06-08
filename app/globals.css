@@ -215,13 +215,15 @@ a {
 .shortcuts-wrapper {
   margin-bottom: auto;
   border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .shortcuts-title {
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0;
   margin-bottom: 12px;
@@ -237,12 +239,12 @@ a {
 .shortcut-link {
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text);
   transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
 .shortcut-link:hover {
-  color: var(--accent);
+  color: var(--accent-light);
   padding-left: 2px;
 }
 

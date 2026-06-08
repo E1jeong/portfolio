@@ -55,13 +55,13 @@ export default function Home() {
 
           {profile.currentCompany ? (
             <p className="profile-company-info">
-              {profile.currentCompany}
+              • {profile.currentCompany}
             </p>
           ) : null}
 
           {profile.email ? (
             <p className="profile-email-direct">
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              • <a href={`mailto:${profile.email}`}>{profile.email}</a>
             </p>
           ) : null}
 
@@ -113,7 +113,7 @@ export default function Home() {
 
           {/* Quick shortcuts for top projects */}
           <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
-            <p className="shortcuts-title">Featured Projects</p>
+            <p className="shortcuts-title">Projects</p>
             <ul className="shortcuts-list">
               {featuredProjects.map((project) => (
                 <li key={project.id}>
