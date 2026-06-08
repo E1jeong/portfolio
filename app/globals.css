@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf6eb;      /* Soft warm ivory background */
-  --surface: #ffffff;         /* Pure white cards and container surface */
-  --surface-hover: #f1f3f5;   /* Light grey for micro hover feed */
-  --text: #111827;            /* Deep black/charcoal for premium typography readability */
-  --text-muted: #5e6675;      /* Slate/cool gray for secondary text and periods */
-  --text-light: #8a92a0;      /* Lighter gray for indicators and details */
-  --line: rgba(0, 0, 0, 0.05); /* Soft light gray thin borders */
+  --background: #0d0d0d;      /* Aakash-inspired smoky black background */
+  --surface: #1e1e1f;         /* Dark card and content surface */
+  --surface-hover: #242426;   /* Subtle elevated hover and placeholder surface */
+  --text: #f5f5f5;            /* Warm off-white primary text */
+  --text-muted: #d6d6d6;      /* Soft gray secondary text */
+  --text-light: rgba(214, 214, 214, 0.7); /* Low-emphasis gray text and indicators */
+  --line: rgba(255, 255, 255, 0.08); /* Soft dark-theme border */
   
-  /* Slate Green (Teal/Sage) Accent Colors */
-  --accent: #059669;          /* Vivid Emerald Green for strong highlights, company names, links */
-  --accent-light: #10b981;    /* Bright Sage Emerald for indicators & active marks */
-  --accent-soft: #e6fcf5;     /* Soft Mint Green for badges and active backgrounds */
-  --accent-strong: #047857;   /* Forest Green for readable highlighted tags and badge text */
+  /* Aakash-inspired Gold Accent Colors */
+  --accent: #ffdb70;          /* Warm gold for strong highlights, names, links */
+  --accent-light: #ffe49a;    /* Soft gold for indicators and active marks */
+  --accent-soft: rgba(255, 219, 112, 0.12); /* Transparent gold for badges */
+  --accent-strong: #ffe8a8;   /* Pale gold for readable dark-theme badge text */
   
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
   --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -307,16 +307,16 @@ a {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 44px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.015), 0 20px 48px -15px rgba(0, 0, 0, 0.025);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
   cursor: pointer;
   transition: border-color 0.35s ease, background-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .project-card:hover {
-  background-color: var(--surface);
-  border-color: rgba(16, 185, 129, 0.25);
+  background-color: var(--surface-hover);
+  border-color: rgba(255, 219, 112, 0.34);
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.01), 0 28px 56px -12px rgba(16, 185, 129, 0.04);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
 }
 
 .project-card-header {
@@ -379,7 +379,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 600;
-  background: #f1f3f5;
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-muted);
   padding: 4px 10px;
   border-radius: 6px;
@@ -388,7 +388,7 @@ a {
 
 .tech-tag:hover {
   background-color: var(--accent) !important;
-  color: #ffffff !important;
+  color: #0d0d0d !important;
   transform: translateY(-2px);
 }
 

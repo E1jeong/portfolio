@@ -181,6 +181,25 @@ Next.js App Router API, Google Play Billing, Pub/Sub, FCM, MySQL
 - 이미지와 영상은 현재 구현에서 제외한다.
 - 필요한 위치는 추후 업로드 가능한 placeholder로만 표시한다.
 
+## Color System
+
+색상은 Aakash Rajbanshi 포트폴리오의 smoky black/gold 톤을 기준으로 한다. 배경은 완전한 순흑보다 약간 부드러운 블랙을 쓰고, 포인트 컬러는 teal이나 blue 대신 warm gold 계열로 고정한다.
+
+```text
+Background: #0d0d0d
+Surface: #1e1e1f
+Surface Hover / Placeholder: #242426
+Primary Text: #f5f5f5
+Muted Text: #d6d6d6
+Light Text: rgba(214, 214, 214, 0.7)
+Accent: #ffdb70
+Accent Light: #ffe49a
+Accent Soft: rgba(255, 219, 112, 0.12)
+Accent Strong: #ffe8a8
+```
+
+배경은 콘텐츠를 돋보이게 하는 역할만 한다. 장식용 gradient, beige/cream/sand 계열, 강한 컬러 배경은 사용하지 않는다. Accent는 링크, 섹션 제목, active indicator, 작은 badge에만 제한적으로 사용한다.
+
 ## Success Criteria
 
 - 첫 화면 5초 안에 Android 개발자라는 점이 보인다.
