@@ -170,11 +170,11 @@ export default function Home() {
           <h2 id="projects-heading" className="section-title">PROJECTS</h2>
           <div className="project-list">
             {projects.map((project) => (
-              <article 
-                key={project.id} 
-                id={project.id} 
+              <Link
+                key={project.id}
+                href={`/projects/${project.id}`}
+                id={project.id}
                 className="project-card clickable-card"
-                onClick={() => router.push(`/projects/${project.id}`)}
               >
                 <header className="project-card-header">
                   <div className="project-meta-top">
@@ -209,16 +209,11 @@ export default function Home() {
                 <p className="project-result-preview">{project.outcomes[0]}</p>
 
                 <footer className="project-card-footer">
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="project-detail-link"
-                    aria-label={`${project.name} detail 보기`}
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <span className="project-detail-link">
                     View Detail <span className="detail-arrow">↗</span>
-                  </Link>
+                  </span>
                 </footer>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
