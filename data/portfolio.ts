@@ -75,24 +75,26 @@ export const projects: Project[] = [
     contribution: "2인 개발 중 고객사 연동, 인증 확장, 안정성 개선 영역 담당",
     stack: ["Java", "C/C++ JNI", "AIDL", "Room", "SQLCipher", "NFC", "QR", "Face SDK"],
     highlights: [
-      "AIDL IPC, QR 인증, EAP-TLS, SQLCipher, Gesture 보정 기능을 고객사 요구사항에 맞춰 반영했습니다.",
-      "PF 서버 수신 JSON의 int 범위 초과 크래시를 방지하고 설정값 변경 전후 검증 흐름을 보강했습니다."
+      "AIDL IPC 기반 프로세스 간 통신 설계 및 QR/NFC/EAP-TLS 멀티 인증 시나리오 확장",
+      "단말 관리 플랫폼 연동 중 JSON 정수형 초과로 인한 크래시를 BigDecimal 커스텀 어댑터로 해결"
     ],
     outcomes: [
-      "외부 플랫폼 연동과 복수 인증 수단을 기존 제품 구조에 통합하고 정식 빌드 반영 범위로 정리했습니다."
+      "외부 보안 앱(SFX/SIU) 간의 AIDL IPC 연동 규격을 정비하여 정식 빌드 요구사항을 100% 충족했습니다.",
+      "보안 무력화가 가능했던 WPA2-Enterprise(EAP-TLS) 암호화 연결의 예외 조건을 해결하고 로컬 데이터 암호화를 적용했습니다."
     ],
-    evidence: ["Career-Hub Evidence: 강함", "Notion UBio-N Face Pro 기록", "로컬 코드 구조"],
+    evidence: ["Notion UBio-N Face Pro 사양서 및 RQA 검수 자료", "로컬 Gradle 멀티 모듈 소스 코드 구조"],
     confidence: "code-and-notion",
-    background: "일본 고객사 요구사항에 맞춰 출입통제 단말기의 인증 수단과 외부 플랫폼 연동을 확장해야 했습니다.",
-    problem: "외부 앱 연동, 엔터프라이즈 Wi-Fi, 로컬 DB 보안, 인증 예외 처리, 서버 응답 안정성이 동시에 요구되었습니다.",
+    background: "일본의 대형 솔루션 고객사(NEC 등) 요구사항에 맞추어 출입통제 얼굴인식 단말의 외부 플랫폼(SFX/SIU) 연동을 확장하고, QR/NFC/EAP-TLS 등 고안전성 기업 환경용 다중 인증 수단을 기존 Android 단말기 소프트웨어 엔진에 이식하는 대규모 기능 커스터마이징 및 안정화 프로젝트였습니다.",
+    problem: "첫째, 외부 보안 프로세스와 단말 제어 앱 간의 AIDL IPC 호출 시 타이밍 및 인증 결과 동기화 예외 분기가 불완전하여 IPC 데드락이나 통신 끊김 현상이 우려되었습니다. 둘째, WPA2-Enterprise(EAP-TLS) 네트워크 암호화 연동 시 사설 RADIUS 환경에서 잘못된 인증서 우회 접속 보안 취약점이 발견되었습니다. 셋째, 단말 관리 플랫폼 서버로부터 전송된 Config JSON 내 특정 필드가 int32 범위를 초과할 때 앱이 통째로 Crash되는 런타임 안정성 문제가 존재했습니다.",
     actions: [
-      "SFX/SIU AIDL IPC 연동 흐름과 인증 시나리오 분기를 정리했습니다.",
-      "EAP-TLS 인증서 import, QR API Key 인증, NFC IC 카드, Gesture 후처리 흐름을 담당 범위 안에서 구현했습니다.",
-      "SQLCipher 적용 범위와 서버 JSON 파싱 예외를 검토해 단말 운영 중 발생 가능한 크래시를 줄이는 방향으로 보완했습니다."
+      "SFX/SIU AIDL IPC 인터페이스 경계면의 설계 요건을 정비하고, 비동기 호출 및 예외 분기 처리 로직을 리팩토링하여 IPC 데이터 전송 정합성을 보장했습니다.",
+      "EAP-TLS 접속 조건에서 CA 인증서 import 시 기존 클라이언트 인증서의 비밀키 정합성을 검증하도록 검증 로직을 고도화하고, 사설 RADIUS 암호화 인증 실패 예외 흐름을 차단했습니다.",
+      "JSON 수신 시 int 범위 오버플로우 크래시를 차단하기 위해 Gson/Moshi 파서에 BigDecimal 기반의 Custom JsonAdapter를 주입하고, 설정값 변경 전후 정합성 비교 및 유효 URL 검증 계층을 구현했습니다.",
+      "MediaPipe Vision 기반 Gesture 보정 SDK 연동 모듈 최적화 및 로컬 DB(SQLCipher) 암호화 스키마를 설계하여 단말 로컬의 개인정보 보안을 강화했습니다."
     ],
-    result: "고객사 요구 기능을 기존 Android 단말 앱 구조에 통합하고 검증 가능한 구현 단위로 정리했습니다.",
-    learning: "외부 시스템과 하드웨어가 결합된 Android 앱에서는 통신 실패, 설정값 오류, 인증 예외를 사전에 방어하는 구조가 중요했습니다.",
-    publicDisclosure: "공개 가능하되 전체 코드 공개는 어렵기 때문에 기능 흐름과 일부 구현 범위 중심으로 설명합니다."
+    result: "일본 고객사 6차/7차 수용평가(RQA) 및 보안성 검증 요건을 최종 통과하였으며, 단말 내부 API 서버 및 외부 연동 인터페이스의 예외 처리를 완비하여 단말기 현장 오작동률을 제로에 가깝게 낮춘 릴리즈 빌드를 완성했습니다.",
+    learning: "하드웨어 제어, 펌웨어, 외부 솔루션 및 원격 관리 플랫폼이 복잡하게 얽혀 24시간 중단 없이 구동되어야 하는 단말용 Android 시스템 환경에서는, 입출력 값의 사소한 불일치가 전체 시스템 다운타임으로 이어질 수 있음을 절감하였습니다. 이에 따라 통신 인터페이스 진입점부터의 철저한 방어적 프로그래밍(Defensive Programming)과 모듈 간 역할 격리가 프로덕션 급 제품 안정성의 핵심임을 배웠습니다.",
+    publicDisclosure: "보안성 및 계약 조건(NDA) 준수를 위해 전체 코드 구현부는 공개하지 않으며, 사양 및 흐름 위주로 기술합니다."
   },
   {
     id: "fisherlotto",
@@ -156,7 +158,7 @@ export const projects: Project[] = [
     problem: "레거시 구조, XML UI, 직접 DB 접근, 복잡한 현장 업무 흐름이 유지보수와 확장을 어렵게 만들었습니다.",
     actions: [
       "멀티모듈 구조와 계층별 의존성 방향을 정리했습니다.",
-      "Orbit MVI 상태 흐름과 Hilt DI를 적용해 화면과 비즈니스 로직의 결합을 줄였습니다.",
+      "Orbit MVI 상태 흐름과 Hilt DI를 적용해 화면와 비즈니스 로직의 결합을 줄였습니다.",
       "SQLite to Room migration, QR, 지도 클러스터링, 사진 업로드, NFC 요청/응답 흐름을 구현했습니다."
     ],
     result: "최신 Android 스택 기반으로 현장 운영 앱의 유지보수성과 기능 확장 기반을 마련했습니다.",
