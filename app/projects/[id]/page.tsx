@@ -127,18 +127,28 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <h3 className="feature-card-title">{feature.title}</h3>
                     <p className="feature-card-description">{feature.description}</p>
                     
-                    <div className="feature-card-grid">
-                      <div className="feature-step challenge">
-                        <span className="step-badge badge-challenge">Challenge</span>
-                        <div className="step-content">{feature.challenge}</div>
+                    <div className="feature-card-body">
+                      <div className="feature-challenge-section">
+                        <div className="step-badge-wrapper">
+                          <span className="step-badge badge-challenge">Challenge</span>
+                        </div>
+                        <div className="step-content text-challenge">{feature.challenge}</div>
                       </div>
-                      <div className="feature-step solution">
-                        <span className="step-badge badge-solution">Solution & Logic</span>
-                        <div className="step-content">{feature.solution}</div>
-                      </div>
-                      <div className="feature-step outcome">
-                        <span className="step-badge badge-outcome">Outcome</span>
-                        <div className="step-content">{feature.outcome}</div>
+                      
+                      <div className="feature-solution-section">
+                        <div className="solution-group">
+                          <div className="step-badge-wrapper">
+                            <span className="step-badge badge-solution">Solution & Logic</span>
+                          </div>
+                          <div className="step-content text-solution">{feature.solution}</div>
+                        </div>
+                        
+                        <div className="outcome-group">
+                          <div className="step-badge-wrapper">
+                            <span className="step-badge badge-outcome">Outcome</span>
+                          </div>
+                          <div className="step-content text-outcome">{feature.outcome}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
