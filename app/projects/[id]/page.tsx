@@ -203,14 +203,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
-        <section className="detail-section" aria-labelledby="evidence-heading">
-          <h2 id="evidence-heading" className="detail-section-title">Evidence & Verification</h2>
-          <div className="evidence-public-notice">
-            <p className="notice-main">✓ 본 프로젝트의 기여도 및 수행 이력은 사내 Git 저장소 기록 및 작업 로그를 바탕으로 상호 검증되었습니다.</p>
-            <p className="notice-sub">※ 보안 및 대외비(NDA) 준수를 위해 상세 코드 구조 및 개인 로컬 경로 정보는 공개 화면에 직접 노출하지 않습니다.</p>
-          </div>
-          <p className="public-disclosure">{project.publicDisclosure}</p>
-        </section>
+
       </div>
     </main>
   );
