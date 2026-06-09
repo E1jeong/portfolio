@@ -110,32 +110,77 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
-        <section className="detail-section case-study-grid" aria-label="프로젝트 상세 흐름">
-          <div className="case-study-block">
-            <h2 className="detail-section-title">Background</h2>
-            <p>{project.background}</p>
-          </div>
-          <div className="case-study-block">
-            <h2 className="detail-section-title">Problem</h2>
-            <p>{project.problem}</p>
-          </div>
-          <div className="case-study-block case-study-wide">
-            <h2 className="detail-section-title">Actions</h2>
-            <ul className="details-list">
-              {project.actions.map((action, idx) => (
-                <li key={idx}>{action}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="case-study-block">
-            <h2 className="detail-section-title">Result</h2>
-            <p>{project.result}</p>
-          </div>
-          <div className="case-study-block">
-            <h2 className="detail-section-title">Learning</h2>
-            <p>{project.learning}</p>
-          </div>
-        </section>
+        {project.features && project.features.length > 0 ? (
+          <>
+            <section className="detail-section" aria-labelledby="background-heading">
+              <h2 id="background-heading" className="detail-section-title">Project Background</h2>
+              <div className="background-block-standalone">
+                <p>{project.background}</p>
+              </div>
+            </section>
+
+            <section className="detail-section" aria-labelledby="features-heading">
+              <h2 id="features-heading" className="detail-section-title">Key Developed Features</h2>
+              <div className="features-container">
+                {project.features.map((feature, idx) => (
+                  <div key={idx} className="feature-card">
+                    <h3 className="feature-card-title">{feature.title}</h3>
+                    <p className="feature-card-description">{feature.description}</p>
+                    
+                    <div className="feature-card-grid">
+                      <div className="feature-step challenge">
+                        <span className="step-badge badge-challenge">Challenge</span>
+                        <div className="step-content">{feature.challenge}</div>
+                      </div>
+                      <div className="feature-step solution">
+                        <span className="step-badge badge-solution">Solution & Logic</span>
+                        <div className="step-content">{feature.solution}</div>
+                      </div>
+                      <div className="feature-step outcome">
+                        <span className="step-badge badge-outcome">Outcome</span>
+                        <div className="step-content">{feature.outcome}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+            
+            <section className="detail-section" aria-labelledby="learning-heading">
+              <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
+              <div className="learning-block-standalone">
+                <p>{project.learning}</p>
+              </div>
+            </section>
+          </>
+        ) : (
+          <section className="detail-section case-study-grid" aria-label="프로젝트 상세 흐름">
+            <div className="case-study-block">
+              <h2 className="detail-section-title">Background</h2>
+              <p>{project.background}</p>
+            </div>
+            <div className="case-study-block">
+              <h2 className="detail-section-title">Problem</h2>
+              <p>{project.problem}</p>
+            </div>
+            <div className="case-study-block case-study-wide">
+              <h2 className="detail-section-title">Actions</h2>
+              <ul className="details-list">
+                {project.actions.map((action, idx) => (
+                  <li key={idx}>{action}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="case-study-block">
+              <h2 className="detail-section-title">Result</h2>
+              <p>{project.result}</p>
+            </div>
+            <div className="case-study-block">
+              <h2 className="detail-section-title">Learning</h2>
+              <p>{project.learning}</p>
+            </div>
+          </section>
+        )}
 
         <section className="detail-section" aria-labelledby="stack-heading">
           <h2 id="stack-heading" className="detail-section-title">Stack</h2>

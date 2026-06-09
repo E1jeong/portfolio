@@ -1,3 +1,12 @@
+export type ProjectFeature = {
+  title: string;
+  description: string;
+  challenge: string;
+  solution: string;
+  outcome: string;
+  image?: string;
+};
+
 export type Project = {
   id: string;
   name: string;
@@ -12,9 +21,10 @@ export type Project = {
   evidence: string[];
   confidence: "git" | "code-and-notion" | "limited";
   background: string;
-  problem: string;
-  actions: string[];
-  result: string;
+  problem: string; // 하위 호환 유지
+  actions: string[]; // 하위 호환 유지
+  result: string; // 하위 호환 유지
+  features?: ProjectFeature[]; // 신규 옵셔널 필드
   learning: string;
   publicDisclosure: string;
 };
@@ -85,14 +95,36 @@ export const projects: Project[] = [
     evidence: ["Notion UBio-N Face Pro 사양서 및 RQA 검수 자료", "로컬 Gradle 멀티 모듈 소스 코드 구조"],
     confidence: "code-and-notion",
     background: "일본의 대형 솔루션 고객사(NEC 등) 요구사항에 맞추어 출입통제 얼굴인식 단말의 외부 플랫폼(SFX/SIU) 연동을 확장하고, QR/NFC/EAP-TLS 등 고안전성 기업 환경용 다중 인증 수단을 기존 Android 단말기 소프트웨어 엔진에 이식하는 대규모 기능 커스터마이징 및 안정화 프로젝트였습니다.",
-    problem: "첫째, 외부 보안 프로세스와 단말 제어 앱 간의 AIDL IPC 호출 시 타이밍 및 인증 결과 동기화 예외 분기가 불완전하여 IPC 데드락이나 통신 끊김 현상이 우려되었습니다. 둘째, WPA2-Enterprise(EAP-TLS) 네트워크 암호화 연동 시 사설 RADIUS 환경에서 잘못된 인증서 우회 접속 보안 취약점이 발견되었습니다. 셋째, 단말 관리 플랫폼 서버로부터 전송된 Config JSON 내 특정 필드가 int32 범위를 초과할 때 앱이 통째로 Crash되는 런타임 안정성 문제가 존재했습니다.",
+    problem: "외부 플랫폼(SFX/SIU) 연동, 복수 인증 수단, 엔터프라이즈 Wi-Fi, 로컬 DB 보안, 서버 수신 안정성 요구가 동시에 제기되었습니다.",
     actions: [
-      "SFX/SIU AIDL IPC 인터페이스 경계면의 설계 요건을 정비하고, 비동기 호출 및 예외 분기 처리 로직을 리팩토링하여 IPC 데이터 전송 정합성을 보장했습니다.",
-      "EAP-TLS 접속 조건에서 CA 인증서 import 시 기존 클라이언트 인증서의 비밀키 정합성을 검증하도록 검증 로직을 고도화하고, 사설 RADIUS 암호화 인증 실패 예외 흐름을 차단했습니다.",
-      "JSON 수신 시 int 범위 오버플로우 크래시를 차단하기 위해 Gson/Moshi 파서에 BigDecimal 기반의 Custom JsonAdapter를 주입하고, 설정값 변경 전후 정합성 비교 및 유효 URL 검증 계층을 구현했습니다.",
-      "MediaPipe Vision 기반 Gesture 보정 SDK 연동 모듈 최적화 및 로컬 DB(SQLCipher) 암호화 스키마를 설계하여 단말 로컬의 개인정보 보안을 강화했습니다."
+      "SFX/SIU AIDL IPC 연동 흐름 정비",
+      "EAP-TLS 인증 보안 강화",
+      "BigDecimal 기반 JsonAdapter 주입으로 int 범위 초과 크래시 방지"
     ],
-    result: "일본 고객사 6차/7차 수용평가(RQA) 및 보안성 검증 요건을 최종 통과하였으며, 단말 내부 API 서버 및 외부 연동 인터페이스의 예외 처리를 완비하여 단말기 현장 오작동률을 제로에 가깝게 낮춘 릴리즈 빌드를 완성했습니다.",
+    result: "고객사 요구 기능을 기존 제품 구조에 완비하여 정식 릴리즈 빌드를 확보했습니다.",
+    features: [
+      {
+        title: "AIDL IPC 기반 외부 보안 제어 소프트웨어(SFX/SIU) 연동 인터페이스 정비",
+        description: "Android 시스템 단말 앱과 타사 외부 보안 앱 간의 멀티 프로세스 통신(IPC) 경계를 설정하고, 단말 잠금 해정 및 이벤트 통지 흐름을 정밀 제어하는 핵심 통신 계층 개발입니다.",
+        challenge: "비동기 다중 프로세스 환경에서 IPC 호출 시의 타이밍 불일치 및 예외 상황 분기 누락으로 인해 단말이 락 해정 통지를 누락하거나 일시적으로 IPC 커넥션 데드락(Deadlock)에 빠지는 안정성 위험이 존재했습니다.",
+        solution: "AIDL 인터페이스 경계면의 예외 처리를 단말 제어 생명주기와 완벽하게 격리하고, 비동기 호출 시 데이터 전달 정합성을 보장하도록 Thread-safe한 상태 처리 큐(Queue)와 재시도 로직을 설계 및 이식했습니다.",
+        outcome: "6차/7차 수용평가(RQA)에서 단말 제어 연동 테스트 케이스를 100% 통과하여, 외부 프로세스 연동 시의 동작 신뢰성을 완전히 보장했습니다."
+      },
+      {
+        title: "WPA2-Enterprise (EAP-TLS) 사설 RADIUS 환경 보안 암호화 인증 우회 취약점 해결",
+        description: "고안전성 기업용 출입문 Wi-Fi 인프라 연결 시, 표준 TLS 암호화 핸드셰이크를 준수하고 인증서 정합성을 엄격히 통제하여 무단 중간자 공격(MITM) 및 보안 우회를 방지하는 통신 보안 강화 작업입니다.",
+        challenge: "사설 RADIUS 서버가 구축된 특수한 고객망 환경에서 CA 인증서가 설치되지 않았음에도 Wi-Fi 접속이 비정상적으로 성공하거나, CA 인증서만 단독 임포트 시 기존 클라이언트 키쌍(Keypair)과의 불일치로 인한 시스템 에러가 발생했습니다.",
+        solution: "인증서 임포트 모듈 진입점에서 CA 및 클라이언트 개인키의 유효성/일치 여부를 사전에 상호 대조 검증하는 정밀 로직을 설계하고, 사설 RADIUS 암호화 인증 실패 예외 조건을 통제하기 위해 Android KeyStore 프레임워크와의 연동 검증을 강화했습니다.",
+        outcome: "사설 RADIUS 접속에서의 보안적 무력화 구멍(인증서 검증 우회)을 원천 차단하여 기업 네트워크 보안 등급을 충족했습니다."
+      },
+      {
+        title: "단말 관리 플랫폼 Config JSON 파싱 예외 복구 및 런타임 안정성 개선",
+        description: "원격 클라우드 서버로부터 단말 설정값(Configs)을 동기화할 때, 비표준 형식 또는 이상 데이터 유입에 대해 단말 구동 프로세스가 비정상 종료(Crash)되지 않도록 방어하는 유효성 검증 계층을 설계했습니다.",
+        challenge: "서버가 보낸 특정 설정 필드가 표준 32비트 int 범위를 넘어서는 대형 정수를 가질 경우, Gson/Moshi 라이브러리가 파싱 중 NumberFormatException을 터뜨려 단말기 시스템 앱이 통째로 런타임 Crash되는 치명적인 필드 오류가 있었습니다.",
+        solution: "파서 단에 정수형 초과 데이터 유입을 유연하게 소화하도록 BigDecimal을 활용한 커스텀 JsonAdapter를 작성해 파서에 주입하고, 설정값 파싱 완료 전후 비교 및 URL 값 유효성 정규식 검증 레이어를 도입했습니다.",
+        outcome: "플랫폼 서버 장애나 비정상 데이터 유입 환경에서도 단말이 다운타임 없이 안정적으로 구동되는 무중단 런타임을 확보했습니다."
+      }
+    ],
     learning: "하드웨어 제어, 펌웨어, 외부 솔루션 및 원격 관리 플랫폼이 복잡하게 얽혀 24시간 중단 없이 구동되어야 하는 단말용 Android 시스템 환경에서는, 입출력 값의 사소한 불일치가 전체 시스템 다운타임으로 이어질 수 있음을 절감하였습니다. 이에 따라 통신 인터페이스 진입점부터의 철저한 방어적 프로그래밍(Defensive Programming)과 모듈 간 역할 격리가 프로덕션 급 제품 안정성의 핵심임을 배웠습니다.",
     publicDisclosure: "보안성 및 계약 조건(NDA) 준수를 위해 전체 코드 구현부는 공개하지 않으며, 사양 및 흐름 위주로 기술합니다."
   },
