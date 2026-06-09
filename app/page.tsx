@@ -215,7 +215,7 @@ export default function Home() {
                     aria-label={`${project.name} detail 보기`}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    View Detail
+                    View Detail <span className="detail-arrow">↗</span>
                   </Link>
                 </footer>
               </article>

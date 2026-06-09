@@ -595,13 +595,27 @@ a {
   font-weight: 800;
   color: var(--accent);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detail-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
 }
 
 .project-card:hover .project-detail-link,
 .project-detail-link:hover {
   color: var(--accent-strong);
   border-color: var(--accent-strong);
+  text-shadow: 0 0 8px rgba(255, 219, 112, 0.6);
+}
+
+.project-card:hover .detail-arrow,
+.project-detail-link:hover .detail-arrow {
+  transform: translate(2px, -2px);
 }
 
 .project-detail-link:focus-visible,
