@@ -6,6 +6,7 @@
 *.swp
 *~
 *.log
+*.stackdump
 
 # gstack 캐시
 .gstack/
