@@ -25,6 +25,9 @@ inputs/private/
 .idea/
 .vscode/
 
+# obsidian-sync 스킬 — 머신별 위키 경로 (집/회사 다름)
+.claude/obsidian-sync.local.json
+
 # node / python (프로젝트 진행 중 생성될 수 있음)
 node_modules/
 .next/

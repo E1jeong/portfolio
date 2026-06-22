@@ -1,0 +1,4 @@
+{
+  "_comment": "머신별 옵시디언 위키 경로 설정. 이 파일을 obsidian-sync.local.json 으로 복사하고 wikiPath를 본인 환경에 맞게 수정하세요. local 파일은 git에 커밋되지 않습니다.",
+  "wikiPath": "C:\\Users\\<USER>\\path\\to\\obsidian-vault\\Project\\Personal\\Portfolio Website"
+}
