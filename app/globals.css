@@ -917,53 +917,6 @@ a {
   letter-spacing: 0;
 }
 
-/* Media Placeholder Styles */
-.media-placeholder {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: var(--surface-hover);
-  border: 1px dashed var(--line);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  color: var(--text-light);
-  overflow: hidden;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.media-placeholder:hover {
-  background-color: var(--surface-hover);
-  border-color: var(--accent-light);
-}
-
-.placeholder-icon {
-  color: var(--text-light);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.media-placeholder:hover .placeholder-icon {
-  transform: scale(1.1);
-  color: var(--accent);
-}
-
-.placeholder-text {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.detail-media-placeholder {
-  margin-top: 24px;
-  margin-bottom: 44px;
-  border-style: solid;
-  border-width: 1px;
-}
-
 /* Tablet & Mobile responsive optimization */
 @media (max-width: 1024px) {
   .layout-container {
@@ -1137,110 +1090,38 @@ a {
   box-shadow: 0 20px 48px rgba(255, 219, 112, 0.08), 0 8px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Premium Device Mockup Styles */
-.device-mockup {
-  width: 240px;
-  height: 400px;
-  background: #181819;
-  border: 4px solid #3a3a3c;
-  border-radius: 24px;
-  padding: 10px 8px 14px;
+/* Detail Banner (neutral project header band) */
+.detail-banner {
+  margin-top: 24px;
+  margin-bottom: 44px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
-}
-
-.media-placeholder:hover .device-mockup {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--accent);
-}
-
-.device-screen {
-  flex-grow: 1;
-  background: #0d0d0d;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.device-statusBar {
-  height: 18px;
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.55rem;
-  color: var(--text-light);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.device-appBar {
-  height: 32px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-}
-
-.appBar-title {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--accent);
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.device-content {
-  flex-grow: 1;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.mock-chart-container {
-  height: 70px;
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 6px;
-  border: 1px dashed var(--line);
-}
-
-.mock-chart-bar {
-  flex-grow: 1;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent);
-  border-radius: 3px 3px 0 0;
-  transition: height 0.3s ease;
-}
-
-.device-mockup:hover .mock-chart-bar {
-  filter: brightness(1.2);
-}
-
-.mock-list-item {
-  height: 14px;
-  background: var(--surface);
-  border-radius: 4px;
+  gap: 8px;
+  padding: 32px 36px;
   border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
 }
 
-.device-home-button {
-  width: 32px;
-  height: 4px;
-  background: #3a3a3c;
-  border-radius: 2px;
-  margin: 8px auto 0;
+.detail-banner-type {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.detail-banner-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.detail-banner-period {
+  font-size: 0.84rem;
+  color: var(--text-light);
 }
 
 /* Evidence Cards Styling */
@@ -1425,12 +1306,37 @@ a {
   opacity: 1;
 }
 
+.feature-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.feature-card-index {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 219, 112, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 219, 112, 0.06);
+}
+
+.feature-card-headings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .feature-card-title {
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 800;
   color: var(--accent);
-  margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
@@ -1438,7 +1344,6 @@ a {
   font-size: 0.96rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 32px;
   max-width: 90%;
 }
 
@@ -1455,6 +1360,8 @@ a {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-right: 28px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .feature-solution-section {
@@ -1506,6 +1413,8 @@ a {
 .step-content {
   font-size: 0.92rem;
   line-height: 1.75;
+  padding-left: 11px;
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
 }
 
 .text-challenge {
@@ -1522,11 +1431,37 @@ a {
 }
 
 @media (max-width: 992px) {
+  .feature-card {
+    padding: 28px;
+  }
   .feature-card-body {
     flex-direction: column;
     gap: 32px;
   }
   .feature-challenge-section {
+    max-width: 100%;
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+@media (max-width: 640px) {
+  .detail-banner {
+    padding: 24px 22px;
+  }
+  .detail-banner-name {
+    font-size: 1.3rem;
+  }
+  .feature-card-head {
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .feature-card-title {
+    font-size: 1.2rem;
+  }
+  .feature-card-description {
     max-width: 100%;
   }
 }

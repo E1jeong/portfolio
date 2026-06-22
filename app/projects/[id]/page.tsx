@@ -67,31 +67,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <p className="detail-summary">{project.summary}</p>
         </header>
 
-        <div className="detail-media-placeholder media-placeholder">
-          <div className="device-mockup">
-            <div className="device-screen">
-              <div className="device-statusBar">
-                <span className="statusBar-time">09:41</span>
-                <span className="statusBar-icons">🔋 📶</span>
-              </div>
-              <div className="device-appBar">
-                <span className="appBar-title">{project.name}</span>
-              </div>
-              <div className="device-content">
-                <div className="mock-chart-container">
-                  <div className="mock-chart-bar" style={{ height: "60%" }}></div>
-                  <div className="mock-chart-bar" style={{ height: "85%" }}></div>
-                  <div className="mock-chart-bar" style={{ height: "45%" }}></div>
-                  <div className="mock-chart-bar" style={{ height: "95%" }}></div>
-                  <div className="mock-chart-bar" style={{ height: "70%" }}></div>
-                </div>
-                <div className="mock-list-item"></div>
-                <div className="mock-list-item"></div>
-              </div>
-            </div>
-            <div className="device-home-button"></div>
-          </div>
-          <p className="placeholder-text">{project.type} UI & System Showcase</p>
+        <div className="detail-banner" role="img" aria-label={`${project.name} — ${project.type}`}>
+          <span className="detail-banner-type">{project.type}</span>
+          <span className="detail-banner-name">{project.name}</span>
+          <span className="detail-banner-period">{project.period}</span>
         </div>
 
         <section className="detail-section" aria-labelledby="role-heading">
@@ -112,21 +91,37 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
         {project.features && project.features.length > 0 ? (
           <>
-            <section className="detail-section" aria-labelledby="background-heading">
-              <h2 id="background-heading" className="detail-section-title">Project Background</h2>
-              <div className="background-block-standalone">
-                <p>{project.background}</p>
-              </div>
-            </section>
+            {project.background ? (
+              <section className="detail-section" aria-labelledby="background-heading">
+                <h2 id="background-heading" className="detail-section-title">Project Background</h2>
+                <div className="background-block-standalone">
+                  <p>{project.background}</p>
+                </div>
+              </section>
+            ) : null}
+
+            {project.problem ? (
+              <section className="detail-section" aria-labelledby="problem-heading">
+                <h2 id="problem-heading" className="detail-section-title">Problem</h2>
+                <div className="background-block-standalone">
+                  <p>{project.problem}</p>
+                </div>
+              </section>
+            ) : null}
 
             <section className="detail-section" aria-labelledby="features-heading">
               <h2 id="features-heading" className="detail-section-title">Key Developed Features</h2>
               <div className="features-container">
                 {project.features.map((feature, idx) => (
                   <div key={idx} className="feature-card">
-                    <h3 className="feature-card-title">{feature.title}</h3>
-                    <p className="feature-card-description">{feature.description}</p>
-                    
+                    <div className="feature-card-head">
+                      <span className="feature-card-index">{String(idx + 1).padStart(2, "0")}</span>
+                      <div className="feature-card-headings">
+                        <h3 className="feature-card-title">{feature.title}</h3>
+                        <p className="feature-card-description">{feature.description}</p>
+                      </div>
+                    </div>
+
                     <div className="feature-card-body">
                       <div className="feature-challenge-section">
                         <div className="step-badge-wrapper">
@@ -134,15 +129,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                         </div>
                         <div className="step-content text-challenge">{feature.challenge}</div>
                       </div>
-                      
+
                       <div className="feature-solution-section">
                         <div className="solution-group">
                           <div className="step-badge-wrapper">
-                            <span className="step-badge badge-solution">Solution & Logic</span>
+                            <span className="step-badge badge-solution">Solution &amp; Logic</span>
                           </div>
                           <div className="step-content text-solution">{feature.solution}</div>
                         </div>
-                        
+
                         <div className="outcome-group">
                           <div className="step-badge-wrapper">
                             <span className="step-badge badge-outcome">Outcome</span>
@@ -156,12 +151,23 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </div>
             </section>
             
-            <section className="detail-section" aria-labelledby="learning-heading">
-              <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
-              <div className="learning-block-standalone">
-                <p>{project.learning}</p>
-              </div>
-            </section>
+            {project.result ? (
+              <section className="detail-section" aria-labelledby="result-heading">
+                <h2 id="result-heading" className="detail-section-title">Result</h2>
+                <div className="background-block-standalone">
+                  <p>{project.result}</p>
+                </div>
+              </section>
+            ) : null}
+
+            {project.learning ? (
+              <section className="detail-section" aria-labelledby="learning-heading">
+                <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
+                <div className="learning-block-standalone">
+                  <p>{project.learning}</p>
+                </div>
+              </section>
+            ) : null}
           </>
         ) : (
           <section className="detail-section case-study-grid" aria-label="프로젝트 상세 흐름">
