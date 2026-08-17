@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/portfolio";
 
-
 type ProjectDetailPageProps = {
   params: Promise<{
     id: string;
@@ -33,10 +32,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${project.name} | Project Detail`,
+    title: `${project.name} | Project Case Study`,
     description: project.summary,
     openGraph: {
-      title: `${project.name} | Project Detail`,
+      title: `${project.name} | Project Case Study`,
       description: project.summary,
       type: "article"
     }
@@ -73,8 +72,65 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="detail-banner-period">{project.period}</span>
         </div>
 
+        {/* 1. Quantitative Performance Metrics Grid */}
+        {project.metrics && project.metrics.length > 0 ? (
+          <section className="detail-section" aria-labelledby="metrics-heading">
+            <h2 id="metrics-heading" className="detail-section-title">Verified Quantitative Metrics</h2>
+            <div className="detail-metrics-grid">
+              {project.metrics.map((m) => (
+                <div key={m.label} className="detail-metric-card">
+                  <div className="detail-metric-val">{m.value}</div>
+                  <div className="detail-metric-lbl">{m.label}</div>
+                  {m.description && <div className="detail-metric-sub">{m.description}</div>}
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {/* 2. Pipeline Flow for Complex AI / Systems */}
+        {project.pipelineSteps && project.pipelineSteps.length > 0 ? (
+          <section className="detail-section" aria-labelledby="pipeline-heading">
+            <h2 id="pipeline-heading" className="detail-section-title">End-to-End Pipeline Architecture</h2>
+            <div className="detail-pipeline-flow">
+              {project.pipelineSteps.map((step) => (
+                <div key={step.step} className="pipeline-step-card">
+                  <div className="pipeline-step-header">
+                    <span className="pipeline-step-num">{step.step}</span>
+                    <h3 className="pipeline-step-title">{step.title}</h3>
+                  </div>
+                  <p className="pipeline-step-desc">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {/* 3. Dual-Repository / Multi-Module Boundaries */}
+        {project.repositories && project.repositories.length > 0 ? (
+          <section className="detail-section" aria-labelledby="repos-heading">
+            <h2 id="repos-heading" className="detail-section-title">Repository Structure & Disclosure Scope</h2>
+            <div className="detail-repos-grid">
+              {project.repositories.map((repo) => (
+                <div key={repo.name} className="detail-repo-card">
+                  <div className="repo-card-header">
+                    <span className="repo-code-icon">⌥</span>
+                    <h3 className="repo-card-name">{repo.name}</h3>
+                  </div>
+                  <p className="repo-card-role">{repo.role}</p>
+                  <div className="repo-card-disclosure">
+                    <span className="disclosure-tag">공개 범위</span>
+                    <span className="disclosure-text">{repo.disclosure}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {/* 4. Role & Contribution */}
         <section className="detail-section" aria-labelledby="role-heading">
-          <h2 id="role-heading" className="detail-section-title">Role</h2>
+          <h2 id="role-heading" className="detail-section-title">Role & Contribution</h2>
           <div className="project-meta-grid detail-meta-grid">
             <div className="meta-col">
               <span className="meta-label">Role</span>
@@ -89,117 +145,94 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
+        {/* 5. Project Background */}
+        {project.background ? (
+          <section className="detail-section" aria-labelledby="background-heading">
+            <h2 id="background-heading" className="detail-section-title">Project Background</h2>
+            <div className="background-block-standalone">
+              <p>{project.background}</p>
+            </div>
+          </section>
+        ) : null}
+
+        {/* 6. Problem Definition */}
+        {project.problem ? (
+          <section className="detail-section" aria-labelledby="problem-heading">
+            <h2 id="problem-heading" className="detail-section-title">Core Problem & Constraints</h2>
+            <div className="background-block-standalone problem-block-highlight">
+              <p>{project.problem}</p>
+            </div>
+          </section>
+        ) : null}
+
+        {/* 7. Key Developed Features (Challenge / Solution / Outcome) */}
         {project.features && project.features.length > 0 ? (
-          <>
-            {project.background ? (
-              <section className="detail-section" aria-labelledby="background-heading">
-                <h2 id="background-heading" className="detail-section-title">Project Background</h2>
-                <div className="background-block-standalone">
-                  <p>{project.background}</p>
-                </div>
-              </section>
-            ) : null}
+          <section className="detail-section" aria-labelledby="features-heading">
+            <h2 id="features-heading" className="detail-section-title">Key Developed Features & Technical Solutions</h2>
+            <div className="features-container">
+              {project.features.map((feature, idx) => (
+                <div key={idx} className="feature-card">
+                  <div className="feature-card-head">
+                    <span className="feature-card-index">{String(idx + 1).padStart(2, "0")}</span>
+                    <div className="feature-card-headings">
+                      <h3 className="feature-card-title">{feature.title}</h3>
+                      <p className="feature-card-description">{feature.description}</p>
+                    </div>
+                  </div>
 
-            {project.problem ? (
-              <section className="detail-section" aria-labelledby="problem-heading">
-                <h2 id="problem-heading" className="detail-section-title">Problem</h2>
-                <div className="background-block-standalone">
-                  <p>{project.problem}</p>
-                </div>
-              </section>
-            ) : null}
-
-            <section className="detail-section" aria-labelledby="features-heading">
-              <h2 id="features-heading" className="detail-section-title">Key Developed Features</h2>
-              <div className="features-container">
-                {project.features.map((feature, idx) => (
-                  <div key={idx} className="feature-card">
-                    <div className="feature-card-head">
-                      <span className="feature-card-index">{String(idx + 1).padStart(2, "0")}</span>
-                      <div className="feature-card-headings">
-                        <h3 className="feature-card-title">{feature.title}</h3>
-                        <p className="feature-card-description">{feature.description}</p>
+                  <div className="feature-card-body">
+                    <div className="feature-challenge-section">
+                      <div className="step-badge-wrapper">
+                        <span className="step-badge badge-challenge">Challenge</span>
                       </div>
+                      <div className="step-content text-challenge">{feature.challenge}</div>
                     </div>
 
-                    <div className="feature-card-body">
-                      <div className="feature-challenge-section">
+                    <div className="feature-solution-section">
+                      <div className="solution-group">
                         <div className="step-badge-wrapper">
-                          <span className="step-badge badge-challenge">Challenge</span>
+                          <span className="step-badge badge-solution">Solution &amp; Logic</span>
                         </div>
-                        <div className="step-content text-challenge">{feature.challenge}</div>
+                        <div className="step-content text-solution">{feature.solution}</div>
                       </div>
 
-                      <div className="feature-solution-section">
-                        <div className="solution-group">
-                          <div className="step-badge-wrapper">
-                            <span className="step-badge badge-solution">Solution &amp; Logic</span>
-                          </div>
-                          <div className="step-content text-solution">{feature.solution}</div>
+                      <div className="outcome-group">
+                        <div className="step-badge-wrapper">
+                          <span className="step-badge badge-outcome">Outcome</span>
                         </div>
-
-                        <div className="outcome-group">
-                          <div className="step-badge-wrapper">
-                            <span className="step-badge badge-outcome">Outcome</span>
-                          </div>
-                          <div className="step-content text-outcome">{feature.outcome}</div>
-                        </div>
+                        <div className="step-content text-outcome">{feature.outcome}</div>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
-            
-            {project.result ? (
-              <section className="detail-section" aria-labelledby="result-heading">
-                <h2 id="result-heading" className="detail-section-title">Result</h2>
-                <div className="background-block-standalone">
-                  <p>{project.result}</p>
                 </div>
-              </section>
-            ) : null}
+              ))}
+            </div>
+          </section>
+        ) : null}
 
-            {project.learning ? (
-              <section className="detail-section" aria-labelledby="learning-heading">
-                <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
-                <div className="learning-block-standalone">
-                  <p>{project.learning}</p>
-                </div>
-              </section>
-            ) : null}
-          </>
-        ) : (
-          <section className="detail-section case-study-grid" aria-label="프로젝트 상세 흐름">
-            <div className="case-study-block">
-              <h2 className="detail-section-title">Background</h2>
-              <p>{project.background}</p>
-            </div>
-            <div className="case-study-block">
-              <h2 className="detail-section-title">Problem</h2>
-              <p>{project.problem}</p>
-            </div>
-            <div className="case-study-block case-study-wide">
-              <h2 className="detail-section-title">Actions</h2>
-              <ul className="details-list">
-                {project.actions.map((action, idx) => (
-                  <li key={idx}>{action}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="case-study-block">
-              <h2 className="detail-section-title">Result</h2>
+        {/* 8. Result */}
+        {project.result ? (
+          <section className="detail-section" aria-labelledby="result-heading">
+            <h2 id="result-heading" className="detail-section-title">Project Result & Impact</h2>
+            <div className="background-block-standalone">
               <p>{project.result}</p>
             </div>
-            <div className="case-study-block">
-              <h2 className="detail-section-title">Learning</h2>
+          </section>
+        ) : null}
+
+        {/* 9. Learning & Engineering Retrospective */}
+        {project.learning ? (
+          <section className="detail-section" aria-labelledby="learning-heading">
+            <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
+            <div className="learning-block-standalone">
               <p>{project.learning}</p>
             </div>
           </section>
-        )}
+        ) : null}
 
+        {/* 10. Tech Stack Tags */}
         <section className="detail-section" aria-labelledby="stack-heading">
-          <h2 id="stack-heading" className="detail-section-title">Stack</h2>
+          <h2 id="stack-heading" className="detail-section-title">Tech Stack</h2>
           <div className="project-tech-tags detail-tech-tags">
             {project.stack.map((tech) => (
               <span key={tech} className="tech-tag">
@@ -209,7 +242,22 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
-
+        {/* 11. Evidence & Disclosure */}
+        <section className="detail-section" aria-labelledby="evidence-heading">
+          <h2 id="evidence-heading" className="detail-section-title">Evidence & Public Disclosure</h2>
+          <div className="evidence-public-notice">
+            <p className="notice-main">Public Disclosure Boundary</p>
+            <p className="notice-sub">{project.publicDisclosure}</p>
+          </div>
+          <div className="evidence-card-list">
+            {project.evidence.map((ev, idx) => (
+              <div key={idx} className="evidence-card-item evidence-git-type">
+                <span className="evidence-badge-indicator">Evidence</span>
+                <span className="evidence-text-content">{ev}</span>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

@@ -15,11 +15,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "이원정 | Android Developer",
-  description: "Android 시스템 앱, 하드웨어 연동, NFC/단말 프로토콜, 결제/구독 앱 개발 포트폴리오",
+  title: "이원정 | AI-Native Android Developer",
+  description:
+    "온디바이스 AI(Edge ML), Android 시스템 앱, 하드웨어 연동, Clean Architecture 기반 개발 포트폴리오",
   openGraph: {
-    title: "이원정 | Android Developer",
-    description: "Android 시스템 앱과 하드웨어 연동 경험을 중심으로 정리한 개발 포트폴리오",
+    title: "이원정 | AI-Native Android Developer",
+    description:
+      "AI 모델을 직접 설계하여 임베디드 NPU에 배포하고 Android 시스템 및 아키텍처를 구축하는 엔지니어링 포트폴리오",
     type: "website"
   }
 };

@@ -3,13 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { experiences, profile, projects, skillGroups } from "../data/portfolio";
-
-const coreStrengths = [
-  "Android 시스템 앱과 하드웨어 연동",
-  "NFC/단말 프로토콜 기반 현장 앱",
-  "Kotlin/Compose 구조 개선과 앱+BFF 구현"
-];
+import { coreStrengths, experiences, profile, projects, skillGroups } from "../data/portfolio";
 
 export default function Home() {
   const router = useRouter();
@@ -154,10 +148,10 @@ export default function Home() {
         <section id="about" className="content-section" aria-labelledby="about-heading">
           <h2 id="about-heading" className="section-title">ABOUT</h2>
           <p className="lead-description">
-            Android 모바일 앱에서 화면 구현, 데이터 흐름, 로컬 저장소, 백엔드 연동, 결제와 알림까지 사용자가 실제로 쓰는 기능을 설계하고 구현해왔습니다.
+            AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 시스템 앱과 견고한 아키텍처까지 일관되게 책임지는 AI-Native Android 개발자입니다.
           </p>
           <p className="lead-subdescription">
-            Kotlin/Compose 기반 앱 구조 개선 경험에 더해 NFC, 단말 프로토콜, AIDL 같은 하드웨어·시스템 연동 경험도 함께 갖고 있어 앱 내부 로직과 외부 연동 문제가 맞물린 상황을 안정적으로 정리할 수 있습니다.
+            온디바이스 딥러닝(Edge ML) 파이프라인 수립과 INT8 양자화, NPU 실기기 추론 최적화 경험을 보유하고 있으며, AIDL IPC·NFC·단말 프로토콜 등의 시스템 연동 및 Kotlin/Compose 기반 Clean Architecture 전환 경험을 바탕으로 하드웨어와 소프트웨어의 경계를 안정적으로 연결합니다.
           </p>
           <ul className="strength-list about-strength-list" aria-label="핵심 강점">
             {coreStrengths.map((strength) => (
@@ -184,6 +178,17 @@ export default function Home() {
                   <h3 className="project-card-title">{project.name}</h3>
                   <p className="project-card-summary">{project.summary}</p>
                 </header>
+
+                {project.metrics && project.metrics.length > 0 ? (
+                  <div className="card-metrics-preview">
+                    {project.metrics.slice(0, 3).map((m) => (
+                      <div key={m.label} className="card-metric-badge">
+                        <span className="metric-badge-value">{m.value}</span>
+                        <span className="metric-badge-label">{m.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
 
                 <div className="project-tech-tags">
                   {project.stack.map((tech) => (

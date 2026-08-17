@@ -15,13 +15,13 @@
 
 ```text
 이원정
-Android Developer
+AI-Native Android Developer
 
-Android 시스템 앱, 하드웨어 연동, NFC/단말 프로토콜, 결제/구독 기반 앱을 개발해왔습니다.
-Java 기반 레거시 운영 경험과 Kotlin/Compose 기반 구조 개선 경험을 함께 가지고 있습니다.
+AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 시스템과 아키텍처까지 책임집니다.
+온디바이스 AI(Edge ML) · Android 시스템 앱 및 하드웨어 연동 · AI 주도 단위 테스트 및 엔지니어링
 ```
 
-감성 카피나 과장 표현보다 직무, 도메인, 기술 문제를 먼저 보여준다.
+감성 카피나 과장 표현보다 직무, 도메인, 기술 문제와 검증된 정량 지표를 먼저 보여준다.
 
 ## Writing Rules
 
@@ -43,35 +43,27 @@ Java 기반 레거시 운영 경험과 Kotlin/Compose 기반 구조 개선 경�
 - 해결한 문제
 - 적용한 기술
 - 운영 중 마주한 제약
-- Git 이력으로 확인되는 변경
+- Git 이력으로 확인되는 변경 및 정량 지표
 
 ## Site Structure
 
 ```text
-1. 첫 화면
-2. 핵심 역량
-3. 대표 프로젝트
+1. 첫 화면 (Hero / About / 핵심 강점)
+2. 프로젝트 목록 (핵심 지표 배지 포함)
+3. 스킬 (On-Device AI, AI-Ops, Android, Architecture, HW/Protocol, Backend)
 4. 경력
-5. 기타 프로젝트
-6. 연락처
+5. 연락처
 ```
-
-첫 화면에는 사진, 긴 자기소개, 장식보다 다음 정보를 우선 배치한다.
-
-- 직무명: Android Developer
-- 핵심 도메인: Android 시스템 앱, 하드웨어 연동, NFC, 단말 프로토콜, 구독/결제 앱
-- 연락 링크: Email, GitHub, Blog
-- 대표 프로젝트 2~3개 바로가기
 
 ## Project Order
 
-프로젝트는 시간 순서 기준으로 배치한다. 최신 또는 진행 중 프로젝트를 먼저 보여주고, 그다음 최근 개인 프로젝트와 이전 회사 프로젝트를 이어서 보여준다.
+Career-Hub 확정 기준에 따라 대표 프로젝트 1번에 온디바이스 AI 세트를 배치한다.
 
-1. UBio-N Face Pro
-2. fisherlotto + lotto-sub-backend
-3. renew_smartset
-4. smartset
-5. hitec_project C 프로젝트
+1. 자체 안티스푸핑(Liveness) AI 모델 & 실기기 검증 앱 (`access-liveness-model` + `android-anti-spoofing-lab`)
+2. UBio-N Face Pro
+3. Fisher Lotto + lotto-sub-backend
+4. SmartSet Renewal
+5. SmartSet (보조 케이스)
 
 ## Evidence Rules
 
