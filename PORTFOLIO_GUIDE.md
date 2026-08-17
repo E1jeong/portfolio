@@ -57,10 +57,10 @@ AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 
 
 ## Project Order
 
-Career-Hub 확정 기준에 따라 대표 프로젝트 1번에 온디바이스 AI 세트를 배치한다.
+메인 상용 제품 프로젝트를 1순위로 배치하고, 온디바이스 AI 세트를 2순위로 배치한다.
 
-1. 자체 안티스푸핑(Liveness) AI 모델 & 실기기 검증 앱 (`access-liveness-model` + `android-anti-spoofing-lab`)
-2. UBio-N Face Pro
+1. UBio-N Face Pro (메인 상용 단말 시스템 앱 프로젝트)
+2. 자체 안티스푸핑(Liveness) AI 모델 & 실기기 검증 앱 (`access-liveness-model` + `android-anti-spoofing-lab`)
 3. Fisher Lotto + lotto-sub-backend
 4. SmartSet Renewal
 5. SmartSet (보조 케이스)
