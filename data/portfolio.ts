@@ -179,8 +179,8 @@ export const projects: Project[] = [
       "6차 릴리즈 완료 및 고객사 납품 검수를 통과하여 7차 기능 개발을 신뢰 기반으로 지속 수임했습니다."
     ],
     evidence: [
-      "사내 RQA 이슈 트래커 종결 기록 (121건 중 118건 종결)",
-      "일본 NEC 고객사 6차 릴리즈 수용평가 검수 통과 자료",
+      "사내 RQA 이슈 트래커 종결 기록 (121건 중 118건 종결, 2026.04 기준)",
+      "일본 NEC 고객사 6차 릴리즈 수용평가 검수 통과 자료 (25건 전건 해결)",
       "로컬 Gradle 멀티 모듈 소스 코드 구조"
     ],
     confidence: "code-and-notion",
@@ -201,7 +201,7 @@ export const projects: Project[] = [
       {
         label: "사내 RQA 이슈 종결",
         value: "97.5%",
-        description: "121건 중 118건 종결 (2인 공동 담당)"
+        description: "121건 중 118건 종결 (2인 공동 담당, 2026.04 기준)"
       },
       {
         label: "고객사 수용평가 이슈",
@@ -246,7 +246,7 @@ export const projects: Project[] = [
         solution:
           "파서 단에 정수형 초과 데이터 유입을 유연하게 소화하도록 BigDecimal을 활용한 커스텀 SafeIntegerAdapter를 작성해 파서에 주입하고, 설정값 파싱 완료 전후 비교 및 URL 값 유효성 정규식 검증 레이어를 도입했습니다.",
         outcome:
-          "플랫폼 서버 장애나 비정상 데이터 유입 환경에서도 단말이 크래시 없이 안정적으로 구동되도록 런타임 안정성을 개선했습니다."
+          "수동 재현 테스트에서 동일 JSON 파싱 크래시 미발생 및 이후 동일 이슈 추가 접수 0건을 달성하여 플랫폼 데이터 동기화 안정성을 개선했습니다."
       },
       {
         title: "MediaPipe Tasks Vision 기반 랜드마크 분석 제스처(Gesture) 오인식 개선 알고리즘",
@@ -379,7 +379,7 @@ export const projects: Project[] = [
       {
         step: "04",
         title: "Real-time Dual Stream Pipeline",
-        desc: "Android 타깃 단말에서 RGB/IR 150ms 프레임 페어링 및 3-Executor 스레드 분리(카메라/검출/추론)"
+        desc: "Android 타깃 단말에서 RGB/IR 150ms 프레임 페어링 및 3-Executor 스레드 분리(카메라/전처리/추론)"
       },
       {
         step: "05",
@@ -403,7 +403,7 @@ export const projects: Project[] = [
       {
         title: "Subject 단위 Group K-Fold 및 IR 1채널 가중치 전이 최적화",
         description:
-          "데이터셋 구축 시 인물 데이터 누수를 방지하고 단일 IR 센서 입력에 최적화된 합성곱 가중치 변환 설계",
+          "데이터셋 구축 시 인물 데이터 누수를 원천 방지하고 단일 IR 센서 입력에 최적화된 합성곱 가중치 변환 설계",
         challenge:
           "동일 인물의 프레임이 Train과 Val/Test에 섞여 들어갈 경우 지표가 과도하게 낙관적으로 왜곡(Data Leakage)되고, 1채널 IR 이미지 주입 시 기존 3채널 사전학습 모델의 Conv1 활성화 스케일이 왜곡되는 문제가 발생했습니다.",
         solution:

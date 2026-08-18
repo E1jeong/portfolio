@@ -32,7 +32,9 @@ inputs/private/
 # node / python (프로젝트 진행 중 생성될 수 있음)
 node_modules/
 .next/
+*.tsbuildinfo
 __pycache__/
 *.pyc
 .env
 .env.local
+
