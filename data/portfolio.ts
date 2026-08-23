@@ -153,8 +153,8 @@ export const projects: Project[] = [
     name: "UBio-N Face Pro",
     summary:
       "일본 NEC 고객사 출입통제 플랫폼 요구사항을 Android 단말 앱에 통합한 시스템 앱 프로젝트",
-    period: "2025.04 - 현재 (집중 개발 2025.07 - 2026.03)",
-    type: "Android System App / Device Integration",
+    period: "2025.07 - 현재",
+    type: "Android Device",
     role: "Android 단말 앱 인증 확장, AIDL IPC 연동, DB 보안, 안정성 개선 전담",
     contribution: "2인 개발 중 카메라/얼굴 알고리즘 외 전 기능 전담 (~50%)",
     stack: [
@@ -288,12 +288,317 @@ export const projects: Project[] = [
       "보안성 및 계약 조건(NDA) 준수를 위해 전체 코드 구현부는 비공개하며, 사양 및 아키텍처 다이어그램 위주로 기술합니다."
   },
   {
+    id: "fisherlotto",
+    name: "Fisher Lotto",
+    summary:
+      "동행복권 1등 당첨판매점 및 연금복권 분석 데이터를 제공하는 위치 기반 네이티브 Android 앱",
+    period: "2025.04 - 2025.06",
+    type: "Android Mobile",
+    role: "Full-Stack 개인 프로젝트 (Android 클라이언트 + Node.js 백엔드 + 파이프라인 전담)",
+    contribution: "100% 단독 기획·설계·개발",
+    stack: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Clean Architecture",
+      "Multi-module",
+      "Orbit MVI",
+      "Hilt",
+      "CameraX",
+      "ML Kit",
+      "Google Play Billing",
+      "Next.js",
+      "MySQL",
+      "FCM",
+      "GitHub Actions"
+    ],
+    highlights: [
+      "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture 및 Orbit MVI 적용",
+      "CameraX/ML Kit 고속 QR 스캔, Google Play Billing 구독 결제, FCM 푸시 파이프라인 구축",
+      "Next.js App Router BFF 서버에서 영수증 서버 검증 및 KFTC 오픈뱅킹 OAuth 2.0 연동"
+    ],
+    outcomes: [
+      "공개 GitHub 코드로 증명 가능한 모바일 클라이언트와 서버리스 백엔드의 End-to-End 아키텍처 확보",
+      "클라이언트에 민감 키를 일절 노출하지 않고 BFF로 안전하게 분리하는 보안 인증/결제 구조 완성"
+    ],
+    evidence: [
+      "FisherLotto Android GitHub: https://github.com/E1jeong/FisherLotto",
+      "lotto-sub-backend GitHub: https://github.com/E1jeong/lotto-sub-backend",
+      "GitHub Actions CI/CD 파이프라인 및 Vercel 배포 내역"
+    ],
+    confidence: "git",
+    background:
+      "실무에서 즉시 도입하기 어려운 최신 Android 스택(Compose, Multi-module, MVI, Play Billing)과 클라우드 백엔드를 End-to-End로 직접 설계하고 실전 운영 역량을 검증하기 위해 기획한 1인 사이드 프로젝트입니다.",
+    problem:
+      "모바일 앱 내부의 복잡한 비즈니스 로직과 결제 영수증 검증, 푸시 알림 발송, OAuth 연동 같은 서버의 보안 책임을 명확히 분리해야 했습니다.",
+    actions: [
+      "app/presentation/domain/data 4모듈 설계 및 순수 Kotlin domain 모듈 분리",
+      "Orbit MVI 상태 관리와 Hilt DI를 결합한 단방향 데이터 흐름 구축",
+      "CameraX ImageAnalysis와 ML Kit를 활용한 0.1초 즉각 QR 당첨 대조 구현",
+      "Next.js BFF 서버 구축 및 Google Cloud Pub/Sub Webhook 기반 영수증 검증 연동",
+      "GitHub Actions를 통한 빌드/테스트 자동화 및 Vercel 서버리스 배포 파이프라인 구축"
+    ],
+    result:
+      "Android 앱부터 BFF 서버, 인증, 결제, 푸시, CI/CD까지 전 과정을 직접 설계하여 공개 GitHub로 확인 가능한 고완성도 서비스 구조를 구축했습니다.",
+    metrics: [
+      {
+        label: "모듈 아키텍처",
+        value: "4-Module",
+        description: "app / presentation / domain / data"
+      },
+      {
+        label: "CI/CD 자동화",
+        value: "100%",
+        description: "GitHub Actions + Vercel Serverless"
+      },
+      {
+        label: "공개 코드베이스",
+        value: "100% Public",
+        description: "GitHub 공개 저장소 2개 (App + Backend)"
+      }
+    ],
+    features: [
+      {
+        title: "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture & Orbit MVI",
+        description:
+          "안드로이드 프레임워크 의존성이 없는 순수 Kotlin domain 모듈과 MVI 단방향 데이터 흐름 설계",
+        challenge:
+          "QR 스캔, 구독 결제, 오픈뱅킹, 번호 추첨 등 복잡한 비즈니스 로직이 단일 화면에 뒤엉켜 상태 충돌 및 테스트 격리가 어려웠습니다.",
+        solution:
+          "domain 모듈을 순수 Kotlin으로 격리하여 UseCase 인터페이스를 배치하고, Orbit MVI를 적용해 State(상태), SideEffect(1회성 이벤트), Intent(사용자 동작)를 단방향으로 통제했습니다.",
+        outcome:
+          "비즈니스 로직과 UI 컴포넌트의 결합도를 낮추고 모듈 단위 독립적 유지보수성을 확보했습니다."
+      },
+      {
+        title: "Google Play Billing 7.0 구독 결제 및 Next.js BFF 서버 실시간 검증",
+        description:
+          "클라이언트에 민감 키를 노출하지 않고 BFF 서버를 통해 결제 영수증 위변조를 방지하는 결제 파이프라인",
+        challenge:
+          "클라이언트 단에서 직접 결제 결과를 신뢰할 경우 결제 우회(Tampering) 및 영수증 조작 보안 취약점이 발생했습니다.",
+        solution:
+          "Next.js App Router 기반 BFF 서버를 구축하고 Google Cloud Pub/Sub Webhook 및 Play Developer API를 연동하여 서버 사이드에서 실시간 구매 토큰 검증 및 구독 상태 갱신을 처리했습니다.",
+        outcome:
+          "클라이언트에 민감 키를 두지 않는 안전한 End-to-End 결제 검증 파이프라인을 구축했습니다."
+      },
+      {
+        title: "CameraX + ML Kit 기반 고속 QR 코드 분석 및 당첨 자동 대조",
+        description:
+          "로또 용지의 QR 코드를 실시간 캡처하여 당첨 번호와 복수 회차 데이터를 자동 파싱하는 카메라 기능",
+        challenge:
+          "저조도 환경이나 각도 왜곡 시 QR 바코드 디코딩 실패율이 증가하고 카메라 프레임 분석 중 UI 렌더링 스레드가 버벅이는 현상이 있었습니다.",
+        solution:
+          "CameraX ImageAnalysis 유즈케이스와 Google ML Kit 바코드 스캐너를 결합하고, 백그라운드 Executor에서 실시간 URL 파싱 및 정규식 검증 엔진을 구동했습니다.",
+        outcome:
+          "카메라 뷰파인더 딜레이 없이 0.1초 내 즉각적인 QR 인식 및 당첨 결과 오버레이 표시를 구현했습니다."
+      }
+    ],
+    learning:
+      "모바일 서비스 개발에서는 클라이언트 기능 구현만큼이나 민감 키를 분리하고 서버와의 경계를 견고히 설계하는 것이 보안과 안정성의 핵심임을 배웠습니다.",
+    publicDisclosure: "GitHub 공개 저장소를 통해 전체 소스 코드와 API 설계를 확인할 수 있습니다."
+  },
+  {
+    id: "renew-smartset",
+    name: "SmartSet Renewal",
+    summary:
+      "레거시 Java 현장 운영 앱을 Kotlin, Jetpack Compose, Multi-module Clean Architecture로 전면 리뉴얼한 프로젝트",
+    period: "2024.07 - 2025.04",
+    type: "Android Mobile",
+    role: "Java 레거시 앱의 Kotlin/Compose 아키텍처 리뉴얼 및 1인 단독 개발",
+    contribution: "100% 단독 수행 (아키텍처 설계부터 기능 마이그레이션까지)",
+    stack: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Clean Architecture",
+      "Multi-module",
+      "Orbit MVI",
+      "Hilt",
+      "Room",
+      "DataStore",
+      "Google Maps Compose",
+      "CameraX",
+      "NFC"
+    ],
+    highlights: [
+      "Clean Architecture와 multi-module 구조로 app/presentation/domain/data 계층 분리",
+      "Orbit MVI, Hilt, Jetpack Compose 기반으로 화면 상태와 비즈니스 로직 결합도 최소화",
+      "SqliteToRoomImporter를 통한 레거시 DB 트랜잭션 이관 및 현장 작업 흐름 통합"
+    ],
+    outcomes: [
+      "Java/XML 기반 레거시 앱을 모던 Android 기술 스택으로 전면 전환하여 유지보수성 및 확장성 극대화",
+      "현장 설치팀·개발팀·영업팀에 APK를 배포하여 실제 운영 검증 완료"
+    ],
+    evidence: [
+      "Git author: E1jeong <won9964@gmail.com>",
+      "Notion SmartSet Renewal 설계 사양서 및 화면 명세",
+      "로컬 4모듈 코드베이스"
+    ],
+    confidence: "git",
+    background:
+      "기존 Java 기반 현장 운영 앱(SmartSet)의 구조적 한계(XML UI, 단일 모듈, 직접 DB 접근)를 극복하고, 현장 업무 흐름(설치·AS·검침·사진·지도)을 완벽히 보존하면서 최신 아키텍처로 전환하기 위해 진행된 전면 리뉴얼 프로젝트였습니다.",
+    problem:
+      "수천 줄 단위의 액티비티 결합도를 해체하고, 서버에서 제공하는 원시 SQLite DB를 Room 엔티티로 무손실 이관하며, 현장 작업자의 기존 업무 플로우를 중단 없이 재현해야 했습니다.",
+    actions: [
+      "app / presentation / domain / data 4개 모듈 분할 및 계층별 의존성 규칙 수립",
+      "Orbit MVI 상태 관리 도입으로 화면 상태(State)와 비즈니스 UseCase 분리",
+      "SqliteToRoomImporter 트랜잭션 계층 구현으로 레거시 데이터 무결성 보장",
+      "Compose Screen 13개, ViewModel 8개, UseCase 21개, Room DAO 6개 구현",
+      "CameraX QR 스캔, Google Maps Compose 마커 클러스터링, 사진 압축 업로드 통합"
+    ],
+    result:
+      "기존 현장 업무 흐름을 100% 보존하면서 최신 Android 아키텍처로 전면 전환을 완료하여, 향후 기능 추가와 유지보수가 용이한 기반을 확립했습니다.",
+    metrics: [
+      {
+        label: "구현 규모",
+        value: "13개 화면",
+        description: "ViewModel 8개 / UseCase 21개 / Room DAO 6개"
+      },
+      {
+        label: "아키텍처 전환",
+        value: "100% 완료",
+        description: "Java/XML ➔ Kotlin Compose Multi-module"
+      },
+      {
+        label: "현장 배포",
+        value: "APK 실운영 검증",
+        description: "설치팀/개발팀/영업팀 실운영 배포 및 비교 검증"
+      }
+    ],
+    features: [
+      {
+        title: "4모듈 Clean Architecture 및 Orbit MVI 기반 상태·이벤트 분리",
+        description:
+          "레거시 모놀리식 단일 모듈을 app, presentation, domain, data 4개 모듈로 분할하고 단방향 상태 흐름 구축",
+        challenge:
+          "기존 Java 레거시 코드는 UI와 DB 호출, 비즈니스 로직이 액티비티 하나에 수천 줄로 얽혀 있어 작은 수정에도 사이드 이펙트가 빈번했습니다.",
+        solution:
+          "계층별 단방향 의존성 규칙을 강제하고, Orbit MVI와 Hilt 의존성 주입을 적용하여 화면 상태(State)와 비즈니스 UseCase를 명확히 격리했습니다.",
+        outcome:
+          "Compose Screen 13개, ViewModel 8개, UseCase 21개를 체계적으로 분리하여 기능 추가 및 유지보수성을 극대화했습니다."
+      },
+      {
+        title: "서버 SQLite 파일에서 Room 데이터베이스로의 트랜잭션 마이그레이션",
+        description:
+          "원격 서버에서 다운로드된 레거시 SQLite 파일 데이터를 앱 내부 최신 Room 엔티티로 안전하게 이관",
+        challenge:
+          "현장 단말 맵핑 데이터가 담긴 원시 SQLite 파일을 직접 다루는 과정에서 테이블 스키마 불일치 및 대량 데이터 변환 시 트랜잭션 롤백 문제가 발생했습니다.",
+        solution:
+          "전용 SqliteToRoomImporter 계층을 설계하여 트랜잭션 단위로 데이터 유효성을 검증하고, Room DAO 엔티티 매퍼를 통해 안전하게 데이터를 주입했습니다.",
+        outcome:
+          "데이터 손실이나 스키마 충돌 없이 현장 검침/설치 데이터의 정합성을 100% 보장하는 마이그레이션 파이프라인을 완성했습니다."
+      },
+      {
+        title: "Google Maps Compose 및 CameraX 결합 현장 작업 흐름 통합",
+        description:
+          "계량기 설치 위치 지도 클러스터링, QR 바코드 인식, 현장 설치 사진 압축 업로드 기능 통합",
+        challenge:
+          "지리 정보 표시와 대용량 사진 촬영/업로드 작업이 빈번한 현장 환경에서 메모리 누수(OOM) 및 백그라운드 작업 중단 문제가 있었습니다.",
+        solution:
+          "Google Maps Compose와 Marker 클러스터링을 적용하고, CameraX 촬영 이미지를 비동기로 압축하여 업로드 큐에서 순차 처리하도록 최적화했습니다.",
+        outcome:
+          "현장 기사들이 설치 위치 확인부터 단말 QR 인식, 완공 사진 등록까지 하나의 앱 흐름 안에서 중단 없이 수행할 수 있도록 완성했습니다."
+      }
+    ],
+    learning:
+      "아키텍처 리뉴얼의 본질은 단순히 최신 프레임워크를 적용하는 것이 아니라, 수년간 누적된 현장 작업자들의 실제 업무 흐름을 훼손하지 않으면서 코드의 응집도를 높이는 작업임을 깨달았습니다.",
+    publicDisclosure: "공개 가능한 범위 내에서 소스 코드와 아키텍처 다이어그램을 설명합니다."
+  },
+  {
+    id: "smartset",
+    name: "SmartSet",
+    summary:
+      "NFC 기반 계량기 설치·검침·설정·AS를 지원하는 Java Android 현장 운영 앱 단독 유지보수 및 현대화",
+    period: "2023.01 - 2025.04",
+    type: "Android Mobile",
+    role: "인수인계 후 단독 유지보수, 개발환경 현대화, 현장 데이터 정합성 개선",
+    contribution: "인수인계 이후 100% 단독 전담",
+    stack: [
+      "Java",
+      "Android SDK",
+      "NFC (NTAG I2C)",
+      "SQLite",
+      "GPS",
+      "Excel Processing",
+      "단말 프로토콜"
+    ],
+    highlights: [
+      "Eclipse 기반 프로젝트를 Android Studio/Gradle 환경으로 이전 및 targetSdk 34 대응",
+      "서버 응답 기반 AS 작업 순서 강제 제어로 현장 단말 재고 데이터 혼재 방지",
+      "NFC 프로토콜 클래스 50+ 개 확장 및 현장 Excel 로그 / 사진 촬영 경로 개선"
+    ],
+    outcomes: [
+      "50~100명 규모의 전국 현장 설치/운영 인력이 사용하는 앱의 운영 지속성 확보",
+      "OS 버전 업그레이드와 단말 프로토콜 변경에 따른 현장 장애 발생 차단"
+    ],
+    evidence: [
+      "Git remote: https://github.com/E1jeong/smartset.git",
+      "Git author: E1jeong <won9964@gmail.com>",
+      "asis_src vs SmartSet 폴더 분리 구조"
+    ],
+    confidence: "git",
+    background:
+      "NFC 기반 단말 설치, 검침, 설정, AS를 지원하는 Java Android 현장 운영 앱을 인수인계받아 단독으로 운영 및 고도화를 담당했습니다.",
+    problem:
+      "구식 Eclipse 개발 환경, 지속적으로 증가하는 신규 단말 프로토콜, Android 12+ 권한 정책 변화, 작업자의 임의 작업 순서로 인한 AS 데이터 혼재 문제가 복합적으로 존재했습니다.",
+    actions: [
+      "Eclipse ➔ Android Studio / Gradle migration 및 compileSdk/targetSdk 34 대응",
+      "서버 인증 응답 기반 AS 작업 순서 강제 제어 로직 구현",
+      "NTAG I2C NFC 프로토콜 송신 30+개 / 수신 20+개 패킷 클래스 확장",
+      "현장 사진 갤러리 및 Excel 로그 데이터 정합성 개선"
+    ],
+    result:
+      "레거시 현장 앱의 운영 기반을 안정적으로 현대화하고, AS 작업 순서 제어를 통해 현장 실물 단말과 전산 데이터의 불일치를 해소했습니다.",
+    metrics: [
+      {
+        label: "운영 사용자 규모",
+        value: "50~100명",
+        description: "전국 현장 설치 및 AS 전담 인력 실운영"
+      },
+      {
+        label: "타깃 SDK 현대화",
+        value: "targetSdk 34",
+        description: "Eclipse ➔ Android Studio / Gradle 전환"
+      },
+      {
+        label: "NFC 프로토콜 확장",
+        value: "50+ 개",
+        description: "송신 30+개 / 수신 20+개 패킷 클래스"
+      }
+    ],
+    features: [
+      {
+        title: "Eclipse 기반 레거시 프로젝트의 Android Studio/Gradle 이전 및 targetSdk 34 대응",
+        description:
+          "빌드조차 어려웠던 구식 Eclipse 구조를 최신 Gradle 빌드 시스템으로 마이그레이션하고 최신 OS 권한 정책 적용",
+        challenge:
+          "구식 빌드 환경으로 인해 최신 라이브러리 도입이 불가능했고, Android 12+ 권한 정책 미대응으로 현장 기기에서 블루투스/카메라 기능이 차단될 위험이 있었습니다.",
+        solution:
+          "프로젝트를 asis_src와 신규 SmartSet 모듈로 명확히 분리하여 Gradle 빌드를 재구성하고, Runtime Permission 처리 레이어를 도입하여 targetSdk 34 대응을 완료했습니다.",
+        outcome:
+          "최신 안드로이드 OS 디바이스에서도 현장 앱이 정상 구동되도록 운영 지속성을 확보했습니다."
+      },
+      {
+        title: "서버 응답 기반 AS 작업 순서 제어 및 현장 재고 데이터 정합성 보장",
+        description:
+          "현장 작업자의 임의 작업 순서로 인해 발생하던 단말 교체·반납·재설치 데이터 혼재 방지",
+        challenge:
+          "현장 기사들이 단말 교체와 반납 절차를 거치지 않고 신규 설치를 진행하여 서버 재고 데이터와 현장 실물 단말 정보가 불일치하는 문제가 있었습니다.",
+        solution:
+          "서버 인증 응답 상태에 따라 다음 단계 UI 컴포넌트 활성화(UI enable)를 통제하고, 필수 절차를 완료해야만 다음 작업으로 넘어가도록 작업 플로우를 앱 단에서 강제했습니다.",
+        outcome:
+          "단말 교체/반납/재설치 시의 데이터 혼재를 원천 방지하여 전산 재고 정합성을 크게 개선했습니다."
+      }
+    ],
+    learning:
+      "운영 환경의 소프트웨어는 코드 품질뿐만 아니라, 현장 작업자의 실수나 예외적인 작업 순서를 앱이 얼마나 효과적으로 가이드하고 방어해주는지가 시스템 전체의 신뢰도를 결정함을 배웠습니다.",
+    publicDisclosure:
+      "Git remote 및 author 기준으로 본인 기여 범위가 명확히 분리된 내용 중심으로 소스 코드를 공개 설명합니다."
+  },
+  {
     id: "anti-spoofing-ai",
     name: "자체 안티스푸핑(Liveness) AI 모델 & 실기기 검증 앱",
     summary:
       "상용 SDK 없이 출입통제 단말용 위조 얼굴 판별 딥러닝 모델을 자체 개발하고, NXP i.MX 8M Plus NPU 실기기 검증 앱까지 구축한 On-Device AI 프로젝트",
     period: "2026.06 - 현재",
-    type: "On-Device AI / Edge ML",
+    type: "On-Device AI",
     role: "딥러닝 모델 설계·학습·INT8 양자화 & Android 실시간 추론 앱 1인 단독 개발",
     contribution: "100% 단독 수행 (개념 공유 외 전 파이프라인 단독 설계 및 구현)",
     stack: [
@@ -460,311 +765,6 @@ export const projects: Project[] = [
       "지표를 좋게 만드는 것과 모델을 견고하게 만드는 것은 다릅니다. 데이터 누수를 철저히 차단하고 NPU 실패 시의 조용한 폴백을 막았을 때 비로소 드러나는 결함들을 정면으로 마주하며 해결할 수 있었습니다. 엔지니어링의 본질은 눈앞의 수치를 꾸미는 것이 아니라 어떤 극한 환경에서도 신뢰할 수 있는 재현성을 확보하는 것임을 배웠습니다.",
     publicDisclosure:
       "Python 학습 파이프라인(access-liveness-model)은 완전 공개되며, Android 검증 앱(android-anti-spoofing-lab)은 상용 SDK 및 단말 의존 코드를 마스킹한 후 본인 구현부(파이프라인·스레드·17개 단위테스트)를 중심으로 발췌 공개합니다."
-  },
-  {
-    id: "fisherlotto",
-    name: "Fisher Lotto",
-    summary:
-      "Android 클라이언트부터 Next.js BFF 서버까지 직접 설계한 1인 풀스택 End-to-End 모바일 서비스",
-    period: "2024.12 - 현재",
-    type: "Full-Stack Mobile App + BFF Backend",
-    role: "Android 클라이언트 및 API 백엔드 1인 단독 풀스택 개발",
-    contribution: "100% 단독 기획·설계·개발",
-    stack: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Clean Architecture",
-      "Multi-module",
-      "Orbit MVI",
-      "Hilt",
-      "CameraX",
-      "ML Kit",
-      "Google Play Billing",
-      "Next.js",
-      "MySQL",
-      "FCM",
-      "GitHub Actions"
-    ],
-    highlights: [
-      "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture 및 Orbit MVI 적용",
-      "CameraX/ML Kit 고속 QR 스캔, Google Play Billing 구독 결제, FCM 푸시 파이프라인 구축",
-      "Next.js App Router BFF 서버에서 영수증 서버 검증 및 KFTC 오픈뱅킹 OAuth 2.0 연동"
-    ],
-    outcomes: [
-      "공개 GitHub 코드로 증명 가능한 모바일 클라이언트와 서버리스 백엔드의 End-to-End 아키텍처 확보",
-      "클라이언트에 민감 키를 일절 노출하지 않고 BFF로 안전하게 분리하는 보안 인증/결제 구조 완성"
-    ],
-    evidence: [
-      "FisherLotto Android GitHub: https://github.com/E1jeong/FisherLotto",
-      "lotto-sub-backend GitHub: https://github.com/E1jeong/lotto-sub-backend",
-      "GitHub Actions CI/CD 파이프라인 및 Vercel 배포 내역"
-    ],
-    confidence: "git",
-    background:
-      "실무에서 즉시 도입하기 어려운 최신 Android 스택(Compose, Multi-module, MVI, Play Billing)과 클라우드 백엔드를 End-to-End로 직접 설계하고 실전 운영 역량을 검증하기 위해 기획한 1인 사이드 프로젝트입니다.",
-    problem:
-      "모바일 앱 내부의 복잡한 비즈니스 로직과 결제 영수증 검증, 푸시 알림 발송, OAuth 연동 같은 서버의 보안 책임을 명확히 분리해야 했습니다.",
-    actions: [
-      "app/presentation/domain/data 4모듈 설계 및 순수 Kotlin domain 모듈 분리",
-      "Orbit MVI 상태 관리와 Hilt DI를 결합한 단방향 데이터 흐름 구축",
-      "CameraX ImageAnalysis와 ML Kit를 활용한 0.1초 즉각 QR 당첨 대조 구현",
-      "Next.js BFF 서버 구축 및 Google Cloud Pub/Sub Webhook 기반 영수증 검증 연동",
-      "GitHub Actions를 통한 빌드/테스트 자동화 및 Vercel 서버리스 배포 파이프라인 구축"
-    ],
-    result:
-      "Android 앱부터 BFF 서버, 인증, 결제, 푸시, CI/CD까지 전 과정을 직접 설계하여 공개 GitHub로 확인 가능한 고완성도 서비스 구조를 구축했습니다.",
-    metrics: [
-      {
-        label: "모듈 아키텍처",
-        value: "4-Module",
-        description: "app / presentation / domain / data"
-      },
-      {
-        label: "CI/CD 자동화",
-        value: "100%",
-        description: "GitHub Actions + Vercel Serverless"
-      },
-      {
-        label: "공개 코드베이스",
-        value: "100% Public",
-        description: "GitHub 공개 저장소 2개 (App + Backend)"
-      }
-    ],
-    features: [
-      {
-        title: "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture & Orbit MVI",
-        description:
-          "안드로이드 프레임워크 의존성이 없는 순수 Kotlin domain 모듈과 MVI 단방향 데이터 흐름 설계",
-        challenge:
-          "QR 스캔, 구독 결제, 오픈뱅킹, 번호 추첨 등 복잡한 비즈니스 로직이 단일 화면에 뒤엉켜 상태 충돌 및 테스트 격리가 어려웠습니다.",
-        solution:
-          "domain 모듈을 순수 Kotlin으로 격리하여 UseCase 인터페이스를 배치하고, Orbit MVI를 적용해 State(상태), SideEffect(1회성 이벤트), Intent(사용자 동작)를 단방향으로 통제했습니다.",
-        outcome:
-          "비즈니스 로직과 UI 컴포넌트의 결합도를 낮추고 모듈 단위 독립적 유지보수성을 확보했습니다."
-      },
-      {
-        title: "Google Play Billing 7.0 구독 결제 및 Next.js BFF 서버 실시간 검증",
-        description:
-          "클라이언트에 민감 키를 노출하지 않고 BFF 서버를 통해 결제 영수증 위변조를 방지하는 결제 파이프라인",
-        challenge:
-          "클라이언트 단에서 직접 결제 결과를 신뢰할 경우 결제 우회(Tampering) 및 영수증 조작 보안 취약점이 발생했습니다.",
-        solution:
-          "Next.js App Router 기반 BFF 서버를 구축하고 Google Cloud Pub/Sub Webhook 및 Play Developer API를 연동하여 서버 사이드에서 실시간 구매 토큰 검증 및 구독 상태 갱신을 처리했습니다.",
-        outcome:
-          "클라이언트에 민감 키를 두지 않는 안전한 End-to-End 결제 검증 파이프라인을 구축했습니다."
-      },
-      {
-        title: "CameraX + ML Kit 기반 고속 QR 코드 분석 및 당첨 자동 대조",
-        description:
-          "로또 용지의 QR 코드를 실시간 캡처하여 당첨 번호와 복수 회차 데이터를 자동 파싱하는 카메라 기능",
-        challenge:
-          "저조도 환경이나 각도 왜곡 시 QR 바코드 디코딩 실패율이 증가하고 카메라 프레임 분석 중 UI 렌더링 스레드가 버벅이는 현상이 있었습니다.",
-        solution:
-          "CameraX ImageAnalysis 유즈케이스와 Google ML Kit 바코드 스캐너를 결합하고, 백그라운드 Executor에서 실시간 URL 파싱 및 정규식 검증 엔진을 구동했습니다.",
-        outcome:
-          "카메라 뷰파인더 딜레이 없이 0.1초 내 즉각적인 QR 인식 및 당첨 결과 오버레이 표시를 구현했습니다."
-      }
-    ],
-    learning:
-      "모바일 서비스 개발에서는 클라이언트 기능 구현만큼이나 민감 키를 분리하고 서버와의 경계를 견고히 설계하는 것이 보안과 안정성의 핵심임을 배웠습니다.",
-    publicDisclosure: "GitHub 공개 저장소를 통해 전체 소스 코드와 API 설계를 확인할 수 있습니다."
-  },
-  {
-    id: "renew-smartset",
-    name: "SmartSet Renewal",
-    summary:
-      "레거시 Java 현장 운영 앱을 Kotlin, Jetpack Compose, Multi-module Clean Architecture로 전면 리뉴얼한 프로젝트",
-    period: "2024.07 - 2025.04",
-    type: "Android Architecture Modernization",
-    role: "Java 레거시 앱의 Kotlin/Compose 아키텍처 리뉴얼 및 1인 단독 개발",
-    contribution: "100% 단독 수행 (아키텍처 설계부터 기능 마이그레이션까지)",
-    stack: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Clean Architecture",
-      "Multi-module",
-      "Orbit MVI",
-      "Hilt",
-      "Room",
-      "DataStore",
-      "Google Maps Compose",
-      "CameraX",
-      "NFC"
-    ],
-    highlights: [
-      "Clean Architecture와 multi-module 구조로 app/presentation/domain/data 계층 분리",
-      "Orbit MVI, Hilt, Jetpack Compose 기반으로 화면 상태와 비즈니스 로직 결합도 최소화",
-      "SqliteToRoomImporter를 통한 레거시 DB 트랜잭션 이관 및 현장 작업 흐름 통합"
-    ],
-    outcomes: [
-      "Java/XML 기반 레거시 앱을 모던 Android 기술 스택으로 전면 전환하여 유지보수성 및 확장성 극대화",
-      "현장 설치팀·개발팀·영업팀에 APK를 배포하여 실제 운영 검증 완료"
-    ],
-    evidence: [
-      "Git author: E1jeong <won9964@gmail.com>",
-      "Notion SmartSet Renewal 설계 사양서 및 화면 명세",
-      "로컬 4모듈 코드베이스"
-    ],
-    confidence: "git",
-    background:
-      "기존 Java 기반 현장 운영 앱(SmartSet)의 구조적 한계(XML UI, 단일 모듈, 직접 DB 접근)를 극복하고, 현장 업무 흐름(설치·AS·검침·사진·지도)을 완벽히 보존하면서 최신 아키텍처로 전환하기 위해 진행된 전면 리뉴얼 프로젝트였습니다.",
-    problem:
-      "수천 줄 단위의 액티비티 결합도를 해체하고, 서버에서 제공하는 원시 SQLite DB를 Room 엔티티로 무손실 이관하며, 현장 작업자의 기존 업무 플로우를 중단 없이 재현해야 했습니다.",
-    actions: [
-      "app / presentation / domain / data 4개 모듈 분할 및 계층별 의존성 규칙 수립",
-      "Orbit MVI 상태 관리 도입으로 화면 상태(State)와 비즈니스 UseCase 분리",
-      "SqliteToRoomImporter 트랜잭션 계층 구현으로 레거시 데이터 무결성 보장",
-      "Compose Screen 13개, ViewModel 8개, UseCase 21개, Room DAO 6개 구현",
-      "CameraX QR 스캔, Google Maps Compose 마커 클러스터링, 사진 압축 업로드 통합"
-    ],
-    result:
-      "기존 현장 업무 흐름을 100% 보존하면서 최신 Android 아키텍처로 전면 전환을 완료하여, 향후 기능 추가와 유지보수가 용이한 기반을 확립했습니다.",
-    metrics: [
-      {
-        label: "구현 규모",
-        value: "13개 화면",
-        description: "ViewModel 8개 / UseCase 21개 / Room DAO 6개"
-      },
-      {
-        label: "아키텍처 전환",
-        value: "100% 완료",
-        description: "Java/XML ➔ Kotlin Compose Multi-module"
-      },
-      {
-        label: "현장 배포",
-        value: "APK 실운영 검증",
-        description: "설치팀/개발팀/영업팀 실운영 배포 및 비교 검증"
-      }
-    ],
-    features: [
-      {
-        title: "4모듈 Clean Architecture 및 Orbit MVI 기반 상태·이벤트 분리",
-        description:
-          "레거시 모놀리식 단일 모듈을 app, presentation, domain, data 4개 모듈로 분할하고 단방향 상태 흐름 구축",
-        challenge:
-          "기존 Java 레거시 코드는 UI와 DB 호출, 비즈니스 로직이 액티비티 하나에 수천 줄로 얽혀 있어 작은 수정에도 사이드 이펙트가 빈번했습니다.",
-        solution:
-          "계층별 단방향 의존성 규칙을 강제하고, Orbit MVI와 Hilt 의존성 주입을 적용하여 화면 상태(State)와 비즈니스 UseCase를 명확히 격리했습니다.",
-        outcome:
-          "Compose Screen 13개, ViewModel 8개, UseCase 21개를 체계적으로 분리하여 기능 추가 및 유지보수성을 극대화했습니다."
-      },
-      {
-        title: "서버 SQLite 파일에서 Room 데이터베이스로의 트랜잭션 마이그레이션",
-        description:
-          "원격 서버에서 다운로드된 레거시 SQLite 파일 데이터를 앱 내부 최신 Room 엔티티로 안전하게 이관",
-        challenge:
-          "현장 단말 맵핑 데이터가 담긴 원시 SQLite 파일을 직접 다루는 과정에서 테이블 스키마 불일치 및 대량 데이터 변환 시 트랜잭션 롤백 문제가 발생했습니다.",
-        solution:
-          "전용 SqliteToRoomImporter 계층을 설계하여 트랜잭션 단위로 데이터 유효성을 검증하고, Room DAO 엔티티 매퍼를 통해 안전하게 데이터를 주입했습니다.",
-        outcome:
-          "데이터 손실이나 스키마 충돌 없이 현장 검침/설치 데이터의 정합성을 100% 보장하는 마이그레이션 파이프라인을 완성했습니다."
-      },
-      {
-        title: "Google Maps Compose 및 CameraX 결합 현장 작업 흐름 통합",
-        description:
-          "계량기 설치 위치 지도 클러스터링, QR 바코드 인식, 현장 설치 사진 압축 업로드 기능 통합",
-        challenge:
-          "지리 정보 표시와 대용량 사진 촬영/업로드 작업이 빈번한 현장 환경에서 메모리 누수(OOM) 및 백그라운드 작업 중단 문제가 있었습니다.",
-        solution:
-          "Google Maps Compose와 Marker 클러스터링을 적용하고, CameraX 촬영 이미지를 비동기로 압축하여 업로드 큐에서 순차 처리하도록 최적화했습니다.",
-        outcome:
-          "현장 기사들이 설치 위치 확인부터 단말 QR 인식, 완공 사진 등록까지 하나의 앱 흐름 안에서 중단 없이 수행할 수 있도록 완성했습니다."
-      }
-    ],
-    learning:
-      "아키텍처 리뉴얼의 본질은 단순히 최신 프레임워크를 적용하는 것이 아니라, 수년간 누적된 현장 작업자들의 실제 업무 흐름을 훼손하지 않으면서 코드의 응집도를 높이는 작업임을 깨달았습니다.",
-    publicDisclosure: "공개 가능한 범위 내에서 소스 코드와 아키텍처 다이어그램을 설명합니다."
-  },
-  {
-    id: "smartset",
-    name: "SmartSet",
-    summary:
-      "NFC 기반 계량기 설치·검침·설정·AS를 지원하는 Java Android 현장 운영 앱 단독 유지보수 및 현대화",
-    period: "2023.01 - 2025.04 (인수인계 2022)",
-    type: "Android Field Operation App",
-    role: "인수인계 후 단독 유지보수, 개발환경 현대화, 현장 데이터 정합성 개선",
-    contribution: "인수인계 이후 100% 단독 전담",
-    stack: [
-      "Java",
-      "Android SDK",
-      "NFC (NTAG I2C)",
-      "SQLite",
-      "GPS",
-      "Excel Processing",
-      "단말 프로토콜"
-    ],
-    highlights: [
-      "Eclipse 기반 프로젝트를 Android Studio/Gradle 환경으로 이전 및 targetSdk 34 대응",
-      "서버 응답 기반 AS 작업 순서 강제 제어로 현장 단말 재고 데이터 혼재 방지",
-      "NFC 프로토콜 클래스 50+ 개 확장 및 현장 Excel 로그 / 사진 촬영 경로 개선"
-    ],
-    outcomes: [
-      "50~100명 규모의 전국 현장 설치/운영 인력이 사용하는 앱의 운영 지속성 확보",
-      "OS 버전 업그레이드와 단말 프로토콜 변경에 따른 현장 장애 발생 차단"
-    ],
-    evidence: [
-      "Git remote: https://github.com/E1jeong/smartset.git",
-      "Git author: E1jeong <won9964@gmail.com>",
-      "asis_src vs SmartSet 폴더 분리 구조"
-    ],
-    confidence: "git",
-    background:
-      "NFC 기반 단말 설치, 검침, 설정, AS를 지원하는 Java Android 현장 운영 앱을 인수인계받아 단독으로 운영 및 고도화를 담당했습니다.",
-    problem:
-      "구식 Eclipse 개발 환경, 지속적으로 증가하는 신규 단말 프로토콜, Android 12+ 권한 정책 변화, 작업자의 임의 작업 순서로 인한 AS 데이터 혼재 문제가 복합적으로 존재했습니다.",
-    actions: [
-      "Eclipse ➔ Android Studio / Gradle migration 및 compileSdk/targetSdk 34 대응",
-      "서버 인증 응답 기반 AS 작업 순서 강제 제어 로직 구현",
-      "NTAG I2C NFC 프로토콜 송신 30+개 / 수신 20+개 패킷 클래스 확장",
-      "현장 사진 갤러리 및 Excel 로그 데이터 정합성 개선"
-    ],
-    result:
-      "레거시 현장 앱의 운영 기반을 안정적으로 현대화하고, AS 작업 순서 제어를 통해 현장 실물 단말과 전산 데이터의 불일치를 해소했습니다.",
-    metrics: [
-      {
-        label: "운영 사용자 규모",
-        value: "50~100명",
-        description: "전국 현장 설치 및 AS 전담 인력 실운영"
-      },
-      {
-        label: "타깃 SDK 현대화",
-        value: "targetSdk 34",
-        description: "Eclipse ➔ Android Studio / Gradle 전환"
-      },
-      {
-        label: "NFC 프로토콜 확장",
-        value: "50+ 개",
-        description: "송신 30+개 / 수신 20+개 패킷 클래스"
-      }
-    ],
-    features: [
-      {
-        title: "Eclipse 기반 레거시 프로젝트의 Android Studio/Gradle 이전 및 targetSdk 34 대응",
-        description:
-          "빌드조차 어려웠던 구식 Eclipse 구조를 최신 Gradle 빌드 시스템으로 마이그레이션하고 최신 OS 권한 정책 적용",
-        challenge:
-          "구식 빌드 환경으로 인해 최신 라이브러리 도입이 불가능했고, Android 12+ 권한 정책 미대응으로 현장 기기에서 블루투스/카메라 기능이 차단될 위험이 있었습니다.",
-        solution:
-          "프로젝트를 asis_src와 신규 SmartSet 모듈로 명확히 분리하여 Gradle 빌드를 재구성하고, Runtime Permission 처리 레이어를 도입하여 targetSdk 34 대응을 완료했습니다.",
-        outcome:
-          "최신 안드로이드 OS 디바이스에서도 현장 앱이 정상 구동되도록 운영 지속성을 확보했습니다."
-      },
-      {
-        title: "서버 응답 기반 AS 작업 순서 제어 및 현장 재고 데이터 정합성 보장",
-        description:
-          "현장 작업자의 임의 작업 순서로 인해 발생하던 단말 교체·반납·재설치 데이터 혼재 방지",
-        challenge:
-          "현장 기사들이 단말 교체와 반납 절차를 거치지 않고 신규 설치를 진행하여 서버 재고 데이터와 현장 실물 단말 정보가 불일치하는 문제가 있었습니다.",
-        solution:
-          "서버 인증 응답 상태에 따라 다음 단계 UI 컴포넌트 활성화(UI enable)를 통제하고, 필수 절차를 완료해야만 다음 작업으로 넘어가도록 작업 플로우를 앱 단에서 강제했습니다.",
-        outcome:
-          "단말 교체/반납/재설치 시의 데이터 혼재를 원천 방지하여 전산 재고 정합성을 크게 개선했습니다."
-      }
-    ],
-    learning:
-      "운영 환경의 소프트웨어는 코드 품질뿐만 아니라, 현장 작업자의 실수나 예외적인 작업 순서를 앱이 얼마나 효과적으로 가이드하고 방어해주는지가 시스템 전체의 신뢰도를 결정함을 배웠습니다.",
-    publicDisclosure:
-      "Git remote 및 author 기준으로 본인 기여 범위가 명확히 분리된 내용 중심으로 소스 코드를 공개 설명합니다."
   }
 ];
 
@@ -789,16 +789,6 @@ export const experiences: Experience[] = [
       "SmartSet Renewal 프로젝트에서 Java 레거시 앱을 Kotlin, Jetpack Compose, 4모듈 Clean Architecture, Orbit MVI 구조로 전면 리뉴얼했습니다.",
       "SmartSet 현장 운영 앱을 Eclipse에서 Android Studio/Gradle로 마이그레이션하고 targetSdk 34 대응 및 AS 작업 순서 강제 제어를 구현했습니다.",
       "NFC(NTAG I2C) 단말 프로토콜 50여 개 클래스 확장 및 50~100명 규모의 현장 설치 인력 운영을 지원했습니다."
-    ]
-  },
-  {
-    company: "Personal & Open Source",
-    domain: "End-to-End 모바일 서비스 & AI-Ops 개발 환경",
-    role: "Full-Stack Developer",
-    period: "2024.12 - 현재",
-    points: [
-      "Fisher Lotto Android 앱과 Next.js BFF 서버를 풀스택 1인 개발하여 Google Play Billing 구독 결제, FCM, CI/CD를 구축했습니다.",
-      "Claude Code, Codex, Antigravity 3개 도구와 3개 머신 간의 규칙을 표준화하고 형상 드리프트를 감사하는 AI-Ops 인프라를 구축했습니다."
     ]
   }
 ];

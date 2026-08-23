@@ -7,9 +7,9 @@ import { coreStrengths, experiences, profile, projects, skillGroups } from "../d
 
 const CATEGORIES = [
   { id: "all", label: "All Projects" },
-  { id: "ai", label: "On-Device AI" },
-  { id: "system", label: "System & Device" },
-  { id: "modern", label: "Architecture & App" }
+  { id: "android-device", label: "Android Device" },
+  { id: "android-mobile", label: "Android Mobile" },
+  { id: "on-device-ai", label: "On-Device AI" }
 ] as const;
 
 type CategoryId = typeof CATEGORIES[number]["id"];
@@ -22,11 +22,25 @@ export default function Home() {
 
   const filteredProjects = projects.filter((project) => {
     if (selectedCategory === "all") return true;
-    if (selectedCategory === "ai") return project.id === "anti-spoofing-ai";
-    if (selectedCategory === "system") return project.id === "ubio-n-face-pro" || project.id === "smartset";
-    if (selectedCategory === "modern") return project.id === "renew-smartset" || project.id === "fisherlotto";
+    if (selectedCategory === "android-device") return project.id === "ubio-n-face-pro";
+    if (selectedCategory === "android-mobile") {
+      return project.id === "fisherlotto" || project.id === "renew-smartset" || project.id === "smartset";
+    }
+    if (selectedCategory === "on-device-ai") return project.id === "anti-spoofing-ai";
     return true;
   });
+
+  const getCategoryCount = (id: CategoryId) => {
+    if (id === "all") return projects.length;
+    if (id === "android-device") return projects.filter((p) => p.id === "ubio-n-face-pro").length;
+    if (id === "android-mobile") {
+      return projects.filter(
+        (p) => p.id === "fisherlotto" || p.id === "renew-smartset" || p.id === "smartset"
+      ).length;
+    }
+    if (id === "on-device-ai") return projects.filter((p) => p.id === "anti-spoofing-ai").length;
+    return 0;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,20 +118,20 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#skills"
-                  className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
-                >
-                  <span className="nav-indicator"></span>
-                  <span className="nav-text">SKILLS</span>
-                </a>
-              </li>
-              <li>
-                <a
                   href="#experience"
                   className={`nav-link ${activeSection === "experience" ? "active" : ""}`}
                 >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">EXPERIENCE</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#skills"
+                  className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
+                >
+                  <span className="nav-indicator"></span>
+                  <span className="nav-text">SKILLS</span>
                 </a>
               </li>
             </ul>
@@ -179,31 +193,23 @@ export default function Home() {
         </section>
 
         <section id="projects" className="content-section" aria-labelledby="projects-heading">
-          <div className="section-header-row">
-            <h2 id="projects-heading" className="section-title">PROJECTS</h2>
-            <div className="project-category-tabs" role="tablist" aria-label="프로젝트 카테고리 필터">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedCategory === cat.id}
-                  className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
-                  onClick={() => setSelectedCategory(cat.id)}
-                >
-                  {cat.label}
-                  <span className="category-tab-count">
-                    {cat.id === "all"
-                      ? projects.length
-                      : cat.id === "ai"
-                      ? 1
-                      : cat.id === "system"
-                      ? 2
-                      : 2}
-                  </span>
-                </button>
-              ))}
-            </div>
+          <h2 id="projects-heading" className="section-title">PROJECTS</h2>
+          <div className="project-category-tabs" role="tablist" aria-label="프로젝트 카테고리 필터">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                role="tab"
+                aria-selected={selectedCategory === cat.id}
+                className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
+                onClick={() => setSelectedCategory(cat.id)}
+              >
+                {cat.label}
+                <span className="category-tab-count">
+                  {getCategoryCount(cat.id)}
+                </span>
+              </button>
+            ))}
           </div>
 
           <div className="project-list">
@@ -267,25 +273,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="skills" className="content-section" aria-labelledby="skills-heading">
-          <h2 id="skills-heading" className="section-title">SKILLS</h2>
-          <div className="skills-typography-list">
-            {skillGroups.map((group) => (
-              <div key={group.title} className="skills-row">
-                <h3 className="skills-row-title">{group.title}</h3>
-                <div className="skills-row-items">
-                  {group.items.map((item, idx) => (
-                    <span key={item} className="skills-item">
-                      <span className="skills-item-text">{item}</span>
-                      {idx < group.items.length - 1 && <span className="skills-separator">/</span>}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section id="experience" className="content-section" aria-labelledby="experience-heading">
           <h2 id="experience-heading" className="section-title">EXPERIENCE</h2>
           <div className="experience-timeline">
@@ -307,6 +294,25 @@ export default function Home() {
                   </ul>
                 </div>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="skills" className="content-section" aria-labelledby="skills-heading">
+          <h2 id="skills-heading" className="section-title">SKILLS</h2>
+          <div className="skills-typography-list">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="skills-row">
+                <h3 className="skills-row-title">{group.title}</h3>
+                <div className="skills-row-items">
+                  {group.items.map((item, idx) => (
+                    <span key={item} className="skills-item">
+                      <span className="skills-item-text">{item}</span>
+                      {idx < group.items.length - 1 && <span className="skills-separator">/</span>}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>

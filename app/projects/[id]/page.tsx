@@ -61,7 +61,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       <div className="detail-container">
         <div className="detail-top-nav">
           <Link href="/#projects" className="detail-back-link">
-            <span className="back-arrow">←</span> Back to Projects
+            <span className="back-arrow">←</span> 프로젝트 목록
           </Link>
           <ShareButton />
         </div>
@@ -79,12 +79,25 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="detail-banner-type">{project.type}</span>
           <span className="detail-banner-name">{project.name}</span>
           <span className="detail-banner-period">{project.period}</span>
+          
+          <div className="detail-banner-meta-grid">
+            <div className="detail-banner-meta-col">
+              <span className="meta-label">담당 역할</span>
+              <span className="meta-value">{project.role}</span>
+            </div>
+            {project.contribution ? (
+              <div className="detail-banner-meta-col">
+                <span className="meta-label">기여도</span>
+                <span className="meta-value">{project.contribution}</span>
+              </div>
+            ) : null}
+          </div>
         </div>
 
         {/* 1. Quantitative Performance Metrics Grid */}
         {project.metrics && project.metrics.length > 0 ? (
           <section className="detail-section" aria-labelledby="metrics-heading">
-            <h2 id="metrics-heading" className="detail-section-title">Verified Quantitative Metrics</h2>
+            <h2 id="metrics-heading" className="detail-section-title">정량적 검증 성과 지표</h2>
             <div className="detail-metrics-grid">
               {project.metrics.map((m) => (
                 <div key={m.label} className="detail-metric-card">
@@ -100,7 +113,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 2. Pipeline Flow for Complex AI / Systems */}
         {project.pipelineSteps && project.pipelineSteps.length > 0 ? (
           <section className="detail-section" aria-labelledby="pipeline-heading">
-            <h2 id="pipeline-heading" className="detail-section-title">End-to-End Pipeline Architecture</h2>
+            <h2 id="pipeline-heading" className="detail-section-title">엔드투엔드 파이프라인 아키텍처</h2>
             <div className="detail-pipeline-flow">
               {project.pipelineSteps.map((step) => (
                 <div key={step.step} className="pipeline-step-card">
@@ -118,7 +131,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 3. Dual-Repository / Multi-Module Boundaries */}
         {project.repositories && project.repositories.length > 0 ? (
           <section className="detail-section" aria-labelledby="repos-heading">
-            <h2 id="repos-heading" className="detail-section-title">Repository Structure & Disclosure Scope</h2>
+            <h2 id="repos-heading" className="detail-section-title">저장소 구조 및 공개 범위</h2>
             <div className="detail-repos-grid">
               {project.repositories.map((repo) => (
                 <div key={repo.name} className="detail-repo-card">
@@ -137,27 +150,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </section>
         ) : null}
 
-        {/* 4. Role & Contribution */}
-        <section className="detail-section" aria-labelledby="role-heading">
-          <h2 id="role-heading" className="detail-section-title">Role & Contribution</h2>
-          <div className="project-meta-grid detail-meta-grid">
-            <div className="meta-col">
-              <span className="meta-label">Role</span>
-              <span className="meta-value">{project.role}</span>
-            </div>
-            {project.contribution ? (
-              <div className="meta-col">
-                <span className="meta-label">Contribution</span>
-                <span className="meta-value">{project.contribution}</span>
-              </div>
-            ) : null}
-          </div>
-        </section>
-
-        {/* 5. Project Background */}
+        {/* 4. Project Background */}
         {project.background ? (
           <section className="detail-section" aria-labelledby="background-heading">
-            <h2 id="background-heading" className="detail-section-title">Project Background</h2>
+            <h2 id="background-heading" className="detail-section-title">프로젝트 배경</h2>
             <div className="background-block-standalone">
               <p>{project.background}</p>
             </div>
@@ -167,7 +163,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 6. Problem Definition */}
         {project.problem ? (
           <section className="detail-section" aria-labelledby="problem-heading">
-            <h2 id="problem-heading" className="detail-section-title">Core Problem & Constraints</h2>
+            <h2 id="problem-heading" className="detail-section-title">핵심 문제 및 기술적 제약조건</h2>
             <div className="background-block-standalone problem-block-highlight">
               <p>{project.problem}</p>
             </div>
@@ -177,7 +173,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 7. Key Developed Features (Challenge / Solution / Outcome) */}
         {project.features && project.features.length > 0 ? (
           <section className="detail-section" aria-labelledby="features-heading">
-            <h2 id="features-heading" className="detail-section-title">Key Developed Features & Technical Solutions</h2>
+            <h2 id="features-heading" className="detail-section-title">주요 개발 기능 및 기술 솔루션</h2>
             <div className="features-container">
               {project.features.map((feature, idx) => (
                 <div key={idx} className="feature-card">
@@ -192,7 +188,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   <div className="feature-card-body">
                     <div className="feature-challenge-section">
                       <div className="step-badge-wrapper">
-                        <span className="step-badge badge-challenge">Challenge</span>
+                        <span className="step-badge badge-challenge">문제 상황</span>
                       </div>
                       <div className="step-content text-challenge">{feature.challenge}</div>
                     </div>
@@ -200,14 +196,14 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <div className="feature-solution-section">
                       <div className="solution-group">
                         <div className="step-badge-wrapper">
-                          <span className="step-badge badge-solution">Solution &amp; Logic</span>
+                          <span className="step-badge badge-solution">해결 방법 &amp; 로직</span>
                         </div>
                         <div className="step-content text-solution">{feature.solution}</div>
                       </div>
 
                       <div className="outcome-group">
                         <div className="step-badge-wrapper">
-                          <span className="step-badge badge-outcome">Outcome</span>
+                          <span className="step-badge badge-outcome">결과 및 성과</span>
                         </div>
                         <div className="step-content text-outcome">{feature.outcome}</div>
                       </div>
@@ -222,7 +218,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 8. Result */}
         {project.result ? (
           <section className="detail-section" aria-labelledby="result-heading">
-            <h2 id="result-heading" className="detail-section-title">Project Result & Impact</h2>
+            <h2 id="result-heading" className="detail-section-title">프로젝트 결과 및 성과</h2>
             <div className="background-block-standalone">
               <p>{project.result}</p>
             </div>
@@ -232,7 +228,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* 9. Learning & Engineering Retrospective */}
         {project.learning ? (
           <section className="detail-section" aria-labelledby="learning-heading">
-            <h2 id="learning-heading" className="detail-section-title">Learning & Insights</h2>
+            <h2 id="learning-heading" className="detail-section-title">성장 및 배운 점</h2>
             <div className="learning-block-standalone">
               <p>{project.learning}</p>
             </div>
@@ -241,7 +237,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
         {/* 10. Tech Stack Tags */}
         <section className="detail-section" aria-labelledby="stack-heading">
-          <h2 id="stack-heading" className="detail-section-title">Tech Stack</h2>
+          <h2 id="stack-heading" className="detail-section-title">기술 스택</h2>
           <div className="project-tech-tags detail-tech-tags">
             {project.stack.map((tech) => (
               <span key={tech} className="tech-tag">
@@ -253,15 +249,15 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
         {/* 11. Evidence & Disclosure */}
         <section className="detail-section" aria-labelledby="evidence-heading">
-          <h2 id="evidence-heading" className="detail-section-title">Evidence & Public Disclosure</h2>
+          <h2 id="evidence-heading" className="detail-section-title">검증 증거 및 공개 범위</h2>
           <div className="evidence-public-notice">
-            <p className="notice-main">Public Disclosure Boundary</p>
+            <p className="notice-main">공개 및 보안 가이드라인</p>
             <p className="notice-sub">{project.publicDisclosure}</p>
           </div>
           <div className="evidence-card-list">
             {project.evidence.map((ev, idx) => (
               <div key={idx} className="evidence-card-item evidence-git-type">
-                <span className="evidence-badge-indicator">Evidence</span>
+                <span className="evidence-badge-indicator">검증 증거</span>
                 <span className="evidence-text-content">{ev}</span>
               </div>
             ))}
@@ -272,7 +268,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         <nav className="detail-pagination" aria-label="프로젝트 이동 네비게이션">
           {prevProject ? (
             <Link href={`/projects/${prevProject.id}`} className="pagination-card pagination-prev">
-              <span className="pagination-dir">← Previous Project</span>
+              <span className="pagination-dir">← 이전 프로젝트</span>
               <span className="pagination-title">{prevProject.name}</span>
             </Link>
           ) : (
@@ -281,7 +277,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
           {nextProject ? (
             <Link href={`/projects/${nextProject.id}`} className="pagination-card pagination-next">
-              <span className="pagination-dir">Next Project →</span>
+              <span className="pagination-dir">다음 프로젝트 →</span>
               <span className="pagination-title">{nextProject.name}</span>
             </Link>
           ) : (
