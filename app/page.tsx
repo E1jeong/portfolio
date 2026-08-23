@@ -5,10 +5,28 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { coreStrengths, experiences, profile, projects, skillGroups } from "../data/portfolio";
 
+const CATEGORIES = [
+  { id: "all", label: "All Projects" },
+  { id: "ai", label: "On-Device AI" },
+  { id: "system", label: "System & Device" },
+  { id: "modern", label: "Architecture & App" }
+] as const;
+
+type CategoryId = typeof CATEGORIES[number]["id"];
+
 export default function Home() {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState("about");
+  const [selectedCategory, setSelectedCategory] = useState<CategoryId>("all");
   const featuredProjects = projects;
+
+  const filteredProjects = projects.filter((project) => {
+    if (selectedCategory === "all") return true;
+    if (selectedCategory === "ai") return project.id === "anti-spoofing-ai";
+    if (selectedCategory === "system") return project.id === "ubio-n-face-pro" || project.id === "smartset";
+    if (selectedCategory === "modern") return project.id === "renew-smartset" || project.id === "fisherlotto";
+    return true;
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,9 +179,35 @@ export default function Home() {
         </section>
 
         <section id="projects" className="content-section" aria-labelledby="projects-heading">
-          <h2 id="projects-heading" className="section-title">PROJECTS</h2>
+          <div className="section-header-row">
+            <h2 id="projects-heading" className="section-title">PROJECTS</h2>
+            <div className="project-category-tabs" role="tablist" aria-label="프로젝트 카테고리 필터">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedCategory === cat.id}
+                  className={`category-tab-btn ${selectedCategory === cat.id ? "active" : ""}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.label}
+                  <span className="category-tab-count">
+                    {cat.id === "all"
+                      ? projects.length
+                      : cat.id === "ai"
+                      ? 1
+                      : cat.id === "system"
+                      ? 2
+                      : 2}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="project-list">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.id}`}
