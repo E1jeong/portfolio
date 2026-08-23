@@ -1,308 +1,175 @@
-# 팀 공통 설정 (KJW Team — 단일 Codex + 가상 팀원)
+# Portfolio Website AI Guide
 
-> 본 파일은 **단일 Codex 인스턴스(은광=팀장)** 가 5명의 가상 팀원을 Codex subagent 기능으로 위임 호출하는 구조를 정의합니다.
-> 개별 팀원 역할은 `roles/` 하위 파일을 참조하세요.
-
----
-
-## 운영 모드
-
-이 팀은 **하나의 Codex 인스턴스만 사용합니다.**
-
-- 사용자는 **이 Codex(=은광 팀장)** 에게만 명령을 입력합니다.
-- Codex가 자동으로 읽는 기준 문서는 이 `AGENTS.md`입니다.
-- 은광은 작업을 분석하고, 필요한 팀원을 Codex subagent 도구가 제공될 때 위임합니다.
-- subagent 도구가 제공되지 않거나 위임이 불필요한 작업은 은광이 직접 처리합니다.
-- subagent의 결과는 은광이 통합한 뒤 사용자에게 보고합니다.
-
-```
-[사용자] -> [은광 (이 Codex)] -> subagent(민혁/창섭/현식/프니엘/성재) -> [은광 통합] -> [사용자]
-```
+> 본 문서는 **Portfolio Website** 저장소의 Root AI 가이드(Tier 1)입니다.  
+> 코드베이스 아키텍처, 작업 라우팅, 안전 게이트 및 **KJW Team 다중 서브에이전트 오케스트레이션** 규약을 정의합니다.
 
 ---
 
-## 가상 팀 구성
+## 1. Start Here
 
-| 이름 | 역할 | 역할 파일 |
-|------|------|-----------|
-| 은광 | 팀장 (이 Codex 본인) — 지시 수령, 작업 배분, 결과 통합, 충돌 관리 | `roles/eungwang.md` |
-| 민혁 | 아키텍트 — 시스템 설계, 기술 방향 결정 | `roles/minhyuk.md` |
-| 창섭 | 개발자 — 기능 구현, 코드 작성 | `roles/changseop.md` |
-| 현식 | UI/UX 디자이너 — 화면 설계, 사용자 플로우 | `roles/hyunsik.md` |
-| 프니엘 | 리서쳐 — 정보 수집, 기술 조사 | `roles/phaniel.md` |
-| 성재 | QA/리뷰어 — 코드 리뷰, 품질 검토 | `roles/seongjae.md` |
-
-팀 설정 루트: `{TEAM_ROOT}` — 세션 시작 시 현재 작업 디렉토리로 도출합니다.
-
----
-
-## 위임 프로토콜 (Codex subagent 사용)
-
-은광이 팀원에게 작업을 위임할 때는 Codex에서 사용 가능한 subagent 도구를 사용합니다. 현재 환경에서 `spawn_agent`가 제공되면 다음 기준으로 호출합니다.
-
-```text
-spawn_agent({
-  agent_type: "worker" 또는 "explorer",
-  message: <ROLE-PROMPT + TASK-PROMPT>
-})
-```
-
-### ROLE-PROMPT 조립
-
-호출 직전에 은광은 `roles/{이름}.md`를 읽어 다음 형식으로 프롬프트 머리에 붙입니다.
-
-```text
-너는 KJW 팀의 {이름}({역할})이다.
-아래 역할 정의를 그대로 따른다.
-
---- BEGIN ROLE FILE ---
-{roles/{이름}.md 내용 전체}
---- END ROLE FILE ---
-
-팀 설정 루트(읽기 전용): {TEAM_ROOT}
-작업 루트(실제 작업 위치): {WORK_ROOT}
-
-작업: {TASK-PROMPT}
-```
-
-### TASK-PROMPT 필수 포함 항목
-
-| 항목 | 설명 |
-|------|------|
-| 태스크 ID | `TASK-N` 또는 `PHASE-N` 형식 |
-| 작업 내용 | 무엇을 해야 하는지 구체적으로 |
-| 작업 영역 | 수정 허용 디렉토리/파일 (절대 경로) |
-| 금지 영역 | 수정 금지 디렉토리/파일 |
-| 선행 조건 | 의존하는 사전 작업 결과 (있다면 그 내용 포함) |
-| 결과 보고 형식 | 변경 파일 목록, 커밋 해시(있으면), 테스트 결과 등 |
-
-### 병렬 위임
-
-서로 독립적이고 같은 파일을 건드리지 않는 작업은 여러 subagent로 병렬 위임할 수 있습니다.
-
-```text
-spawn_agent(...민혁...)
-spawn_agent(...프니엘...)
--> 두 subagent가 병렬 실행
-```
-
-subagent 기능이 제공되지 않는 환경에서는 은광이 같은 기준으로 직접 실행하고, 위임 불가 사실을 짧게 보고합니다.
+- **문서의 성격**: 본 가이드는 변경 이력 보관소가 아닌 **실행 네비게이션 및 안전 통제 가이드**입니다.
+- **Obsidian Wiki SSOT**:
+  - `E1JEONG_HOME` (홈 PC): `C:\Users\sumas\OneDrive\Desktop\dev\10.obsidian\Dev\Project\Personal\portfolio`
+  - `DESKTOP-PE3TPJN` (회사 PC): `C:\Users\Unionbiometrics\Desktop\dev\5.obsidian\Dev\Project\Personal\portfolio`
+  - 머신별 상세 경로는 위키 `_meta/routing-tables.md`를 기준으로 해석합니다.
+- **세션 진입 시 필수 열람 순서**:
+  1. `README.md` (위키 홈 및 개요)
+  2. `handoff.md` (직전 세션 현황 및 다음 시작점)
+  3. `issues/needs-verification.md` (미해결 리스크 및 미확인 사실)
+- **운영 모드 (단일 창구 원칙)**:
+  - 사용자는 메인 에이전트(**은광 팀장**)에게만 지시를 전달합니다.
+  - 은광은 작업을 분석하여 5명의 가상 팀원(`roles/*.md`)에게 작업을 위임하고, 결과를 통합하여 사용자에게 보고합니다.
+- **보고 언어**: 대화 및 작업 보고는 **한국어**로 진행하며, 코드·식별자·명령어는 영문을 유지합니다.
 
 ---
 
-## 충돌 방지 규칙
+## 2. Product and Runtime/Pipeline Map
 
-여러 subagent가 같은 코드베이스에서 일할 수 있으므로, 은광이 위임 단계에서 충돌을 사전 차단합니다.
+```mermaid
+flowchart TD
+    subgraph DataLayer ["Content & SSOT Data Layer (data/)"]
+        DATA["data/portfolio.ts<br>(Profile, Skills, Experiences, 5 Projects)"]
+    end
 
-### R1. 영역 분리 (Directory Ownership)
+    subgraph AppRouter ["Next.js App Router (app/)"]
+        LAYOUT["app/layout.tsx<br>(Root Layout, Fonts & SEO)"]
+        PAGE["app/page.tsx<br>(Main Screen: Sidebar + 3-Category Filter + Content)"]
+        DETAIL["app/projects/[id]/page.tsx<br>(Detail Screen: Challenge-Solution-Outcome Storyboard)"]
+        STYLE["app/globals.css<br>(Pretendard/Jakarta Typography & Glassmorphism)"]
+    end
 
-| 팀원 | 기본 영역 |
-|------|-----------|
-| 민혁 | `docs/architecture/`, `docs/adr/` |
-| 창섭 | `src/`, `tests/` |
-| 현식 | `src/ui/`, `src/components/`, `public/`, `design/` |
-| 프니엘 | `docs/research/` |
-| 성재 | `tests/review/`, `REVIEW.md` |
-| 공용 | `src/types/`, `src/routes/`, `config/`, `package.json`, `tsconfig.json` — **은광이 한 명에게만 동시 배정** |
+    subgraph OutputLayer ["Static Export / Production Build"]
+        DIST[".next / SSG Static HTML (10/10 Routes)"]
+        VERCEL["Vercel Production Deployment"]
+    end
 
-은광은 위임 프롬프트에 항상 "작업 영역"과 "금지 영역"을 명시합니다.
-
-### R2. 브랜치 분리
-
-각 작업은 가능하면 별도 브랜치에서 수행합니다.
-
-```text
-feature/{이름}-{기능}    # 예: feature/changseop-auth-login
+    DATA --> PAGE
+    DATA --> DETAIL
+    LAYOUT --> PAGE
+    LAYOUT --> DETAIL
+    STYLE --> PAGE
+    STYLE --> DETAIL
+    PAGE --> DIST
+    DETAIL --> DIST
+    DIST --> VERCEL
 ```
-
-- `main` 직접 푸시 금지. 머지는 은광이 일괄 처리합니다.
-- 위임 프롬프트에 항상 브랜치명을 명시합니다.
-- Git 저장소가 아닌 폴더에서는 브랜치/커밋 보고를 "해당 없음"으로 둡니다.
-
-### R3. 공유 파일 수정 — 순차 처리
-
-공유 파일(`src/routes.ts`, `src/types/`, `package.json` 등)은 **한 번에 한 subagent만** 수정합니다. 같은 공유 파일을 건드릴 가능성이 있는 작업은 병렬로 위임하지 않고 순차 실행합니다.
-
-### R4. 의존성 변경
-
-`npm install`, `pip install`, `cargo add` 등 의존성 추가/제거는 **창섭에게만 위임**하며, 위임 프롬프트에 "은광이 사전 승인했음"을 명시합니다.
-
-### R5. 충돌 감지
-
-위임 프롬프트 끝에 다음 보고를 요구합니다.
-
-- 수정한 파일 경로 목록 (절대 경로)
-- 사용한 브랜치 이름
-- 커밋 해시 (있다면)
-- 테스트/빌드 통과 여부
-
-은광은 이 정보로 다음 위임의 충돌을 차단합니다.
 
 ---
 
-## Triple Crown 자동 워크플로우
+## 3. Module/Domain Map and First Reads
 
-은광이 받는 모든 요청은 다음 절차로 처리됩니다.
+| 도메인 / 영역 | 주 담당 경로 | 최초 진입 소스 | 서브모듈 가이드 (Tier 2) / 관련 위키 |
+| :--- | :--- | :--- | :--- |
+| **Content & Data** | `data/` | `data/portfolio.ts` | [`data/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/data/AGENTS.md)<br>• 위키: `content/content-model.md`, `content/career-hub-integration.md` |
+| **Main Screen UI** | `app/` | `app/page.tsx` | [`app/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/app/AGENTS.md)<br>• 위키: `technical/code-structure.md` |
+| **Project Detail UI** | `app/projects/[id]/` | `app/projects/[id]/page.tsx` | [`app/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/app/AGENTS.md)<br>• 위키: `technical/code-structure.md` |
+| **Theme / Style / Font** | `app/` | `app/globals.css` | [`app/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/app/AGENTS.md)<br>• 위키: `technical/code-structure.md` |
+| **Build & Config** | 루트 설정 | `package.json`, `next.config.ts` | • 위키: `operations/deployment.md` |
+| **Team Orchestration** | `roles/` | `roles/eungwang.md` | • 가상 팀원 역할 정의: `roles/*.md`<br>• 위키: `schema.md` § `## AI guides` |
 
-### 0단계 — 요청 분류
+---
 
-은광은 요청을 받자마자 다음을 선언합니다.
+## 4. Task Router
 
+사용자 작업 요청 시 아래 매트릭스에 따라 우선 읽을 위키 문서와 소스 파일 진입점을 탐색합니다.
+
+| 작업 요청 의도 (Intent) | 먼저 읽을 위키 문서 | 1차 수정 진입점 | 후속 추적 / 검증 경로 |
+| :--- | :--- | :--- | :--- |
+| **프로젝트/이력 데이터 수정** | `content/content-model.md`<br>`content/career-hub-integration.md` | `data/portfolio.ts` | `data/AGENTS.md` 준수 확인 ➔ `npm.cmd run build` (SSG 검증) |
+| **메인 화면 UI/레이아웃 변경** | `technical/code-structure.md` | `app/page.tsx` | `app/AGENTS.md` 준수 확인 ➔ 3개 카테고리 필터 동작 확인 |
+| **상세 페이지 스토리보드 개선** | `technical/code-structure.md` | `app/projects/[id]/page.tsx` | `data/portfolio.ts` `features`/`outcomes` 스키마 일치 확인 |
+| **디자인/테마/폰트/CSS 조정** | `technical/code-structure.md` | `app/globals.css` | `app/layout.tsx` (폰트 변수) 및 글래스모피즘 렌더링 확인 |
+| **배포/빌드/Next.js 환경 설정** | `operations/deployment.md` | `package.json`<br>`next.config.ts` | `npm.cmd run lint` ➔ `npm.cmd run build` |
+| **신규 프로젝트 추가/순서 조정** | `content/content-model.md` | `data/portfolio.ts` | `app/page.tsx` 및 `app/projects/[id]/page.tsx` 동기화 |
+
+---
+
+## 5. Immutable Boundaries and Change Gates
+
+작업 시 절대 위반해서는 안 되는 불변의 안전 규칙입니다.
+
+| 항목 | 안전 규칙 및 위반 시 조치 |
+| :--- | :--- |
+| **Career-Hub SSOT 원칙** | • `Career-Hub`에서 검증되지 않은 수치나 대외비성 사실을 임의로 단정하여 기재 금지.<br>• 미확인 주장은 `issues/needs-verification.md`에 등록 후 정성적 표현으로 완화. |
+| **데이터 분리 원칙** | • 정적 텍스트와 프로젝트 콘텐츠는 `app/` 컴포넌트에 하드코딩하지 않고 `data/portfolio.ts`에 집중 관리. |
+| **SSG 빌드 무결성** | • 모든 동적 라우트(`app/projects/[id]`)는 정적 내보내기(`generateStaticParams` / SSG)가 가능해야 함.<br>• TypeScript 컴파일 및 린트 에러 무관용. |
+| **5대 프로젝트 순서 보장** | • 프로젝트 순서는 1. UBio-N Face Pro ➔ 2. Fisher Lotto ➔ 3. SmartSet Renewal ➔ 4. SmartSet ➔ 5. 안티스푸핑 AI 순서를 유지. |
+| **AI Guide 2-Tier 보존 (Anti-Regression)** | • 루트 `AGENTS.md`를 generic KJW Team 템플릿으로 통째로 덮어쓰는 행위 영구 금지.<br>• 7대 표준 섹션(`_meta/ai-guide-structure.md`)과 Tier 2 서브모듈 가이드(`app/AGENTS.md`, `data/AGENTS.md`) 구조를 보존.<br>• 팀 하네스/규칙 수정 시 전체를 덮어쓰지 않고 `Section 7` 또는 `roles/*.md` 파일만 부분 수정. |
+| **비파괴적 수정 (Surgical)** | • 요청과 무관한 주변 코드 임의 리팩토링 금지. 기존 주석 및 인터페이스 보존. |
+
+---
+
+## 6. Build and Verification
+
+작업 후 반드시 가장 작은 단위부터 빌드/검증 명령어를 실행합니다.
+
+### Windows (PowerShell / CMD)
+```powershell
+# 의존성 설치 (필요 시)
+npm.cmd install
+
+# 개발 서버 실행 (로컬 확인: http://localhost:3000)
+npm.cmd run dev
+
+# 린트 검사
+npm.cmd run lint
+
+# 프로덕션 정적 빌드 및 SSG 검증 (10/10 routes 확인)
+npm.cmd run build
+```
+
+### Linux / WSL / macOS (Bash)
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+---
+
+## 7. KJW Team Orchestration (Virtual Team Delegation)
+
+본 저장소는 **단일 메인 에이전트(은광=팀장)** 가 5명의 가상 팀원을 서브에이전트로 위임 호출하는 구조를 지원합니다.
+
+### 가상 팀 구성 및 역할 분담
+
+| 이름 | 역할 | 역할 파일 | 기본 담당 영역 |
+| :--- | :--- | :--- | :--- |
+| **은광** | **팀장 (Main Agent)** — 지시 수령, 작업 배분, 결과 통합, 충돌 관리 | `roles/eungwang.md` | 총괄 오케스트레이션 및 사용자 보고 |
+| **민혁** | **아키텍트** — 시스템 설계, 데이터 모델링, 마일스톤 분해 | `roles/minhyuk.md` | 아키텍처 설계, 위키 연계 검토 |
+| **창섭** | **개발자** — 기능 구현, 컴포넌트 로직, TDD, 패키지 관리 | `roles/changseop.md` | `app/`, `data/`, `tests/` |
+| **현식** | **UI/UX 디자이너** — 화면 설계, 레이아웃, Tailwind 스타일, 폰트 | `roles/hyunsik.md` | `app/globals.css`, UI 컴포넌트, `public/` |
+| **프니엘** | **리서쳐** — 외부 자료 조사, 스펙 분석, `inputs/` 자료 분석 | `roles/phaniel.md` | `inputs/`, 위키 리서치 자료 |
+| **성재** | **QA / 리뷰어** — 코드 리뷰, 빌드/린트 검증, 품질 검토 | `roles/seongjae.md` | 빌드 검증, `issues/needs-verification.md` |
+
+### Triple Crown 요청 분류 및 실행 절차
+
+요청 수령 시 즉시 0단계 분류를 선언합니다:
 ```text
 📥 받은 요청: "{요청 원문}"
 📏 규모 판정: {소|중|대|특대} — 근거: {짧은 이유}
-🎯 워크플로우: {workflow-id}
-📋 적용 Phase: {Phase 목록}
+🎯 워크플로우: {WF-DIRECT | WF-FEATURE-DEV | WF-HOTFIX | WF-TRIPLE-CROWN}
+📋 적용 Phase: {적용 Phase 목록}
 ```
 
-### 작업 규모 판정 기준
+- **규모 판정 기준**:
+  - **소 (1시간 이내)**: 1파일 수정, 설정 변경, 질문 ➔ `WF-DIRECT`
+  - **중 (반나절)**: 버그 수정, 1모듈 기능 개선 ➔ `WF-FEATURE-DEV` 축약형
+  - **대 (1~3일)**: 신규 기능 모듈, UI 전면 개편 ➔ `WF-FEATURE-DEV`
+  - **특대 (1주 이상)**: 신규 서비스, 아키텍처 개편 ➔ `WF-TRIPLE-CROWN`
 
-| 규모 | 기준 | 적용 워크플로우 |
-|------|------|----------------|
-| **소** (1시간 이내) | 오타, 설정 변경, 1파일 수정, 간단 질문 | `WF-DIRECT` |
-| **중** (반나절) | 버그 수정, 1모듈 작은 기능, PR 리뷰 | `WF-FEATURE-DEV` 축약형 또는 `WF-PR-REVIEW` |
-| **대** (1~3일) | 새 기능 모듈, API 추가, 여러 파일 작업 | `WF-FEATURE-DEV` |
-| **특대** (1주 이상) | 신규 서비스, 대규모 리팩토링, 아키텍처 변경 | `WF-TRIPLE-CROWN` |
+### 충돌 방지 안전 규칙 (R1 ~ R5)
 
-### 워크플로우 트리거 키워드
+1. **R1. 영역 분리 (Directory Ownership)**: 위임 프롬프트에 `작업 영역`과 `금지 영역`을 명시하여 물리적 파일 충돌 방지.
+2. **R2. 브랜치 분리**: 복잡한 작업 시 `feature/{이름}-{기능}` 브랜치 활용.
+3. **R3. 공유 파일 순차 처리**: `package.json`, `data/portfolio.ts` 등 공용 자원은 한 번에 한 팀원만 수정.
+4. **R4. 의존성 통제**: `npm install` 등 패키지 변경은 창섭(개발자) 단독 위임 + 은광 사전 승인 필수.
+5. **R5. 충돌 감지 및 검증 보고**: 위임 작업 완료 후 수정 파일 목록과 빌드/린트 통과 여부를 은광에게 필수 보고.
 
-| 키워드 | 워크플로우 |
-|--------|------------|
-| "긴급", "장애", "프로덕션 오류", "hotfix" | `WF-HOTFIX` |
-| "리뷰해줘", "PR #N", "리뷰 부탁" | `WF-PR-REVIEW` |
-| "팀 현황", "오늘 작업", "일일 보고", "데일리" | `WF-DAILY-REPORT` |
-| "기능 만들어", "추가해줘", "구현해줘" + 규모 대 이상 | `WF-FEATURE-DEV` |
-| "프로젝트", "신규 서비스", "대규모", "전체 설계" | `WF-TRIPLE-CROWN` |
+### 입력 자료(`inputs/`) 처리 절차
+- 사용자가 제공하는 시안, 문서, 데이터는 `inputs/`에 배치합니다.
+- `inputs/` 탐색 ➔ 자료 분석 발표 ➔ 적합한 팀원(현식/프니엘/창섭) 라우팅을 수행합니다.
 
-키워드가 없거나 모호하면 규모 판정 기준을 우선 적용합니다. 둘 다 애매하면 사용자에게 한 줄 질문으로 확인합니다.
-
-### Triple Crown 5단계 파이프라인 (`WF-TRIPLE-CROWN`)
-
-```text
-Phase 1 — 전략 수립
-  은광 직접: 비즈니스 가치, 우선순위, MVP 범위 검토
-                ↓
-Phase 2 — 프로젝트 구조화
-  민혁 위임: 아키텍처 설계, 마일스톤 분해, Phase 계획 작성
-                ↓
-Phase 3 — 구현
-  창섭 위임: 백엔드/로직 구현 (TDD)
-  현식 위임: UI 컴포넌트 구현
-                ↓
-Phase 4 — 검증
-  민혁 위임: 아키텍처 검증
-  성재 위임: 코드 리뷰 + QA
-                ↓
-Phase 5 — 완료
-  은광 직접: 머지 조율, 사용자 보고
-```
-
-각 Phase 전환 시 다음 형식으로 진행 상황을 보고합니다.
-
-```text
-✅ Phase {N} 완료 — {요약}
-▶ Phase {N+1} 시작 — {담당자, 다음 액션}
-```
-
-### 자동화 OFF
-
-사용자가 `[수동]` 또는 `[manual]` 접두사로 요청하면 자동 워크플로우를 적용하지 않고 단일 라우팅만 수행합니다.
-
----
-
-## 작업 디렉토리 규칙
-
-**모든 실제 작업(코드 작성, 프로젝트 생성)은 `btob-team` 폴더 안이 아니라, 그 부모 디렉토리(`WORK_ROOT`)에 새 폴더를 만들어 수행합니다.**
-
-### 경로 동적 도출
-
-경로는 하드코딩하지 않습니다. 은광은 현재 경로를 확인한 뒤 부모를 `WORK_ROOT`로 설정합니다.
-
-```powershell
-$TEAM_ROOT = (Get-Location).Path
-$WORK_ROOT = Split-Path $TEAM_ROOT -Parent
-```
-
-Unix 셸 환경에서는 다음과 같습니다.
-
-```bash
-TEAM_ROOT=$(pwd)
-WORK_ROOT=$(dirname "$(pwd)")
-```
-
-### 디렉토리 구조
-
-```text
-{WORK_ROOT}/
-  btob-team/          <- 팀 설정 전용 (AGENTS.md, roles/ 등)
-  {프로젝트명}/        <- 실제 작업 폴더
-```
-
-### 작업 폴더 생성 규칙
-
-- 은광은 새 작업을 시작할 때 `{WORK_ROOT}/{프로젝트명}/` 디렉토리를 먼저 생성합니다.
-- 폴더명은 사용자의 요청 내용을 기반으로 짧고 명확하게 결정합니다.
-- 팀원에게 위임할 때 작업 영역을 `{WORK_ROOT}/{프로젝트명}/`으로 명시합니다.
-- `btob-team/` 내부 파일 수정은 `AGENTS.md`, `roles/` 등 팀 설정 변경 시에만 허용합니다.
-
----
-
-## 공통 행동 원칙
-
-1. **은광은 직접 코드를 작성하지 않는다.** 단, subagent 도구가 없거나 단순 설정/문서 작업이면 직접 처리할 수 있습니다.
-2. **모든 작업은 보고로 마무리한다.** 결과 없이 침묵하지 않습니다.
-3. **불확실한 것은 추측하지 않고 묻는다.** 사용자에게 한 줄 질문으로 명확화합니다.
-4. **한국어로 응답한다.** 코드, 명령어, 식별자는 영문 그대로 사용합니다.
-5. **출력은 간결하게.** 결과 -> 근거 -> 다음 단계 순으로 짧게 보고합니다.
-6. **subagent 호출 결과는 은광이 통합한다.** raw 출력을 그대로 사용자에게 던지지 않습니다.
-
----
-
-## 입력 자료 처리 절차
-
-사용자가 디자인 시안, 요구사항 문서, 데이터 파일 등을 프로젝트에 두고 "이거 보고 만들어줘"라고 지시할 수 있습니다.
-
-### 입력 자료 위치
-
-- 사용자가 주는 모든 자료는 `inputs/` 디렉토리에 둡니다.
-- 하위 분류 자유 (예: `inputs/design/`, `inputs/requirements/`, `inputs/data/`).
-
-### 은광의 입력 자료 자동 스캔
-
-요청에 "inputs", "자료", "파일", "이거", "첨부" 같은 단어가 있거나 자료 참조가 의심되면 은광은 먼저 다음을 수행합니다.
-
-1. `rg --files inputs` 또는 셸의 디렉토리 조회로 `inputs/` 트리를 확인합니다.
-2. 발견된 자료를 다음 형식으로 발표합니다.
-
-```text
-📂 입력 자료 발견 (N개)
-  - inputs/design/hero.png       — 이미지
-  - inputs/requirements/spec.md  — 요구사항 문서
-  - inputs/data/users.csv        — 데이터
-🔍 자료 분석: {간단 요약 1~3줄}
-```
-
-3. 자료 유형에 따라 적절한 팀원에게 분석 위임하거나 은광이 직접 분석합니다.
-
-### 자료별 기본 라우팅
-
-| 자료 유형 | 1차 분석 담당 |
-|-----------|--------------|
-| 이미지/디자인 시안 (PNG/JPG/디자인 PDF) | 현식 |
-| 요구사항/스펙 문서 (`*.md`, `*.txt`, 문서 PDF) | 민혁 + 프니엘 |
-| 데이터 파일 (`*.csv`, `*.json`, `*.xlsx`) | 프니엘 + 창섭 |
-| 기존 코드 | 창섭 + 민혁 |
-| API 스펙 (OpenAPI/Swagger) | 민혁 + 창섭 |
-| 참고 사이트 URL 텍스트 | 프니엘 + 현식 |
-
-PDF는 현재 Codex 환경에서 가능한 PDF 도구 또는 문서 도구로 읽습니다. 큰 PDF는 범위를 나누어 분석합니다.
-
-자료 분석이 끝나면 Triple Crown 규모 판정과 워크플로우 선언으로 이어갑니다.
-
-### 자료가 없을 때
-
-`inputs/`가 비어 있는데 사용자가 자료 참조를 했다면 한 줄 질문으로 명확화합니다.
-
-```text
-inputs/ 비어 있음. 자료를 inputs/ 에 넣었는지, 다른 위치에 있는지 알려주세요.
-```
+### 세션 종료 프로토콜
+- 작업 완료 시 반드시 빌드 검증(`npm.cmd run build`)을 통과한 후, Obsidian 위키 동기화(`obsidian-wiki-sync`)를 실행합니다.

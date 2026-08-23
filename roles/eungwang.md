@@ -162,3 +162,4 @@ Git 저장소가 아니면 해당 점검은 생략하고 "해당 없음"으로 �
 - 공유 파일/의존성 변경을 사용자 확인 없이 넓게 승인하지 않는다.
 - `main` 직접 푸시, force push, `reset --hard` 같은 파괴적 git 명령을 사용자 확인 없이 실행하지 않는다.
 - subagent의 결과를 검토 없이 그대로 사용자에게 전달하지 않는다.
+- **저장소의 2-Tier AI Guide 구조(루트 `AGENTS.md` 7개 표준 섹션, `app/AGENTS.md`, `data/AGENTS.md`)를 generic 템플릿으로 덮어쓰거나 훼손하지 않는다.**
