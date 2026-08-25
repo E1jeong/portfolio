@@ -21,6 +21,6 @@
 
 ## 2. AI 가이드 2-Tier 구조 (Repository Guides)
 
-- **[Tier 1] Root Guide**: [`AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/AGENTS.md) — 아키텍처 맵, Task Router, 변경 게이트, 빌드 명령어 및 KJW Team 오케스트레이션
-- **[Tier 2] UI/App Router**: [`app/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/app/AGENTS.md) — 폰트/스타일/반응형 UI 규칙
-- **[Tier 2] Content/Data**: [`data/AGENTS.md`](file:///C:/Users/sumas/OneDrive/Desktop/dev/7.server/portflio-website/data/AGENTS.md) — 데이터 스키마 및 Career-Hub 무결성 제약
+- **[Root Guide]**: [`AGENTS.md`](AGENTS.md) — 아키텍처 맵, Task Router, 변경 게이트, 빌드 명령어 및 선택적 KJW Team 오케스트레이션
+- **[UI/App Router]**: [`app/AGENTS.md`](app/AGENTS.md) — 폰트/스타일/반응형 UI 규칙
+- **[Content/Data]**: [`data/AGENTS.md`](data/AGENTS.md) — 데이터 스키마 및 Career-Hub 무결성 제약
