@@ -4,7 +4,7 @@
 
 - This guide is a navigation and safety aid, not a knowledge archive.
 - The wiki at vault-relative `Dev/Project/Personal/portfolio` owns product context, content decisions, roadmap, and history. Resolve the vault through `_meta/routing-tables.md` or `obsidian-wiki-sync`, never hardcoded file URLs.
-- Before non-trivial work, read wiki `README.md` → `handoff.md` → `schema.md` → `index.md`; read `issues/needs-verification.md` when uncertainty is relevant.
+- Before non-trivial work, read wiki `handoff.md` → `schema.md` → `index.md`; read `issues/needs-verification.md` when uncertainty is relevant.
 - Before multi-step or resumed implementation, ground wiki context against live code, propose `step → verify` checkpoints, and confirm them before editing.
 - Report to the user in Korean; keep code, identifiers, and commands in English.
 - Handle small or single-area work directly. Use the optional KJW roles only when delegation materially reduces time or improves independent review.
