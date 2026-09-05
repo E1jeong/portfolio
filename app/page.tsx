@@ -17,6 +17,7 @@ type CategoryId = typeof CATEGORIES[number]["id"];
 export default function Home() {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState("about");
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>("all");
   const featuredProjects = projects;
 
@@ -44,29 +45,50 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = document.querySelectorAll(".content-section");
-      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+      const triggerY = window.innerHeight * 0.35;
 
+      // 1. 메인 4개 섹션 감지
+      const sections = document.querySelectorAll<HTMLElement>(".content-section");
+      let currentSection = "about";
       sections.forEach((section) => {
-        const element = section as HTMLElement;
-        const sectionTop = element.offsetTop;
-        const sectionHeight = element.offsetHeight;
-        const sectionId = element.getAttribute("id");
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          if (sectionId) {
-            setActiveSection(sectionId);
-          }
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= triggerY && rect.bottom > triggerY) {
+          const id = section.getAttribute("id");
+          if (id) currentSection = id;
         }
       });
+      setActiveSection(currentSection);
+
+      // 2. 프로젝트 섹션 내부의 개별 프로젝트 카드 감지
+      if (currentSection === "projects") {
+        const cards = document.querySelectorAll<HTMLElement>(".project-card");
+        let currentProject: string | null = null;
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          if (rect.top <= triggerY && rect.bottom > triggerY) {
+            const id = card.getAttribute("id");
+            if (id) currentProject = id;
+          }
+        });
+
+        // 경계 보정: 아직 첫 카드 위쪽 영역이면 첫 번째 카드 활성화
+        if (!currentProject && cards.length > 0) {
+          const firstRect = cards[0].getBoundingClientRect();
+          if (firstRect.top > triggerY) {
+            currentProject = cards[0].getAttribute("id");
+          } else {
+            currentProject = cards[cards.length - 1].getAttribute("id");
+          }
+        }
+        setActiveProjectId(currentProject);
+      } else {
+        setActiveProjectId(null);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
     handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -91,7 +113,7 @@ export default function Home() {
             </p>
           ) : null}
 
-          <p className="profile-summary">{profile.summary}</p>
+          <p className="profile-summary">{profile.tagline}</p>
           {profile.subSummary ? (
             <p className="profile-subsummary">{profile.subSummary}</p>
           ) : null}
@@ -104,17 +126,33 @@ export default function Home() {
                   className={`nav-link ${activeSection === "about" ? "active" : ""}`}
                 >
                   <span className="nav-indicator"></span>
-                  <span className="nav-text">ABOUT</span>
+                  <span className="nav-text">About</span>
                 </a>
               </li>
-              <li>
+              <li className="nav-item-projects">
                 <a
                   href="#projects"
                   className={`nav-link ${activeSection === "projects" ? "active" : ""}`}
                 >
                   <span className="nav-indicator"></span>
-                  <span className="nav-text">PROJECTS</span>
+                  <span className="nav-text">Projects</span>
                 </a>
+                <ul className="nav-sub-list" aria-label="대표 프로젝트 바로가기">
+                  {featuredProjects.map((project) => {
+                    const isSubActive = activeSection === "projects" && activeProjectId === project.id;
+                    return (
+                      <li key={project.id}>
+                        <a
+                          href={`#${project.id}`}
+                          className={`nav-sub-link ${isSubActive ? "active" : ""}`}
+                        >
+                          <span className="nav-sub-indicator"></span>
+                          <span className="nav-sub-text">{project.name}</span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
               </li>
               <li>
                 <a
@@ -122,7 +160,7 @@ export default function Home() {
                   className={`nav-link ${activeSection === "experience" ? "active" : ""}`}
                 >
                   <span className="nav-indicator"></span>
-                  <span className="nav-text">EXPERIENCE</span>
+                  <span className="nav-text">Experience</span>
                 </a>
               </li>
               <li>
@@ -131,23 +169,11 @@ export default function Home() {
                   className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
                 >
                   <span className="nav-indicator"></span>
-                  <span className="nav-text">SKILLS</span>
+                  <span className="nav-text">Skills</span>
                 </a>
               </li>
             </ul>
           </nav>
-
-          {/* Quick shortcuts for top projects */}
-          <div className="shortcuts-wrapper" aria-label="대표 프로젝트 바로가기">
-            <p className="shortcuts-title">Projects</p>
-            <ul className="shortcuts-list">
-              {featuredProjects.map((project) => (
-                <li key={project.id}>
-                  <a href={`#${project.id}`} className="shortcut-link">{project.name}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
 
           <div className="contacts-wrapper" aria-label="연락처 정보">
             {profile.contacts.map((contact) => (
@@ -178,9 +204,9 @@ export default function Home() {
         </nav>
 
         <section id="about" className="content-section" aria-labelledby="about-heading">
-          <h2 id="about-heading" className="section-title">ABOUT</h2>
+          <h2 id="about-heading" className="section-title">About</h2>
           <p className="lead-description">
-            AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 시스템 앱과 견고한 아키텍처까지 일관되게 책임지는 AI-Native Android 개발자입니다.
+            {profile.summary}
           </p>
           <p className="lead-subdescription">
             온디바이스 딥러닝(Edge ML) 파이프라인 수립과 INT8 양자화, NPU 실기기 추론 최적화 경험을 보유하고 있으며, AIDL IPC·NFC·단말 프로토콜 등의 시스템 연동 및 Kotlin/Compose 기반 Clean Architecture 전환 경험을 바탕으로 하드웨어와 소프트웨어의 경계를 안정적으로 연결합니다.
@@ -193,7 +219,7 @@ export default function Home() {
         </section>
 
         <section id="projects" className="content-section" aria-labelledby="projects-heading">
-          <h2 id="projects-heading" className="section-title">PROJECTS</h2>
+          <h2 id="projects-heading" className="section-title">Projects</h2>
           <div className="project-category-tabs" role="tablist" aria-label="프로젝트 카테고리 필터">
             {CATEGORIES.map((cat) => (
               <button
@@ -274,7 +300,7 @@ export default function Home() {
         </section>
 
         <section id="experience" className="content-section" aria-labelledby="experience-heading">
-          <h2 id="experience-heading" className="section-title">EXPERIENCE</h2>
+          <h2 id="experience-heading" className="section-title">Experience</h2>
           <div className="experience-timeline">
             {experiences.map((exp) => (
               <article key={exp.company} className="experience-row">
@@ -299,7 +325,7 @@ export default function Home() {
         </section>
 
         <section id="skills" className="content-section" aria-labelledby="skills-heading">
-          <h2 id="skills-heading" className="section-title">SKILLS</h2>
+          <h2 id="skills-heading" className="section-title">Skills</h2>
           <div className="skills-typography-list">
             {skillGroups.map((group) => (
               <div key={group.title} className="skills-row">

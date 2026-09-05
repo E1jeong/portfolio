@@ -62,12 +62,14 @@ export type Experience = {
 export const profile = {
   name: "이원정",
   title: "AI-Native Android Developer",
-  currentCompany: "유니온바이오메트릭스 재직 중",
+  currentCompany: "(주)유니온바이오메트릭스 재직 중",
   email: "won9964@gmail.com",
+  tagline:
+    "AI 모델 설계부터 임베디드 NPU 배포, 모던 Android 앱 아키텍처까지 일관되게 구축합니다.",
   summary:
-    "AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 시스템과 아키텍처까지 책임지는 AI-Native Android 개발자입니다.",
+    "AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 애플리케이션과 견고한 클라이언트 아키텍처까지 일관되게 책임지는 AI-Native Android 개발자입니다.",
   subSummary:
-    "온디바이스 AI(Edge ML) · Android 시스템 및 하드웨어 연동 · AI 주도 단위 테스트 및 엔지니어링",
+    "온디바이스 AI(Edge ML) · Android 앱 및 하드웨어 연동 · AI 주도 단위 테스트 및 엔지니어링",
   contacts: [
     { label: "GitHub", href: "https://github.com/E1jeong" },
     { label: "Blog", href: "https://still-coding.tistory.com/" }
@@ -165,7 +167,7 @@ export const projects: Project[] = ([
     id: "ubio-n-face-pro",
     name: "UBio-N Face Pro",
     summary:
-      "일본 NEC 고객사 출입통제 플랫폼 요구사항을 Android 단말 앱에 통합한 시스템 앱 프로젝트",
+      "일본 NEC 고객사 출입통제 플랫폼 요구사항을 Android 단말 앱에 통합한 프로덕션 앱 프로젝트",
     period: "2025.07 - 현재",
     type: "Android Device",
     role: "Android 단말 앱 인증 확장, AIDL IPC 연동, DB 보안, 안정성 개선 전담",
@@ -255,7 +257,7 @@ export const projects: Project[] = ([
         description:
           "원격 클라우드 서버로부터 단말 설정값(Configs)을 동기화할 때, 비표준 형식 또는 이상 데이터 유입에 대해 단말 구동 프로세스가 비정상 종료(Crash)되지 않도록 방어하는 유효성 검증 계층을 설계했습니다.",
         challenge:
-          "서버가 보낸 특정 설정 필드가 표준 32비트 int 범위를 넘어서는 대형 정수를 가질 경우, Gson/Moshi 라이브러리가 파싱 중 NumberFormatException을 터뜨려 단말기 시스템 앱이 통째로 런타임 Crash되는 치명적인 필드 오류가 있었습니다.",
+          "서버가 보낸 특정 설정 필드가 표준 32비트 int 범위를 넘어서는 대형 정수를 가질 경우, Gson/Moshi 라이브러리가 파싱 중 NumberFormatException을 터뜨려 단말기 앱이 통째로 런타임 Crash되는 치명적인 필드 오류가 있었습니다.",
         solution:
           "파서 단에 정수형 초과 데이터 유입을 유연하게 소화하도록 BigDecimal을 활용한 커스텀 SafeIntegerAdapter를 작성해 파서에 주입하고, 설정값 파싱 완료 전후 비교 및 URL 값 유효성 정규식 검증 레이어를 도입했습니다.",
         outcome:
@@ -607,7 +609,7 @@ export const projects: Project[] = ([
   },
   {
     id: "anti-spoofing-ai",
-    name: "UBio-Vision (자체 안티스푸핑 AI 모델 & 실기기 검증 앱)",
+    name: "UBio-Vision (안티스푸핑 AI)",
     summary:
       "출입통제 단말기의 위조 얼굴을 판별하는 자체 딥러닝 모델(UBio-Vision)을 상용 SDK 없이 개발하고, NXP i.MX 8M Plus NPU 실기기 검증 앱까지 구축한 On-Device AI 프로젝트",
     period: "2026.06 - 현재",
@@ -744,7 +746,7 @@ export const projects: Project[] = ([
       {
         title: "Android 실시간 RGB/IR 듀얼 카메라 추론 파이프라인 및 스레드 격리",
         description:
-          "하드웨어 단말에서 실시간으로 유입되는 RGB 및 IR 카메라 스트림을 동기화하고 온디바이스 NPU 추론을 수행하는 Android 시스템 앱 구현",
+          "하드웨어 단말에서 실시간으로 유입되는 RGB 및 IR 카메라 스트림을 동기화하고 온디바이스 NPU 추론을 수행하는 Android 애플리케이션 구현",
         challenge:
           "초당 30프레임의 듀얼 카메라 콜백에서 YUV→Bitmap 변환과 NNAPI 추론이 메인/카메라 스레드를 점유하여 프레임 드랍 및 UI 프리징이 발생했습니다.",
         solution:
@@ -786,13 +788,13 @@ export const projects: Project[] = ([
 
 export const experiences: Experience[] = [
   {
-    company: "유니온바이오메트릭스",
-    domain: "출입통제 단말 On-Device AI 모델 개발 & Android 시스템 앱",
+    company: "(주)유니온바이오메트릭스",
+    domain: "출입통제 단말 On-Device AI 모델 개발 & Android 애플리케이션",
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
       "UBio-Vision 프로젝트로 상용 SDK 없이 출입통제 단말용 안티스푸핑 딥러닝 모델을 자체 개발하고, 기존 6클래스 모델의 NXP i.MX 8M Plus NPU 실기기 추론(P50 10–11ms 모델 invoke, Validation ACER 0.05%)을 검증했습니다.",
-      "UBio-N Face Pro 일본 NEC 고객사향 시스템 앱의 AIDL IPC, EAP-TLS 네트워크 보안, JSON 파싱 방어, DB 암호화를 전담하여 6차 릴리즈 검수를 통과했습니다.",
+      "UBio-N Face Pro 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 네트워크 보안, JSON 파싱 방어, DB 암호화를 전담하여 6차 릴리즈 검수를 통과했습니다.",
       "AI를 활용한 17개 JVM 단위 테스트로 경계값 회귀를 차단하고, 사내 AI 활용 및 기술 보고서 작성을 지원했습니다."
     ]
   },

@@ -1,129 +1,83 @@
 # Portfolio Website
 
-이원정 Android 개발자 포트폴리오 웹사이트입니다.
+> **이원정 | AI-Native Android Developer Portfolio**  
+> AI 모델 설계부터 임베디드 NPU 하드웨어 배포, 모던 Android 앱 아키텍처까지 일관되게 구축합니다.
 
-채용 담당자와 실무 리더가 짧은 시간 안에 다음을 파악할 수 있도록 구성합니다.
+Next.js App Router 기반의 정적 생성(SSG) 포트폴리오 웹사이트입니다.  
+채용 담당자와 기술 리더가 엔지니어링 역량, 실제 프로덕션 기여도, 코드 기반 근거를 명확하게 파악할 수 있도록 케이스 스터디 중심으로 설계되었습니다.
 
-- 어떤 Android 개발자인가
-- 어떤 도메인과 기술 문제를 다뤄왔는가
-- 각 프로젝트에서 실제로 맡은 역할은 무엇인가
-- Git 이력, 코드 구조, Notion 기록으로 뒷받침되는 근거는 무엇인가
+---
 
-## Tech Stack
+## 🌟 Featured Projects
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- Vercel 배포 기준
+| 프로젝트명 | 도메인 | 기간 | 주요 기술 & 역할 |
+| --- | --- | --- | --- |
+| **UBio-N Face Pro** | Android Device | `2025.07 - 현재` | • 일본 NEC 고객사 출입통제 플랫폼 연동 프로덕션 단말 앱<br>• AIDL IPC 멀티 프로세스 통신, WPA2-Enterprise(EAP-TLS) 보안, FeliCa IDm 스마트카드 로컬 캐싱, SQLCipher 암호화 DB |
+| **UBio-Vision (안티스푸핑 AI)** | On-Device AI | `2026.06 - 현재` | • 상용 SDK 없는 자체 안티스푸핑 딥러닝 모델 설계 & NXP i.MX 8M Plus NPU 실기기 추론 앱<br>• PyTorch/Keras, INT8 PTQ 양자화, NNAPI 하드웨어 가속, 듀얼 카메라(RGB/IR) 파이프라인 |
+| **Fisher Lotto** | Android Mobile | `2024.12 - 현재` | • 1인 풀스택 안드로이드 앱 & Next.js BFF 백엔드<br>• Jetpack Compose, Clean Architecture 4-멀티모듈, Google Play Billing 정기구독, FCM 푸시 |
+| **SmartSet Renewal** | Android Mobile | `2024.07 - 2025.04` | • 원격 수도 검침 단말 제어 차세대 Android 앱 전면 재설계<br>• Clean Architecture, MVI(Orbit), Hilt, Coroutines/Flow, Room DB 캐싱 |
+| **SmartSet** | Android Mobile | `2023.01 - 2025.04` | • 현장 작업자용 NFC 스마트 미터 통신 및 단말 상태 검침 앱<br>• NFC 커스텀 단말 프로토콜 제어, 지자체 A/S 작업 오더 정합성 검증 및 유지보수 |
 
-## Project Guide
+---
 
-포트폴리오 작성 기준 및 가이드는 루트의 [AGENTS.md](./AGENTS.md)와 Obsidian Wiki SSOT를 따릅니다.
+## 🛠 Tech Stack
 
-핵심 원칙:
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript (Strict Type Safety)
+- **Rendering**: 100% Static Site Generation (`generateStaticParams`)
+- **Styling**: Modern Dark Theme Design System (Vanilla CSS, Responsive)
+- **Typography**: Pretendard (Korean) & Plus Jakarta Sans (English/Digits)
+- **Deployment**: Vercel
 
-- 과장된 랜딩페이지 문구를 쓰지 않습니다.
-- 프로젝트별 본인 역할과 근거를 분리해서 작성합니다.
-- Git 이력이 있는 프로젝트는 본인 author 기준으로 작성합니다.
-- Git 이력이 없는 프로젝트는 코드 구조와 Notion 기록 기준으로 보수적으로 작성합니다.
-- 이미지와 영상은 현재 버전에서 제외하고, 필요한 위치만 추후 반영합니다.
+---
 
-## Main Content
-
-대표 프로젝트 우선순위:
-
-1. UBio-N Face Pro
-2. Fisher Lotto + lotto-sub-backend
-3. SmartSet Renewal
-4. SmartSet
-5. Hitec Embedded C Projects
-
-SmartSet은 새 클론 경로를 기준으로 작성합니다.
+## 📂 Architecture & Directory Structure
 
 ```text
-C:\Users\sumas\OneDrive\Desktop\dev\6.project\smartset
+├── app/
+│   ├── globals.css              # 다크 테마 커스텀 디자인 시스템 및 반응형 미디어 쿼리
+│   ├── layout.tsx               # SEO 메타데이터 및 전역 폰트/레이아웃
+│   ├── page.tsx                 # 메인 랜딩 (스크롤스파이 & 프로젝트 서브 네비게이션)
+│   ├── projects/[id]/page.tsx   # 정적 케이스 스터디 상세 페이지 (SSG)
+│   └── robots.ts                # 검색 엔진 최적화 (SEO)
+├── data/
+│   └── portfolio.ts             # 단일 소스 오브 트루스(SSOT) 기반 정적 데이터 모델
+├── AGENTS.md                    # AI 어시스턴트 협업 및 엔지니어링 가이드
+└── README.md                    # 리포지토리 대문 문서
 ```
 
-기존 `_SmartSet`은 참고하지 않습니다.
+---
 
-## Getting Started
+## 🚀 Getting Started
 
-의존성 설치:
-
+### 1. 의존성 설치
 ```bash
 npm install
-```
-
-Windows PowerShell에서 `npm.ps1` 실행 정책 문제가 있으면 `npm.cmd`를 사용합니다.
-
-```bash
+# Windows PowerShell 실행 정책 이슈 발생 시
 npm.cmd install
 ```
 
-개발 서버 실행:
-
+### 2. 개발 서버 실행
 ```bash
 npm run dev
-```
-
-또는:
-
-```bash
+# 또는
 npm.cmd run dev
 ```
+브라우저에서 `http://localhost:3000`으로 접속합니다.
 
-기본 URL:
-
-```text
-http://localhost:3000
-```
-
-## Build
-
-Vercel 배포 전 로컬 빌드 확인:
-
+### 3. 정적 빌드 및 무결성 검증
 ```bash
+# TypeScript 타입 검증
+npm run lint
+
+# 정적 페이지 10개 빌드 생성 확인
 npm run build
 ```
 
-PowerShell 실행 정책 문제가 있으면:
+---
 
-```bash
-npm.cmd run build
-```
+## 🔒 Content & Evidence Governance
 
-## Validation
-
-Next.js 16 환경에서는 기존 `next lint` 스크립트 대신 TypeScript 검증을 사용합니다.
-
-```bash
-npm.cmd run lint
-```
-
-## Directory Structure
-
-```text
-app/
-  globals.css       # 전역 스타일
-  layout.tsx        # 메타데이터와 루트 레이아웃
-  page.tsx          # 포트폴리오 메인 화면
-  robots.ts         # robots.txt
-data/
-  portfolio.ts      # 프로필, 기술 스택, 프로젝트, 경력 데이터
-AGENTS.md           # AI 가이드 및 프로젝트 아키텍처
-```
-
-## Deployment
-
-Vercel에서 이 저장소를 연결한 뒤 기본 설정으로 배포합니다.
-
-- Framework Preset: Next.js
-- Build Command: `npm run build`
-- Output Directory: Next.js 기본값
-- Environment Variables: 현재 필요 없음
-
-## Notes
-
-`npm audit`에서 Next.js 내부 `postcss` 관련 moderate 이슈가 표시될 수 있습니다. 현재 최신 안정 Next.js 버전 기준으로 발생하는 항목이며, `npm audit fix --force`는 오래된 Next.js 버전으로 변경을 제안하므로 적용하지 않습니다.
-
-최신 코드가 아직 반영되지 않은 프로젝트는 추후 Git 이력과 실제 코드 기준으로 다시 갱신합니다.
+- 모든 이력, 기여도, 수치, 공개 범위는 근거 자료(Git 이력, 사내 수용평가 종결 기록, 실기기 벤치마크)를 기반으로 작성되었습니다.
+- 상세 페이지의 기능 설명은 **문제 상황(Challenge) ➔ 해결 방법 및 로직(Solution) ➔ 결과 및 성과(Outcome)**의 정형화된 케이스 스터디 포맷을 따릅니다.
+- 사이트의 모든 콘텐츠는 [`data/portfolio.ts`](./data/portfolio.ts) 단일 파일에서 중앙 집중식으로 관리됩니다.

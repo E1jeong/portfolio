@@ -3,8 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/portfolio";
 
-import ShareButton from "./ShareButton";
-
 type ProjectDetailPageProps = {
   params: Promise<{
     id: string;
@@ -63,7 +61,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <Link href="/#projects" className="detail-back-link">
             <span className="back-arrow">←</span> 프로젝트 목록
           </Link>
-          <ShareButton />
         </div>
 
         <header className="detail-hero">
