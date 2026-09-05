@@ -4,23 +4,31 @@
 
 This is a code-navigation and safety guide, not project history. Product context, content decisions, roadmap, and history live in the vault-relative `Dev/Project/Personal/portfolio` wiki; resolve it through `_meta/routing-tables.md` or `obsidian-wiki-sync`, then follow the vault root `AGENTS.md`.
 
-Report plans and results in Korean. Use the nearest module guide before changing `app/` or `data/`.
+Report plans and results in Korean.
 
 ## Code Map
 
-| Module | Responsibility | Orient first | Local guide |
-| --- | --- | --- | --- |
-| `app/` | Next.js App Router pages, layouts, styles, and static project routes | `app/page.tsx`, `app/projects/[id]/page.tsx` | `app/AGENTS.md` |
-| `data/` | Portfolio content model and typed site data | `data/portfolio.ts` | `data/AGENTS.md` |
-| `inputs/` | User-provided repository-local source material | `inputs/README.md` | None |
+| Module | Responsibility | Key Files |
+| --- | --- | --- |
+| `app/` | Next.js App Router pages, layouts, styles, and static project routes | `app/page.tsx`, `app/projects/[id]/page.tsx`, `app/layout.tsx`, `app/globals.css` |
+| `data/` | Single site-content source and typed portfolio data model | `data/portfolio.ts` |
 
 ## Change Gates
 
-- Career claims, metrics, contribution levels, and disclosure scope must be grounded in Career-Hub; record unresolved claims in the project wiki.
-- Keep portfolio content in `data/portfolio.ts`; do not duplicate it as hardcoded UI data.
-- Preserve static generation for every `app/projects/[id]` route.
-- Preserve the established five-project order unless the user explicitly requests a content-order change.
-- Keep TypeScript checks clean and do not mix unrelated refactors into a requested change.
+### Data & Career Integrity
+- Ground career claims, metrics, contribution levels, and disclosure scope in Career-Hub; record unresolved claims in the project wiki.
+- Keep `data/portfolio.ts` as the single site-content source; never hardcode portfolio facts, metrics, or metadata in UI components.
+- Preserve required fields and valid relationships in the exported data model.
+- Preserve the established five-project order unless explicitly requested otherwise.
+
+### UI & App Router
+- Preserve static generation (`generateStaticParams`) for every `app/projects/[id]` route; do not depend on unavailable runtime data.
+- Preserve accessible semantic structure, keyboard navigation, and responsive layouts.
+- Keep shared layout and styling concerns in their owning files (`layout.tsx`, `globals.css`).
+
+### Engineering Hygiene
+- Keep TypeScript checks clean (`tsc --noEmit`).
+- Do not mix unrelated refactors into a requested change.
 
 ## Verify
 

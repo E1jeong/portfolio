@@ -18,7 +18,7 @@
 
 ## Project Guide
 
-포트폴리오 작성 기준은 루트의 [PORTFOLIO_GUIDE.md](./PORTFOLIO_GUIDE.md)를 따릅니다.
+포트폴리오 작성 기준 및 가이드는 루트의 [AGENTS.md](./AGENTS.md)와 Obsidian Wiki SSOT를 따릅니다.
 
 핵심 원칙:
 
@@ -110,7 +110,7 @@ app/
   robots.ts         # robots.txt
 data/
   portfolio.ts      # 프로필, 기술 스택, 프로젝트, 경력 데이터
-PORTFOLIO_GUIDE.md  # 포트폴리오 작성 기준
+AGENTS.md           # AI 가이드 및 프로젝트 아키텍처
 ```
 
 ## Deployment
