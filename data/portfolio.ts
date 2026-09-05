@@ -147,7 +147,20 @@ export const skillGroups = [
   }
 ];
 
-export const projects: Project[] = [
+const projectOrder = [
+  "ubio-n-face-pro",
+  "anti-spoofing-ai",
+  "fisherlotto",
+  "renew-smartset",
+  "smartset"
+];
+
+const projectRank = (id: string) => {
+  const index = projectOrder.indexOf(id);
+  return index === -1 ? projectOrder.length : index;
+};
+
+export const projects: Project[] = ([
   {
     id: "ubio-n-face-pro",
     name: "UBio-N Face Pro",
@@ -171,7 +184,7 @@ export const projects: Project[] = [
     ],
     highlights: [
       "AIDL IPC 기반 프로세스 간 통신 설계 및 QR/NFC/EAP-TLS 멀티 인증 시나리오 확장",
-      "단말 관리 플랫폼 연동 중 JSON 정수형 초과로 인한 크래시를 BigDecimal 커스텀 어댑터로 해결",
+      "단말 관리 플랫폼의 범위 초과 정수 응답에 BigDecimal 커스텀 어댑터를 적용해 RQA 이슈의 수동 재현이 중단되도록 개선",
       "FeliCa 대용량 스마트카드 오프라인 로컬 캐싱 최적화 및 Wiegand 비트 패리티 정합성 확보"
     ],
     outcomes: [
@@ -196,7 +209,7 @@ export const projects: Project[] = [
       "FeliCa IDm 스마트카드 메모리 Lookup 캐시 계층 도입 및 Wiegand 비트 패리티 동적 매칭"
     ],
     result:
-      "고객사 요구 기능을 기존 제품 구조에 완벽히 통합하여 사내 RQA 97.5% 종결 및 NEC 고객사 25건 이슈 전건 해결을 달성하며 6차 릴리즈 검수를 통과했습니다.",
+      "고객사 요구 기능을 기존 제품 구조에 통합하고 사내 RQA 121건 중 118건을 종결했으며, NEC 고객사 검수 이슈 25건을 해결해 6차 릴리즈 검수를 통과했습니다.",
     metrics: [
       {
         label: "사내 RQA 이슈 종결",
@@ -227,7 +240,7 @@ export const projects: Project[] = [
           "수용평가(RQA) 단계에서 단말 제어 연동 테스트를 통과하여, 외부 프로세스 연동 시의 동작 신뢰성을 개선했습니다."
       },
       {
-        title: "WPA2-Enterprise (EAP-TLS) 사설 RADIUS 환경 보안 암호화 인증 우회 취약점 해결",
+        title: "WPA2-Enterprise (EAP-TLS) 사설 RADIUS 환경 인증서 검증 강화",
         description:
           "고안전성 기업용 출입문 Wi-Fi 인프라 연결 시, 표준 TLS 암호화 핸드셰이크를 준수하고 인증서 정합성을 통제하여 중간자 공격(MITM) 및 보안 우회 가능성을 줄이는 통신 보안 강화 작업입니다.",
         challenge:
@@ -246,7 +259,7 @@ export const projects: Project[] = [
         solution:
           "파서 단에 정수형 초과 데이터 유입을 유연하게 소화하도록 BigDecimal을 활용한 커스텀 SafeIntegerAdapter를 작성해 파서에 주입하고, 설정값 파싱 완료 전후 비교 및 URL 값 유효성 정규식 검증 레이어를 도입했습니다.",
         outcome:
-          "플랫폼 서버 장애나 비정상 데이터 유입 환경에서도 단말이 크래시 없이 안정적으로 구동되도록 런타임 안정성을 개선했습니다."
+          "변경 후 해당 RQA 시나리오가 수동 테스트에서 더 이상 재현되지 않았고 동일 후속 이슈가 접수되지 않았습니다. 전체 크래시율이나 전후 정량 수치는 측정하지 않았습니다."
       },
       {
         title: "MediaPipe Tasks Vision 기반 랜드마크 분석 제스처(Gesture) 오인식 개선 알고리즘",
@@ -291,10 +304,10 @@ export const projects: Project[] = [
     id: "fisherlotto",
     name: "Fisher Lotto",
     summary:
-      "동행복권 1등 당첨판매점 및 연금복권 분석 데이터를 제공하는 위치 기반 네이티브 Android 앱",
-    period: "2025.04 - 2025.06",
+      "로또 당첨 확인·예상 번호·통계·로그인·구독을 Android 앱과 전용 Next.js 서버로 연결한 개인 프로젝트",
+    period: "2024.12 - 현재",
     type: "Android Mobile",
-    role: "Full-Stack 개인 프로젝트 (Android 클라이언트 + Node.js 백엔드 + 파이프라인 전담)",
+    role: "Full-Stack 개인 프로젝트 (Android 클라이언트 + Next.js 백엔드 + 배포 파이프라인 전담)",
     contribution: "100% 단독 기획·설계·개발",
     stack: [
       "Kotlin",
@@ -317,13 +330,13 @@ export const projects: Project[] = [
       "Next.js App Router BFF 서버에서 영수증 서버 검증 및 KFTC 오픈뱅킹 OAuth 2.0 연동"
     ],
     outcomes: [
-      "공개 GitHub 코드로 증명 가능한 모바일 클라이언트와 서버리스 백엔드의 End-to-End 아키텍처 확보",
-      "클라이언트에 민감 키를 일절 노출하지 않고 BFF로 안전하게 분리하는 보안 인증/결제 구조 완성"
+      "공개 GitHub 코드로 확인 가능한 모바일 클라이언트와 전용 백엔드의 End-to-End 아키텍처 확보",
+      "Google Play Closed Testing에 v0.0.7을 출시하고 결제·구독 만료·FCM 흐름을 실기기에서 검증"
     ],
     evidence: [
       "FisherLotto Android GitHub: https://github.com/E1jeong/FisherLotto",
       "lotto-sub-backend GitHub: https://github.com/E1jeong/lotto-sub-backend",
-      "GitHub Actions CI/CD 파이프라인 및 Vercel 배포 내역"
+      "GitHub Actions 배포 파이프라인 및 Gabia/PM2 운영 기록"
     ],
     confidence: "git",
     background:
@@ -333,12 +346,12 @@ export const projects: Project[] = [
     actions: [
       "app/presentation/domain/data 4모듈 설계 및 순수 Kotlin domain 모듈 분리",
       "Orbit MVI 상태 관리와 Hilt DI를 결합한 단방향 데이터 흐름 구축",
-      "CameraX ImageAnalysis와 ML Kit를 활용한 0.1초 즉각 QR 당첨 대조 구현",
+      "CameraX ImageAnalysis와 ML Kit를 활용한 QR 당첨 대조 구현",
       "Next.js BFF 서버 구축 및 Google Cloud Pub/Sub Webhook 기반 영수증 검증 연동",
-      "GitHub Actions를 통한 빌드/테스트 자동화 및 Vercel 서버리스 배포 파이프라인 구축"
+      "GitHub Actions를 통한 빌드/배포 자동화 및 Gabia PM2 운영 파이프라인 구축"
     ],
     result:
-      "Android 앱부터 BFF 서버, 인증, 결제, 푸시, CI/CD까지 전 과정을 직접 설계하여 공개 GitHub로 확인 가능한 고완성도 서비스 구조를 구축했습니다.",
+      "Android 앱부터 전용 서버, 인증, 결제, 푸시, CI/CD까지 직접 설계하고 Google Play Closed Testing에서 핵심 결제·알림 흐름을 검증했습니다. 프로덕션 공개 배포는 준비 중입니다.",
     metrics: [
       {
         label: "모듈 아키텍처",
@@ -347,8 +360,8 @@ export const projects: Project[] = [
       },
       {
         label: "CI/CD 자동화",
-        value: "100%",
-        description: "GitHub Actions + Vercel Serverless"
+        value: "Automated",
+        description: "GitHub Actions + Gabia/PM2"
       },
       {
         label: "공개 코드베이스",
@@ -388,7 +401,7 @@ export const projects: Project[] = [
         solution:
           "CameraX ImageAnalysis 유즈케이스와 Google ML Kit 바코드 스캐너를 결합하고, 백그라운드 Executor에서 실시간 URL 파싱 및 정규식 검증 엔진을 구동했습니다.",
         outcome:
-          "카메라 뷰파인더 딜레이 없이 0.1초 내 즉각적인 QR 인식 및 당첨 결과 오버레이 표시를 구현했습니다."
+          "카메라 뷰파인더 흐름에서 QR 인식과 당첨 결과 오버레이 표시를 구현했습니다."
       }
     ],
     learning:
@@ -433,7 +446,7 @@ export const projects: Project[] = [
     ],
     confidence: "git",
     background:
-      "기존 Java 기반 현장 운영 앱(SmartSet)의 구조적 한계(XML UI, 단일 모듈, 직접 DB 접근)를 극복하고, 현장 업무 흐름(설치·AS·검침·사진·지도)을 완벽히 보존하면서 최신 아키텍처로 전환하기 위해 진행된 전면 리뉴얼 프로젝트였습니다.",
+      "기존 Java 기반 현장 운영 앱(SmartSet)의 구조적 한계(XML UI, 단일 모듈, 직접 DB 접근)를 극복하고, 주요 현장 업무 흐름(설치·AS·검침·사진·지도)을 유지하면서 최신 아키텍처로 전환하기 위해 진행된 전면 리뉴얼 프로젝트였습니다.",
     problem:
       "수천 줄 단위의 액티비티 결합도를 해체하고, 서버에서 제공하는 원시 SQLite DB를 Room 엔티티로 무손실 이관하며, 현장 작업자의 기존 업무 플로우를 중단 없이 재현해야 했습니다.",
     actions: [
@@ -444,7 +457,7 @@ export const projects: Project[] = [
       "CameraX QR 스캔, Google Maps Compose 마커 클러스터링, 사진 압축 업로드 통합"
     ],
     result:
-      "기존 현장 업무 흐름을 100% 보존하면서 최신 Android 아키텍처로 전면 전환을 완료하여, 향후 기능 추가와 유지보수가 용이한 기반을 확립했습니다.",
+      "기존 주요 현장 업무 흐름을 유지하면서 최신 Android 아키텍처로 전환하여, 향후 기능 추가와 유지보수가 용이한 기반을 확립했습니다.",
     metrics: [
       {
         label: "구현 규모",
@@ -453,13 +466,13 @@ export const projects: Project[] = [
       },
       {
         label: "아키텍처 전환",
-        value: "100% 완료",
+        value: "핵심 구조 구현",
         description: "Java/XML ➔ Kotlin Compose Multi-module"
       },
       {
-        label: "현장 배포",
-        value: "APK 실운영 검증",
-        description: "설치팀/개발팀/영업팀 실운영 배포 및 비교 검증"
+        label: "현장 검증",
+        value: "병행 비교",
+        description: "기존 앱과 함께 검증; 전면 전환 전 퇴사"
       }
     ],
     features: [
@@ -472,7 +485,7 @@ export const projects: Project[] = [
         solution:
           "계층별 단방향 의존성 규칙을 강제하고, Orbit MVI와 Hilt 의존성 주입을 적용하여 화면 상태(State)와 비즈니스 UseCase를 명확히 격리했습니다.",
         outcome:
-          "Compose Screen 13개, ViewModel 8개, UseCase 21개를 체계적으로 분리하여 기능 추가 및 유지보수성을 극대화했습니다."
+          "Compose Screen 13개, ViewModel 8개, UseCase 21개를 분리하여 기능 추가와 유지보수를 위한 구조적 기반을 마련했습니다."
       },
       {
         title: "서버 SQLite 파일에서 Room 데이터베이스로의 트랜잭션 마이그레이션",
@@ -483,7 +496,7 @@ export const projects: Project[] = [
         solution:
           "전용 SqliteToRoomImporter 계층을 설계하여 트랜잭션 단위로 데이터 유효성을 검증하고, Room DAO 엔티티 매퍼를 통해 안전하게 데이터를 주입했습니다.",
         outcome:
-          "데이터 손실이나 스키마 충돌 없이 현장 검침/설치 데이터의 정합성을 100% 보장하는 마이그레이션 파이프라인을 완성했습니다."
+          "테이블 매핑과 트랜잭션 경계를 명시해 현장 검침·설치 데이터를 Room으로 이관하는 파이프라인을 구현했습니다."
       },
       {
         title: "Google Maps Compose 및 CameraX 결합 현장 작업 흐름 통합",
@@ -494,7 +507,7 @@ export const projects: Project[] = [
         solution:
           "Google Maps Compose와 Marker 클러스터링을 적용하고, CameraX 촬영 이미지를 비동기로 압축하여 업로드 큐에서 순차 처리하도록 최적화했습니다.",
         outcome:
-          "현장 기사들이 설치 위치 확인부터 단말 QR 인식, 완공 사진 등록까지 하나의 앱 흐름 안에서 중단 없이 수행할 수 있도록 완성했습니다."
+          "설치 위치 확인, 단말 QR 인식, 완공 사진 등록을 하나의 앱 흐름으로 통합하고 기존 앱과 병행하는 현장 검증까지 진행했습니다."
       }
     ],
     learning:
@@ -615,14 +628,14 @@ export const projects: Project[] = [
       "JUnit4"
     ],
     highlights: [
-      "RGB·IR 듀얼 입력 6클래스 분류 설계 및 subject 단위 Group K-Fold로 인물 데이터 누수 원천 차단",
+      "기존 RGB·IR 6클래스 검증 기준을 구축하고, 현재 12클래스·덴탈 마스크 처리까지 확장",
       "Keras MobileNetV2 기반 INT8 PTQ 양자화로 Float32 대비 손실 없는 Near-Zero Loss 달성",
-      "NXP i.MX 8M Plus NPU(NNAPI) 실기기에서 추론 속도 P50 10ms 확보 및 실시간 듀얼 카메라 추론 파이프라인 구축",
+      "기존 6클래스 고정 IR 모델을 NXP i.MX 8M Plus NPU(NNAPI)에서 invoke P50 10–11ms로 구동하고, 별도의 RGB/IR 듀얼 카메라 추론 파이프라인 구축",
       "시각적으로 판별하기 어려운 경계값(79.9% vs 80.0%)과 BMP 헤더/바이트 순서를 검증하는 17개 JVM 단위 테스트 구축"
     ],
     outcomes: [
-      "독립 Test Split ACER 0.60%, 최신 단일 IR 모델 ACER 0.05% 달성 (보안 목표 2.0% 대비 대폭 초과 달성)",
-      "NXP i.MX 8M Plus NPU 하드웨어에서 실시간 온디바이스 라이브니스 추론(P50 10ms) 구동 검증 완료"
+      "기존 6클래스 독립 Test Split ACER 0.60%, 단일 IR Validation ACER 0.05% 달성 (현재 파이프라인은 12클래스로 확장)",
+      "기존 6클래스 고정 IR 모델의 NXP i.MX 8M Plus NPU invoke 지연(P50 10–11ms)과 앱 End-to-End 지연(P50 47–49ms)을 각각 실기기에서 검증"
     ],
     evidence: [
       "GitHub access-liveness-model (Python 학습 및 양자화 파이프라인 코드)",
@@ -635,19 +648,19 @@ export const projects: Project[] = [
     problem:
       "정확도 손실 없이 모델을 INT8 정수형으로 양자화하여 임베디드 NPU에 배포해야 했으며, 카메라 스트림 전처리와 NPU 추론 지연시간을 실시간(Real-time) 수준으로 유지하고, 미세한 확률 변동 속에서도 측정 신뢰성을 엄격히 확보해야 했습니다.",
     actions: [
-      "RGB/IR 듀얼 입력 6클래스 분류 데이터셋(14,400장) 구축 및 Subject 단위 Group K-Fold 적용",
+      "RGB/IR 듀얼 입력 6클래스 분류 데이터셋(14,398장: Train 12,000 / Val 1,200 / Test 1,198) 구축 및 Subject 단위 Group K-Fold 적용",
       "MobileNetV2 기반 양자화 친화적 구조 개조 및 Keras TFLite INT8 PTQ 파이프라인 수립",
       "Android 타깃 보드에서 RGB/IR 150ms 타임스탬프 허용 오차 기반 프레임 페어링 및 3-Executor 스레드 격리",
       "AI를 활용한 17개 JVM 단위 테스트로 확률 판정 경계값(79.9% vs 80.0%) 및 24-bit BMP 바이트 정합성 잠금",
       "NPU BPCER 폭등 현상의 원인을 역추적하여 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 장애 해결"
     ],
     result:
-      "보안 목표치(2.0%)를 압도하는 ACER 0.05%(단일 IR) 및 0.60%(Test split)를 달성하고, Float32 대비 정확도 손실 없는 INT8 양자화 모델을 실물 NPU 하드웨어에서 P50 10ms 속도로 실시간 구동하는 데 성공했습니다.",
+      "기존 6클래스 기준 ACER 0.05%(단일 IR Validation) 및 0.60%(독립 Test split)를 달성하고, 고정 IR INT8 모델의 실물 NPU invoke 지연을 P50 10–11ms로 검증했습니다. 현재 12클래스 파이프라인의 수치는 별도 Validation 범위로 관리합니다.",
     metrics: [
       {
         label: "단일 IR ACER",
         value: "0.05%",
-        description: "최신 IR 모델 검증 오차율 (보안 목표 2.0% 대비)"
+        description: "기존 6클래스 단일 IR Validation 오차율 (보안 목표 2.0% 대비)"
       },
       {
         label: "독립 Test ACER",
@@ -655,13 +668,13 @@ export const projects: Project[] = [
         description: "INT8 양자화 모델 고정 Test Split 평가 결과"
       },
       {
-        label: "실기기 NPU 추론 지연",
-        value: "P50 10ms",
-        description: "NXP i.MX 8M Plus NPU(NNAPI) 실시간 추론"
+        label: "6클래스 NPU 모델 invoke",
+        value: "P50 10–11ms",
+        description: "기존 고정 IR 모델, NXP i.MX 8M Plus NPU(NNAPI)"
       },
       {
         label: "학습 데이터셋 규모",
-        value: "14,400장",
+        value: "14,398장",
         description: "Train 12,000 / Val 1,200 / Test 1,198 (6개 클래스)"
       }
     ],
@@ -669,7 +682,7 @@ export const projects: Project[] = [
       {
         step: "01",
         title: "Dataset & Leakage Prevention",
-        desc: "RGB/IR 6클래스 14,400장 데이터셋 구축, Subject 단위 Group K-Fold로 인물 간 데이터 누수 원천 차단"
+        desc: "RGB/IR 6클래스 14,398장 데이터셋 구축, Subject 단위 Group K-Fold로 인물 간 데이터 누수 차단"
       },
       {
         step: "02",
@@ -714,7 +727,7 @@ export const projects: Project[] = [
         solution:
           "물리적 피실험자 매핑 기반 Subject Group K-Fold를 강제 적용해 진짜 성능을 검증하고, Conv1 가중치 전이 모드를 'mean'에서 'sum'으로 변경하여 초기 활성화 스케일 왜곡을 방지했습니다.",
         outcome:
-          "인물 누수를 완벽 차단한 상태에서 최신 단일 IR 모델 ACER 0.05%를 달성하여 보안 기준치(2.0%)를 크게 상회하는 정확도를 확보했습니다."
+          "인물 누수를 차단한 기존 6클래스 검증에서 단일 IR Validation ACER 0.05%를 달성했으며, 현재 12클래스 파이프라인과 구분해 관리합니다."
       },
       {
         title: "Keras MobileNetV2 기반 INT8 PTQ 양자화 및 Near-Zero Loss 달성",
@@ -736,7 +749,7 @@ export const projects: Project[] = [
         solution:
           "카메라 수신, 전처리/디텍션, NPU 추론의 책임을 3개의 독립적인 Single-thread Executor로 완전 분리하고, 150ms 타임스탬프 허용 오차(MAX_PAIR_DELTA_NS) 기반 프레임 페어링 큐를 설계했습니다.",
         outcome:
-          "카메라 프레임 누락 없이 실시간 듀얼 스트림을 안정적으로 동기화하며 NPU 실기기 추론(P50 10ms)을 달성했습니다."
+          "처리가 밀릴 때 프레임을 의도적으로 드롭해 카메라 콜백과 추론 큐의 적체를 막고, RGB/IR 페어링과 NPU 추론을 분리했습니다. 기존 6클래스 고정 IR 모델 invoke는 P50 10–11ms로 측정했습니다."
       },
       {
         title: "AI 활용 17개 JVM 단위 테스트 및 경계값(Edge-case) 회귀 방지",
@@ -747,7 +760,7 @@ export const projects: Project[] = [
         solution:
           "AI를 활용하여 100회 캡처 스케줄, LIVE 79.9% Rejected vs 80.0% Allowed 판정 경계, 24-bit BMP 헤더·4바이트 row padding·바이트 오더를 검증하는 17개 JVM 단위 테스트를 구축했습니다.",
         outcome:
-          "코드 리팩토링 및 NPU 드라이버 업데이트 시에도 핵심 비즈니스 로직과 파일 입출력의 무결성을 100% 보장하는 회귀 테스트 환경을 확보했습니다."
+          "코드 리팩토링 및 NPU 드라이버 업데이트 시 핵심 비즈니스 로직과 파일 입출력 회귀를 자동 탐지할 수 있는 테스트 환경을 확보했습니다."
       },
       {
         title: "NPU 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 실패 원인 분석",
@@ -766,7 +779,9 @@ export const projects: Project[] = [
     publicDisclosure:
       "Python 학습 파이프라인(access-liveness-model)은 완전 공개되며, Android 검증 앱(android-anti-spoofing-lab)은 상용 SDK 및 단말 의존 코드를 마스킹한 후 본인 구현부(파이프라인·스레드·17개 단위테스트)를 중심으로 발췌 공개합니다."
   }
-];
+] satisfies Project[]).sort(
+  (left, right) => projectRank(left.id) - projectRank(right.id)
+);
 
 export const experiences: Experience[] = [
   {
@@ -775,7 +790,7 @@ export const experiences: Experience[] = [
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
-      "상용 SDK 없이 출입통제 단말용 안티스푸핑 딥러닝 모델을 자체 개발하고 NXP i.MX 8M Plus NPU 실기기 추론(P50 10ms, ACER 0.05%) 배포를 완결했습니다.",
+      "상용 SDK 없이 출입통제 단말용 안티스푸핑 딥러닝 모델을 자체 개발하고, 기존 6클래스 모델의 NXP i.MX 8M Plus NPU 실기기 추론(P50 10–11ms 모델 invoke, Validation ACER 0.05%)을 검증했습니다.",
       "UBio-N Face Pro 일본 NEC 고객사향 시스템 앱의 AIDL IPC, EAP-TLS 네트워크 보안, JSON 파싱 방어, DB 암호화를 전담하여 6차 릴리즈 검수를 통과했습니다.",
       "AI를 활용한 17개 JVM 단위 테스트로 경계값 회귀를 차단하고, 사내 AI 활용 및 기술 보고서 작성을 지원했습니다."
     ]
