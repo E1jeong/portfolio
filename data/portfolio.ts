@@ -607,9 +607,9 @@ export const projects: Project[] = ([
   },
   {
     id: "anti-spoofing-ai",
-    name: "자체 안티스푸핑(Liveness) AI 모델 & 실기기 검증 앱",
+    name: "UBio-Vision (자체 안티스푸핑 AI 모델 & 실기기 검증 앱)",
     summary:
-      "상용 SDK 없이 출입통제 단말용 위조 얼굴 판별 딥러닝 모델을 자체 개발하고, NXP i.MX 8M Plus NPU 실기기 검증 앱까지 구축한 On-Device AI 프로젝트",
+      "출입통제 단말기의 위조 얼굴을 판별하는 자체 딥러닝 모델(UBio-Vision)을 상용 SDK 없이 개발하고, NXP i.MX 8M Plus NPU 실기기 검증 앱까지 구축한 On-Device AI 프로젝트",
     period: "2026.06 - 현재",
     type: "On-Device AI",
     role: "딥러닝 모델 설계·학습·INT8 양자화 & Android 실시간 추론 앱 1인 단독 개발",
@@ -638,6 +638,7 @@ export const projects: Project[] = ([
       "기존 6클래스 고정 IR 모델의 NXP i.MX 8M Plus NPU invoke 지연(P50 10–11ms)과 앱 End-to-End 지연(P50 47–49ms)을 각각 실기기에서 검증"
     ],
     evidence: [
+      "Career-Hub Evidence: UBio-Vision (In-House Anti-Spoofing Deep Learning Model)",
       "GitHub access-liveness-model (Python 학습 및 양자화 파이프라인 코드)",
       "GitHub android-anti-spoofing-lab (Android 실시간 추론 앱 및 17개 단위 테스트)",
       "실기기 NXP i.MX 8M Plus NPU 회귀 테스트 로그 (2026-07-28)"
@@ -777,7 +778,7 @@ export const projects: Project[] = ([
     learning:
       "지표를 좋게 만드는 것과 모델을 견고하게 만드는 것은 다릅니다. 데이터 누수를 철저히 차단하고 NPU 실패 시의 조용한 폴백을 막았을 때 비로소 드러나는 결함들을 정면으로 마주하며 해결할 수 있었습니다. 엔지니어링의 본질은 눈앞의 수치를 꾸미는 것이 아니라 어떤 극한 환경에서도 신뢰할 수 있는 재현성을 확보하는 것임을 배웠습니다.",
     publicDisclosure:
-      "Python 학습 파이프라인(access-liveness-model)은 완전 공개되며, Android 검증 앱(android-anti-spoofing-lab)은 상용 SDK 및 단말 의존 코드를 마스킹한 후 본인 구현부(파이프라인·스레드·17개 단위테스트)를 중심으로 발췌 공개합니다."
+      "공식 프로젝트명 UBio-Vision의 Python 학습 파이프라인(access-liveness-model)은 완전 공개되며, Android 검증 앱(android-anti-spoofing-lab)은 상용 SDK 및 단말 의존 코드를 마스킹한 후 본인 구현부(파이프라인·스레드·17개 단위테스트)를 중심으로 발췌 공개합니다."
   }
 ] satisfies Project[]).sort(
   (left, right) => projectRank(left.id) - projectRank(right.id)
@@ -790,7 +791,7 @@ export const experiences: Experience[] = [
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
-      "상용 SDK 없이 출입통제 단말용 안티스푸핑 딥러닝 모델을 자체 개발하고, 기존 6클래스 모델의 NXP i.MX 8M Plus NPU 실기기 추론(P50 10–11ms 모델 invoke, Validation ACER 0.05%)을 검증했습니다.",
+      "UBio-Vision 프로젝트로 상용 SDK 없이 출입통제 단말용 안티스푸핑 딥러닝 모델을 자체 개발하고, 기존 6클래스 모델의 NXP i.MX 8M Plus NPU 실기기 추론(P50 10–11ms 모델 invoke, Validation ACER 0.05%)을 검증했습니다.",
       "UBio-N Face Pro 일본 NEC 고객사향 시스템 앱의 AIDL IPC, EAP-TLS 네트워크 보안, JSON 파싱 방어, DB 암호화를 전담하여 6차 릴리즈 검수를 통과했습니다.",
       "AI를 활용한 17개 JVM 단위 테스트로 경계값 회귀를 차단하고, 사내 AI 활용 및 기술 보고서 작성을 지원했습니다."
     ]
