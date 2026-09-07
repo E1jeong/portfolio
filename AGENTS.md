@@ -8,10 +8,10 @@ Report plans and results in Korean.
 
 ## Code Map
 
-| Module | Responsibility | Key Files |
-| --- | --- | --- |
-| `app/` | Next.js App Router pages, layouts, styles, and static project routes | `app/page.tsx`, `app/projects/[id]/page.tsx`, `app/layout.tsx`, `app/globals.css` |
-| `data/` | Single site-content source and typed portfolio data model | `data/portfolio.ts` |
+| Module | Responsibility | Orient first | Local guide |
+| --- | --- | --- | --- |
+| `app/` | Next.js App Router pages, layouts, styles, and static project routes | `app/page.tsx`, `app/projects/[id]/page.tsx`, `app/layout.tsx`, `app/globals.css` | None |
+| `data/` | Single site-content source and typed portfolio data model | `data/portfolio.ts` | None |
 
 ## Change Gates
 
