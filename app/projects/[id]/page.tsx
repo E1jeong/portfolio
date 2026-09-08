@@ -244,24 +244,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
-        {/* 11. Evidence & Disclosure */}
-        <section className="detail-section" aria-labelledby="evidence-heading">
-          <h2 id="evidence-heading" className="detail-section-title">검증 증거 및 공개 범위</h2>
-          <div className="evidence-public-notice">
-            <p className="notice-main">공개 및 보안 가이드라인</p>
-            <p className="notice-sub">{project.publicDisclosure}</p>
-          </div>
-          <div className="evidence-card-list">
-            {project.evidence.map((ev, idx) => (
-              <div key={idx} className="evidence-card-item evidence-git-type">
-                <span className="evidence-badge-indicator">검증 증거</span>
-                <span className="evidence-text-content">{ev}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 12. Project Pagination (Prev / Next Project) */}
+        {/* 11. Project Pagination (Prev / Next Project) */}
         <nav className="detail-pagination" aria-label="프로젝트 이동 네비게이션">
           {prevProject ? (
             <Link href={`/projects/${prevProject.id}`} className="pagination-card pagination-prev">

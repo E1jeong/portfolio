@@ -63,13 +63,17 @@ export const profile = {
   name: "이원정",
   title: "AI-Native Android Developer",
   currentCompany: "(주)유니온바이오메트릭스 재직 중",
-  email: "won9964@gmail.com",
-  tagline:
-    "AI 모델 설계부터 임베디드 NPU 배포, 모던 Android 앱 아키텍처까지 일관되게 구축합니다.",
+  email: "sumastra@naver.com",
   summary:
-    "AI 모델을 직접 설계하여 임베디드 NPU 하드웨어에 배포하고, 그 위의 Android 애플리케이션과 견고한 클라이언트 아키텍처까지 일관되게 책임지는 AI-Native Android 개발자입니다.",
-  subSummary:
-    "온디바이스 AI(Edge ML) · Android 앱 및 하드웨어 연동 · AI 주도 단위 테스트 및 엔지니어링",
+    "AI 모델 설계부터 임베디드 NPU 배포와 Android 앱 아키텍처까지 직접 구현하는\nAI-Native Android 개발자",
+  aiWorkflow: [
+    { step: "Define", description: "문제와 제약 정의" },
+    {
+      step: "Expand with AI",
+      description: "대안·엣지 케이스·테스트 확장"
+    },
+    { step: "Verify", description: "코드·수치·실기기 검증" }
+  ],
   contacts: [
     { label: "GitHub", href: "https://github.com/E1jeong" },
     { label: "Blog", href: "https://still-coding.tistory.com/" }
@@ -190,8 +194,8 @@ export const projects: Project[] = ([
       "FeliCa 대용량 스마트카드 오프라인 로컬 캐싱 최적화 및 Wiegand 비트 패리티 정합성 확보"
     ],
     outcomes: [
-      "사내 수용평가(RQA) 이슈 121건 중 118건(97.5%) 종결 및 NEC 고객사 검수 이슈 25건 전건 해결",
-      "6차 릴리즈 완료 및 고객사 납품 검수 통과로 7차 기능 개발 신뢰 기반 지속 수임"
+      "사내 수용평가(RQA) 이슈 121건 중 118건 종결(97.5%, 2026.04 기준) 및 NEC 고객사 검수 이슈 25건 해결",
+      "6차 릴리즈 고객사 검수 통과 및 7차 기능 개발 진행"
     ],
     evidence: [
       "사내 RQA 이슈 트래커 종결 기록 (121건 중 118건 종결)",
@@ -200,18 +204,18 @@ export const projects: Project[] = ([
     ],
     confidence: "code-and-notion",
     background:
-      "일본 대형 솔루션 고객사(NEC 등)의 요구에 맞춰 출입통제 얼굴인식 단말의 외부 플랫폼(SFX/SIU) 연동을 확장하고, QR/NFC/EAP-TLS 등 엔터프라이즈 멀티 인증 수단을 기존 단말 소프트웨어 엔진에 이식하는 프로덕션 개발 및 안정화 프로젝트.",
+      "일본 NEC 고객사의 요구에 맞춰 출입통제 얼굴인식 단말의 외부 보안 플랫폼 연동을 확장하고, QR/NFC/EAP-TLS 등 엔터프라이즈 인증 수단을 기존 단말 소프트웨어에 통합한 프로덕션 개발 및 안정화 프로젝트.",
     problem:
-      "외부 플랫폼(SFX/SIU) 연동, 복수 인증 수단, 엔터프라이즈 Wi-Fi(EAP-TLS), 로컬 DB 보안, 대용량 오프라인 카드 매칭 요구가 동시에 제기되었으며, 기존 단말기 제품 구조를 유지하면서 안정적으로 통합해야 하는 과제 존재.",
+      "외부 보안 플랫폼 연동, 복수 인증 수단, 엔터프라이즈 Wi-Fi(EAP-TLS), 로컬 DB 보안, 대용량 오프라인 카드 매칭 요구를 기존 단말 제품 구조 안에 통합해야 하는 과제 존재.",
     actions: [
-      "SFX/SIU AIDL IPC 연동 흐름 정비 및 BindService 구조 설계",
-      "WPA2-Enterprise(EAP-TLS) 사설 RADIUS 인증서 사전 상호 대조 검증 및 보안 강화",
-      "BigDecimal 기반 SafeIntegerAdapter 주입으로 int 범위 초과 JSON 크래시 방지",
-      "MediaPipe Tasks Vision 랜드마크 분석 기반 제스처 오인식 방지 2차 필터링 알고리즘 설계",
+      "외부 보안 앱과의 AIDL IPC 연동 흐름 정비 및 BindService 구조 설계",
+      "WPA2-Enterprise(EAP-TLS) 인증서 가져오기·구성 및 예외 처리 구현",
+      "BigDecimal 기반 SafeIntegerAdapter 주입으로 범위 초과 정수 응답의 JSON 파싱 예외 처리",
+      "MediaPipe Tasks Vision 랜드마크 분석 기반 제스처 오인식 완화용 2차 필터링 설계",
       "FeliCa IDm 스마트카드 메모리 Lookup 캐시 계층 도입 및 Wiegand 비트 패리티 동적 매칭"
     ],
     result:
-      "고객사 요구 기능을 기존 제품 구조에 안정적으로 통합하고 사내 RQA 121건 중 118건을 종결했으며, NEC 고객사 검수 이슈 25건을 해결해 6차 릴리즈 검수 통과.",
+      "고객사 요구 기능을 기존 제품 구조에 통합하고, 2인 공동 담당으로 사내 RQA 121건 중 118건을 종결했으며 NEC 고객사 검수 이슈 25건을 해결해 6차 릴리즈 검수 통과.",
     metrics: [
       {
         label: "사내 RQA 이슈 종결",
@@ -231,37 +235,37 @@ export const projects: Project[] = ([
     ],
     features: [
       {
-        title: "AIDL IPC 기반 외부 보안 제어 소프트웨어(SFX/SIU) 연동 인터페이스 정비",
+        title: "AIDL IPC 기반 외부 보안 앱 연동 인터페이스 정비",
         description:
-          "Android 시스템 단말 앱과 타사 외부 보안 앱 간의 멀티 프로세스 통신(IPC) 경계를 설정하고, 단말 잠금 해정 및 이벤트 통지 흐름을 정밀 제어하는 핵심 통신 계층 개발",
+          "Android 단말 앱과 타사 외부 보안 앱 사이의 멀티 프로세스 통신(IPC) 경계를 설정하고, 단말 잠금 해제와 이벤트 통지 흐름을 제어하는 통신 계층 개발",
         challenge:
-          "비동기 다중 프로세스 환경에서 IPC 호출 시의 타이밍 불일치 및 예외 상황 분기 누락으로 인해 단말이 락 해정 통지를 누락하거나 일시적으로 IPC 커넥션 데드락(Deadlock)에 빠지는 안정성 위험 존재.",
+          "비동기 다중 프로세스 환경에서 IPC 호출 시의 타이밍 불일치 및 예외 상황 분기 누락으로 인해 단말이 잠금 해제 통지를 누락하거나 일시적으로 IPC 교착 상태에 빠지는 안정성 위험 존재.",
         solution:
           "AIDL 인터페이스 경계면의 예외 처리를 단말 제어 생명주기와 분리하고, 비동기 호출 시 데이터 전달 정합성을 높이도록 Thread-safe한 상태 처리 큐(Queue)와 재시도 로직 설계 및 이식.",
         outcome:
           "수용평가(RQA) 단계에서 단말 제어 연동 테스트를 통과하여 외부 프로세스 연동 시의 동작 신뢰성 확보."
       },
       {
-        title: "WPA2-Enterprise (EAP-TLS) 사설 RADIUS 환경 인증서 검증 강화",
+        title: "WPA2-Enterprise (EAP-TLS) 사설 RADIUS 환경 인증서 구성",
         description:
-          "고안전성 기업용 출입문 Wi-Fi 인프라 연결 시, 표준 TLS 암호화 핸드셰이크를 준수하고 인증서 정합성을 통제하여 중간자 공격(MITM) 및 보안 우회 가능성을 줄이는 통신 보안 강화 작업",
+          "기업용 출입문 Wi-Fi 환경에서 EAP-TLS 인증서 가져오기와 연결 설정을 처리하는 네트워크 구성 작업",
         challenge:
           "사설 RADIUS 서버가 구축된 특수 고객망 환경에서 CA 인증서가 설치되지 않았음에도 Wi-Fi 접속이 비정상적으로 성공하거나, CA 인증서만 단독 임포트 시 기존 클라이언트 키쌍(Keypair)과의 불일치로 인한 시스템 에러 발생.",
         solution:
-          "인증서 임포트 모듈 진입점에서 CA 및 클라이언트 개인키의 유효성/일치 여부를 사전에 상호 대조 검증하는 정밀 로직을 설계하고, 사설 RADIUS 암호화 인증 실패 예외 조건을 통제하기 위해 Android KeyStore 프레임워크와의 연동 검증 강화.",
+          "인증서 가져오기 단계에서 CA와 클라이언트 키 구성 조건을 확인하고, Android KeyStore 및 WifiEnterpriseConfig 연동 과정의 예외 처리 보강.",
         outcome:
-          "사설 RADIUS 접속에서의 인증서 검증 우회 가능성을 원천 차단하고 기업 네트워크 보안 요구사항에 완벽 대응."
+          "사설 RADIUS 환경에서 필요한 EAP-TLS 인증서 가져오기와 연결 설정 흐름 구현."
       },
       {
         title: "단말 관리 플랫폼 Config JSON 파싱 예외 복구 및 런타임 안정성 개선",
         description:
           "원격 클라우드 서버로부터 단말 설정값(Configs)을 동기화할 때, 비표준 형식 또는 이상 데이터 유입에 대해 단말 구동 프로세스가 비정상 종료(Crash)되지 않도록 방어하는 유효성 검증 계층 설계",
         challenge:
-          "서버가 보낸 특정 설정 필드가 표준 32비트 int 범위를 넘어서는 대형 정수를 가질 경우, Gson/Moshi 라이브러리가 파싱 중 NumberFormatException을 터뜨려 단말기 앱이 통째로 런타임 Crash되는 치명적인 필드 오류 발생.",
+          "서버가 보낸 특정 설정 필드가 표준 32비트 int 범위를 넘을 경우 JSON 파싱 중 예외가 발생해 단말 앱이 종료되는 문제 발생.",
         solution:
           "파서 단에 정수형 초과 데이터 유입을 유연하게 소화하도록 BigDecimal을 활용한 커스텀 SafeIntegerAdapter를 작성해 파서에 주입하고, 설정값 파싱 완료 전후 비교 및 URL 값 유효성 정규식 검증 레이어 도입.",
         outcome:
-          "수동 테스트 시나리오에서 크래시 재현 중단 확인 및 동일 후속 이슈 재발 방지 (전체 크래시율은 미측정)."
+          "변경 후 수동 테스트에서 해당 이슈가 재현되지 않았고 동일 후속 이슈가 접수되지 않음. 전체 크래시율과 전후 발생 건수는 미측정."
       },
       {
         title: "MediaPipe Tasks Vision 기반 랜드마크 분석 제스처(Gesture) 오인식 개선 알고리즘",
@@ -272,7 +276,7 @@ export const projects: Project[] = ([
         solution:
           "기본 분류 모델 결과에 더해, 실시간 검출된 손가락 관절 랜드마크(Landmarks) 좌표 상에서 각 손가락 끝(Tip)과 두 번째 관절 마디(Pip)의 높이 차이 및 굴곡도를 픽셀 변위 분석으로 수학적 2차 필터링 검증 단계 설계.",
         outcome:
-          "Victory와 PointUp 간의 판단 모호도를 완벽히 해소하여 제스처 인식 정확도 개선 및 근태 오입력 방지."
+          "Victory와 PointUp을 구분하는 랜드마크 기반 2차 판정 단계를 추가해 제스처 오인식 가능성 완화."
       },
       {
         title: "FeliCa IDm 스마트카드 로컬 캐싱 및 대용량 오프라인 매칭 최적화",
@@ -281,9 +285,9 @@ export const projects: Project[] = ([
         challenge:
           "네트워크 단절 시에도 출입이 가능하도록 대용량 사용자 IDm 리스트를 단말 로컬 DB(SQLCipher)에 저장·매칭해야 했으나, 짧은 갱신 주기로 인해 플랫폼 동기화 시 로컬 I/O 병목 및 단말 UI 스레드 일시 프리징(Freezing) 발생.",
         solution:
-          "대규모 변경 사항 반영 시 Room/SQLite 벌크(Bulk) 트랜잭션 처리를 고도화하고, DB 직접 조회를 최소화하기 위해 메모리 단에 최적화된 Lookup 캐시 계층을 배치하여 카드리더 스레드 연동 효율 극대화.",
+          "대규모 변경 사항 반영 시 Room/SQLite 벌크 트랜잭션을 적용하고, DB 직접 조회를 줄이기 위한 메모리 Lookup 캐시 계층 구성.",
         outcome:
-          "오프라인 환경에서도 대용량 IDm 리스트를 신속하게 로컬 매칭하도록 최적화하고 플랫폼 동기화 중 발생하던 단말 오작동 해소."
+          "오프라인 환경의 대용량 IDm 로컬 매칭 경로를 개선하고 플랫폼 동기화 시의 DB 조회 부담 감소."
       },
       {
         title: "Wiegand 외부 입출력 제어 프로토콜의 패리티 비트(Parity Bit) 이기종 단말 정합성 확보",
@@ -294,13 +298,13 @@ export const projects: Project[] = ([
         solution:
           "WiegandComm 메서드 단에서 26bit, 32bit, 34bit 포맷 패킷을 분석해 홀수/짝수 패리티 비트 연산 로직을 동적으로 분기 적용하고 하드웨어 하위 비트 송수신 레이어의 통신 규격 정밀 매칭.",
         outcome:
-          "국내외 다양한 벤더사 출입 통제 컨트롤러 장비와의 물리 비트 호환성 테스트 통과 및 현장 장비 호환 오류 완전 해소."
+          "26·32·34bit 포맷별 패리티 처리로 이기종 단말과 외부 컨트롤러 사이의 비트 정합성 보강."
       }
     ],
     learning:
-      "하드웨어 제어, 펌웨어, 외부 솔루션 및 원격 관리 플랫폼이 복잡하게 얽혀 24시간 중단 없이 구동되어야 하는 단말 환경에서는 입출력 값의 사소한 불일치가 전체 시스템 다운타임으로 직결됨을 확인. 통신 인터페이스 진입점부터 철저한 방어적 프로그래밍(Defensive Programming)과 모듈 간 역할 격리가 프로덕션 급 제품 안정성의 핵심임을 체득.",
+      "하드웨어, 외부 솔루션, 원격 관리 플랫폼이 결합된 단말에서는 입력값과 통신 예외를 경계에서 처리하고 모듈 책임을 분리하는 것이 운영 안정성의 핵심임을 확인.",
     publicDisclosure:
-      "보안성 및 계약 조건(NDA) 준수를 위해 전체 코드 구현부는 비공개하며, 사양 및 아키텍처 다이어그램 위주로 기술합니다."
+      "전체 소스는 비공개이며, 공개가 승인된 기능 단위 코드 발췌와 아키텍처 다이어그램으로 설명합니다."
   },
   {
     id: "fisherlotto",
@@ -328,7 +332,7 @@ export const projects: Project[] = ([
     ],
     highlights: [
       "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture 및 Orbit MVI 적용",
-      "CameraX/ML Kit 고속 QR 스캔, Google Play Billing 구독 결제, FCM 푸시 파이프라인 구축",
+      "CameraX/ML Kit QR 스캔, Google Play Billing 구독 결제, FCM 푸시 파이프라인 구축",
       "Next.js App Router BFF 서버에서 영수증 서버 검증 및 KFTC 오픈뱅킹 OAuth 2.0 연동"
     ],
     outcomes: [
@@ -395,15 +399,15 @@ export const projects: Project[] = ([
           "클라이언트에 민감 키를 두지 않는 안전한 End-to-End 결제 검증 파이프라인 구축."
       },
       {
-        title: "CameraX + ML Kit 기반 고속 QR 코드 분석 및 당첨 자동 대조",
+        title: "CameraX + ML Kit 기반 QR 코드 분석 및 당첨 자동 대조",
         description:
           "로또 용지의 QR 코드를 실시간 캡처하여 당첨 번호와 복수 회차 데이터를 자동 파싱하는 카메라 기능",
         challenge:
-          "저조도 환경이나 각도 왜곡 시 QR 바코드 디코딩 실패율 증가 및 카메라 프레임 분석 중 UI 렌더링 스레드 병목 현상 발생.",
+          "복권 QR과 상품 바코드를 구분하고, 복권 형식이 아닌 QR 입력에는 명확한 오류 피드백을 제공해야 하는 과제 존재.",
         solution:
-          "CameraX ImageAnalysis 유즈케이스와 Google ML Kit 바코드 스캐너를 결합하고, 백그라운드 Executor에서 실시간 URL 파싱 및 정규식 검증 엔진 구동.",
+          "CameraX ImageAnalysis와 Google ML Kit를 결합하고 QR 형식만 복권 URL 파싱 대상으로 전달하도록 입력 필터링 적용.",
         outcome:
-          "카메라 뷰파인더 흐름에서 프레임 지연 없는 실시간 QR 인식 및 당첨 결과 오버레이 표시 구현."
+          "복권 QR 당첨 대조와 결과 표시 흐름을 구현하고 상품 바코드의 잘못된 파싱 진입 차단."
       }
     ],
     learning:
@@ -438,8 +442,8 @@ export const projects: Project[] = ([
       "SqliteToRoomImporter를 통한 레거시 DB 트랜잭션 이관 및 현장 작업 흐름 통합"
     ],
     outcomes: [
-      "Java/XML 기반 레거시 앱을 모던 Android 기술 스택으로 전면 전환하여 유지보수성 및 확장성 극대화",
-      "현장 설치팀·개발팀·영업팀에 APK를 배포하여 실제 운영 검증 완료"
+      "Java/XML 기반 레거시 앱을 모던 Android 기술 스택으로 전환해 유지보수·기능 확장 기반 마련",
+      "현장 설치팀·개발팀·영업팀에 APK를 배포해 기존 앱과 병행 현장 검증 진행"
     ],
     evidence: [
       "Git author: E1jeong <won9964@gmail.com>",
@@ -450,11 +454,11 @@ export const projects: Project[] = ([
     background:
       "기존 Java 기반 현장 운영 앱(SmartSet)의 구조적 한계(XML UI, 단일 모듈, 직접 DB 접근)를 극복하고, 주요 현장 업무 흐름(설치·AS·검침·사진·지도)을 유지하면서 최신 아키텍처로 전환하기 위해 진행된 전면 리뉴얼 프로젝트.",
     problem:
-      "수천 줄 단위의 액티비티 결합도를 해체하고, 서버에서 제공하는 원시 SQLite DB를 Room 엔티티로 무손실 이관하며, 현장 작업자의 기존 업무 플로우를 중단 없이 재현해야 하는 과제 존재.",
+      "수천 줄 단위의 액티비티 결합도를 해체하고, 서버의 SQLite 데이터를 Room 엔티티로 이관하면서 기존 현장 업무 흐름을 유지해야 하는 과제 존재.",
     actions: [
       "app / presentation / domain / data 4개 모듈 분할 및 계층별 의존성 규칙 수립",
       "Orbit MVI 상태 관리 도입으로 화면 상태(State)와 비즈니스 UseCase 분리",
-      "SqliteToRoomImporter 트랜잭션 계층 구현으로 레거시 데이터 무결성 보장",
+      "SqliteToRoomImporter 트랜잭션 계층 구현으로 레거시 데이터 이관 경계 관리",
       "Compose Screen 13개, ViewModel 8개, UseCase 21개, Room DAO 6개 구현",
       "CameraX QR 스캔, Google Maps Compose 마커 클러스터링, 사진 압축 업로드 통합"
     ],
@@ -498,7 +502,7 @@ export const projects: Project[] = ([
         solution:
           "전용 SqliteToRoomImporter 계층을 설계하여 트랜잭션 단위로 데이터 유효성을 검증하고, Room DAO 엔티티 매퍼를 통해 안전하게 데이터 주입.",
         outcome:
-          "테이블 매핑과 트랜잭션 경계를 명시해 현장 검침·설치 데이터를 Room으로 무손실 이관하는 파이프라인 구현."
+          "테이블 매핑과 트랜잭션 경계를 명시해 현장 검침·설치 데이터를 Room으로 이관하는 파이프라인 구현."
       },
       {
         title: "Google Maps Compose 및 CameraX 결합 현장 작업 흐름 통합",
@@ -509,12 +513,12 @@ export const projects: Project[] = ([
         solution:
           "Google Maps Compose와 Marker 클러스터링을 적용하고, CameraX 촬영 이미지를 비동기로 압축하여 업로드 큐에서 순차 처리하도록 최적화.",
         outcome:
-          "설치 위치 확인, 단말 QR 인식, 완공 사진 등록을 하나의 앱 흐름으로 통합하고 기존 앱과 병행 현장 검증 완료."
+          "설치 위치 확인, 단말 QR 인식, 완공 사진 등록을 하나의 앱 흐름으로 통합하고 기존 앱과 병행 현장 검증 진행."
       }
     ],
     learning:
-      "아키텍처 리뉴얼의 본질은 단순한 최신 프레임워크 적용이 아닌, 수년간 누적된 현장 작업자의 실제 업무 흐름을 훼손하지 않으면서 코드 응집도와 안정성을 극대화하는 것임을 체득.",
-    publicDisclosure: "공개 가능한 범위 내에서 소스 코드와 아키텍처 다이어그램 위주로 설명."
+      "아키텍처 리뉴얼에서는 기술 교체 자체보다 기존 현장 업무 흐름을 유지하면서 책임 경계를 다시 설계하는 일이 중요함을 확인.",
+    publicDisclosure: "소스 코드와 4모듈 의존성·MVI 상태 흐름 다이어그램을 공개할 수 있습니다."
   },
   {
     id: "smartset",
@@ -541,7 +545,7 @@ export const projects: Project[] = ([
     ],
     outcomes: [
       "50~100명 규모의 전국 현장 설치/운영 인력이 사용하는 앱의 운영 지속성 확보",
-      "OS 버전 업그레이드와 단말 프로토콜 변경에 따른 현장 장애 발생 차단"
+      "OS 버전 업그레이드와 단말 프로토콜 변경에 대응할 수 있는 운영 기반 마련"
     ],
     evidence: [
       "Git remote: https://github.com/E1jeong/smartset.git",
@@ -560,7 +564,7 @@ export const projects: Project[] = ([
       "현장 사진 갤러리 및 Excel 로그 데이터 정합성 개선"
     ],
     result:
-      "레거시 현장 앱의 운영 기반을 안정적으로 현대화하고, AS 작업 순서 제어를 통해 현장 실물 단말과 전산 데이터의 불일치 해소.",
+      "레거시 현장 앱의 개발·운영 기반을 현대화하고, AS 작업 순서 제어로 단말 교체·반납·재설치 과정의 데이터 혼재 감소.",
     metrics: [
       {
         label: "운영 사용자 규모",
@@ -591,7 +595,7 @@ export const projects: Project[] = ([
           "최신 Android OS 디바이스에서도 현장 앱이 정상 구동되도록 장기 운영 지속성 확보."
       },
       {
-        title: "서버 응답 기반 AS 작업 순서 제어 및 현장 재고 데이터 정합성 보장",
+        title: "서버 응답 기반 AS 작업 순서 제어 및 현장 재고 데이터 정합성 개선",
         description:
           "현장 작업자의 임의 작업 순서로 인해 발생하던 단말 교체·반납·재설치 데이터 혼재 방지",
         challenge:
@@ -599,13 +603,13 @@ export const projects: Project[] = ([
         solution:
           "서버 인증 응답 상태에 따라 다음 단계 UI 컴포넌트 활성화(UI enable)를 통제하고, 필수 절차 완료 시에만 다음 단계로 진입하도록 작업 플로우 앱 단에서 강제.",
         outcome:
-          "단말 교체/반납/재설치 시의 데이터 혼재를 원천 방지하여 전산 재고 정합성 대폭 개선."
+          "단말 교체·반납·재설치 순서를 앱에서 제어해 데이터 혼재를 줄이고 전산 재고 정합성 개선."
       }
     ],
     learning:
       "운영 환경의 소프트웨어는 순수 코드 품질뿐만 아니라, 현장 작업자의 실수나 비정형 작업 순서를 시스템이 얼마나 효과적으로 가이드하고 방어하는지가 전체 신뢰도를 결정함을 체득.",
     publicDisclosure:
-      "Git remote 및 author 기준으로 본인 기여 범위가 명확히 분리된 내용 중심으로 소스 코드 공개 및 설명."
+      "인수인계 전후 코드 경계를 구분해 본인 구현 범위와 전체 소스를 공개할 수 있습니다."
   },
   {
     id: "anti-spoofing-ai",
@@ -631,7 +635,7 @@ export const projects: Project[] = ([
     ],
     highlights: [
       "기존 RGB·IR 6클래스 검증 기준을 구축하고, 현재 12클래스·덴탈 마스크 처리까지 확장",
-      "Keras MobileNetV2 기반 INT8 PTQ 양자화로 Float32 대비 손실 없는 Near-Zero Loss 달성",
+      "Keras MobileNetV2 기반 INT8 PTQ 양자화로 Float32 대비 정확도 손실이 거의 없는 결과 확보",
       "기존 6클래스 고정 IR 모델을 NXP i.MX 8M Plus NPU(NNAPI)에서 invoke P50 10–11ms로 구동하고, 별도의 RGB/IR 듀얼 카메라 추론 파이프라인 구축",
       "시각적으로 판별하기 어려운 경계값(79.9% vs 80.0%)과 BMP 헤더/바이트 순서를 검증하는 17개 JVM 단위 테스트 구축"
     ],
@@ -649,7 +653,7 @@ export const projects: Project[] = ([
     background:
       "얼굴인식 출입통제기에서 인쇄물, 스마트폰 화면 재생, 3D 실리콘 마스크 등 다양한 위조 얼굴 공격 방어 목적. 외부 상용 SDK 의존 없이 자체 딥러닝 모델을 구축해야 했으며, 최종 배포처가 연산 자원이 극도로 제한된 임베디드 NPU(NXP i.MX 8M Plus) 환경이라는 하드웨어 제약 존재.",
     problem:
-      "정확도 손실 없이 모델을 INT8 정수형으로 양자화하여 임베디드 NPU에 배포하고, 카메라 스트림 전처리와 NPU 추론 지연시간을 실시간(Real-time) 수준으로 유지하며, 미세한 확률 변동 속에서도 측정 신뢰성을 엄격히 확보해야 하는 과제 존재.",
+      "정확도 손실을 최소화하며 모델을 INT8로 양자화해 임베디드 NPU에 배포하고, 모델 invoke와 앱 End-to-End 지연을 구분해 측정 신뢰성을 확보해야 하는 과제 존재.",
     actions: [
       "RGB/IR 듀얼 입력 6클래스 분류 데이터셋(14,398장: Train 12,000 / Val 1,200 / Test 1,198) 구축 및 Subject 단위 Group K-Fold 적용",
       "MobileNetV2 기반 양자화 친화적 구조 개조 및 Keras TFLite INT8 PTQ 파이프라인 수립",
@@ -741,7 +745,7 @@ export const projects: Project[] = ([
         solution:
           "Hardswish를 ReLU로 교체하고 SE 블록을 비활성화하는 구조 개조 후, Keras/MobileNetV2 기반 TFLite INT8 및 NPU-friendly export 경로로 피벗(Pivot) 단행.",
         outcome:
-          "Float32 대비 정확도 손실이 거의 없는(Near-Zero Loss) 고효율 INT8 양자화 모델 도출 성공."
+          "Keras 경로에서 Float32 대비 정확도 손실이 거의 없는 INT8 양자화 결과 확인."
       },
       {
         title: "Android 실시간 RGB/IR 듀얼 카메라 추론 파이프라인 및 스레드 격리",
@@ -750,14 +754,14 @@ export const projects: Project[] = ([
         challenge:
           "초당 30프레임의 듀얼 카메라 콜백에서 YUV→Bitmap 변환과 NNAPI 추론이 메인/카메라 스레드를 점유하여 프레임 드랍 및 UI 프리징 발생.",
         solution:
-          "카메라 수신, 전처리/디텍션, NPU 추론의 책임을 3개의 독립적인 Single-thread Executor로 완전 분리하고, 150ms 타임스탬프 허용 오차(MAX_PAIR_DELTA_NS) 기반 프레임 페어링 큐 설계.",
+          "카메라 수신, 전처리/디텍션, NPU 추론을 3개의 Single-thread Executor로 분리하고, 150ms 타임스탬프 허용 오차(MAX_PAIR_DELTA_NS) 기반 프레임 페어링 큐 설계.",
         outcome:
           "부하 발생 시 프레임을 의도적으로 드롭해 카메라 콜백과 추론 큐 적체를 차단하고, RGB/IR 페어링과 NPU 추론 분리 완료 (기존 6클래스 고정 IR 모델 invoke P50 10–11ms 달성)."
       },
       {
         title: "AI 활용 17개 JVM 단위 테스트 및 경계값(Edge-case) 회귀 방지",
         description:
-          "실제 하드웨어의 미세 확률 변동과 바이너리 파일 입출력의 정합성을 보장하는 단위 테스트 스위트 구축",
+          "실제 하드웨어의 미세 확률 변동과 바이너리 파일 입출력의 정합성을 검증하는 단위 테스트 스위트 구축",
         challenge:
           "화면 표시 라이브니스 확률의 실시간 변동으로 육안 검증이 불가능한 경계값(Threshold) 판정과 커스텀 24-bit BMP 바이트 패딩 에러를 수동 테스트로 검출하기 어려운 한계 존재.",
         solution:
@@ -772,13 +776,13 @@ export const projects: Project[] = ([
         challenge:
           "NPU-friendly 모델 평가 시 위조를 진짜로 오인하는 BPCER이 30~60%로 폭등하고, 타깃 보드 NPU 드라이버에서 NNAPI 컴파일 캐싱 활성화 시 런타임 실패(ANEURALNETWORKS_OP_FAILED) 발생.",
         solution:
-          "지표 폭등 원인이 모델 결함이 아닌 평가 스크립트 입력 정규화 범위 미스매치임을 역추적해 수식을 보정하고, VSI NPU 드라이버의 캐싱 버그 확인 후 캐시 비활성화 및 CPU 조용한 폴백(Silent fallback) 원천 차단.",
+          "지표 폭등 원인이 모델 결함이 아닌 평가 스크립트 입력 정규화 범위 불일치임을 역추적해 수식을 보정하고, VSI NPU 드라이버의 캐싱 오류 확인 후 캐시 비활성화 및 CPU 조용한 폴백(Silent fallback) 차단.",
         outcome:
-          "성능 착시를 원천 차단하고 Float32와 동등한 정상 성능 복원 및 실기기 하드웨어 신뢰성 확보."
+          "평가 입력을 보정해 Float32와 동등한 성능을 복원하고, NPU 준비 실패를 숨기지 않는 검증 경로 확보."
       }
     ],
     learning:
-      "지표를 보기 좋게 포장하는 것과 모델을 견고하게 만드는 것은 근본적으로 다름을 확인. 데이터 누수를 철저히 차단하고 NPU 실패 시의 조용한 폴백을 방지했을 때 비로소 드러나는 결함들을 정면으로 마주하며 해결. 엔지니어링의 본질은 수치를 꾸미는 것이 아닌 어떤 극한 환경에서도 신뢰할 수 있는 재현성을 확보하는 것임을 체득.",
+      "데이터 누수와 NPU의 조용한 CPU 폴백을 차단하자 가려져 있던 결함을 확인할 수 있었음. 좋은 수치보다 평가 조건과 실행 경로를 재현 가능하게 만드는 것이 우선임을 확인.",
     publicDisclosure:
       "공식 프로젝트명 UBio-Vision의 Python 학습 파이프라인(access-liveness-model)은 완전 공개. Android 검증 앱(android-anti-spoofing-lab)은 상용 SDK 및 단말 의존 코드 마스킹 후 본인 구현부(파이프라인·스레드·17개 단위 테스트) 중심으로 발췌 공개."
   }
@@ -794,8 +798,8 @@ export const experiences: Experience[] = [
     period: "2025.04 - 현재",
     points: [
       "UBio-Vision: 상용 SDK 없이 출입통제 단말용 안티스푸핑 자체 딥러닝 모델 개발 및 NXP i.MX 8M Plus NPU 실기기 추론 검증 (기존 6클래스 고정 IR 모델 invoke P50 10–11ms, Validation ACER 0.05%).",
-      "UBio-N Face Pro: 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 네트워크 보안, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과.",
-      "AI 활용 17개 JVM 단위 테스트로 확률·바이트 경계값 회귀 원천 차단 및 사내 AI 기술 보고서 작성 지원."
+      "UBio-N Face Pro: 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과.",
+      "AI 활용 17개 JVM 단위 테스트로 확률·바이트 경계값 회귀를 자동 검출하고 사내 AI 기술 보고서 작성 지원."
     ]
   },
   {

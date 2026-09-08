@@ -109,18 +109,55 @@ a {
   color: var(--accent);
 }
 
-.profile-summary {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin-bottom: 12px;
+.profile-workflow {
+  margin: 28px 0;
 }
 
-.profile-subsummary {
-  font-size: 0.85rem;
-  line-height: 1.6;
+.profile-workflow h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.profile-workflow h2::before {
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  content: "";
+}
+
+.profile-workflow ol {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  list-style: none;
+}
+
+.profile-workflow li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  padding-left: 36px;
+}
+
+.profile-workflow strong {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.profile-workflow span {
   color: var(--text-light);
-  margin-bottom: 20px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .strength-list {
@@ -335,6 +372,7 @@ a {
   color: var(--text);
   margin-bottom: 24px;
   letter-spacing: 0;
+  white-space: pre-line;
 }
 
 .lead-subdescription {
@@ -972,10 +1010,6 @@ a {
     border-bottom: 1px solid var(--line);
   }
 
-  .profile-subsummary {
-    margin-bottom: 24px;
-  }
-
   .nav-menu {
     display: none; /* Keep layout simple on mobile */
   }
@@ -1186,97 +1220,8 @@ a {
   }
 }
 
-/* Evidence Cards Styling */
-.evidence-card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.evidence-card-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-}
-
-.evidence-card-item:hover {
-  transform: translateX(4px);
-  border-color: rgba(255, 219, 112, 0.2);
-  background-color: var(--surface-hover);
-}
-
-.evidence-badge-indicator {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-}
-
-.evidence-git-type .evidence-badge-indicator {
-  color: #9ff0c8;
-  background: rgba(86, 211, 143, 0.12);
-  border: 1px solid rgba(159, 240, 200, 0.22);
-}
-
-.evidence-notion-type .evidence-badge-indicator {
-  color: #a5d6ff;
-  background: rgba(88, 166, 255, 0.12);
-  border: 1px solid rgba(165, 214, 255, 0.22);
-}
-
-.evidence-local-type .evidence-badge-indicator {
-  color: var(--accent-strong);
-  background: var(--accent-soft);
-  border: 1px solid rgba(255, 219, 112, 0.22);
-}
-
-.evidence-other .evidence-badge-indicator {
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line);
-}
-
-.evidence-text-content {
-  color: var(--text);
-  overflow-wrap: anywhere;
-}
-
 .clickable-card {
   cursor: pointer;
-}
-
-.evidence-public-notice {
-  padding: 20px 24px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.notice-main {
-  color: #9ff0c8;
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.notice-sub {
-  color: var(--text-light);
-  font-size: 0.82rem;
-  font-weight: 500;
 }
 
 .profile-company-info {
@@ -1293,7 +1238,7 @@ a {
   font-size: 0.84rem;
   font-weight: 700;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 0;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1856,6 +1801,3 @@ a {
   background: rgba(255, 219, 112, 0.25);
   color: var(--accent);
 }
-
-
-

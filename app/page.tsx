@@ -113,10 +113,17 @@ export default function Home() {
             </p>
           ) : null}
 
-          <p className="profile-summary">{profile.tagline}</p>
-          {profile.subSummary ? (
-            <p className="profile-subsummary">{profile.subSummary}</p>
-          ) : null}
+          <section className="profile-workflow" aria-labelledby="workflow-heading">
+            <h2 id="workflow-heading">AI-Native Workflow</h2>
+            <ol>
+              {profile.aiWorkflow.map((item) => (
+                <li key={item.step}>
+                  <strong>{item.step}</strong>
+                  <span>{item.description}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
 
           <nav className="nav-menu" aria-label="섹션 이동 네비게이션">
             <ul>
