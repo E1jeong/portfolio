@@ -136,30 +136,43 @@ export default function Home() {
                   <span className="nav-text">About</span>
                 </a>
               </li>
-              <li className="nav-item-projects">
+              <li className={`nav-item-projects${activeSection === "projects" ? " expanded" : ""}`}>
                 <a
                   href="#projects"
                   className={`nav-link ${activeSection === "projects" ? "active" : ""}`}
+                  aria-expanded={activeSection === "projects"}
+                  aria-controls="nav-projects-sublist"
                 >
                   <span className="nav-indicator"></span>
                   <span className="nav-text">Projects</span>
                 </a>
-                <ul className="nav-sub-list" aria-label="대표 프로젝트 바로가기">
-                  {featuredProjects.map((project) => {
-                    const isSubActive = activeSection === "projects" && activeProjectId === project.id;
-                    return (
-                      <li key={project.id}>
-                        <a
-                          href={`#${project.id}`}
-                          className={`nav-sub-link ${isSubActive ? "active" : ""}`}
-                        >
-                          <span className="nav-sub-indicator"></span>
-                          <span className="nav-sub-text">{project.name}</span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div className="nav-sub-clip">
+                  <div className="nav-sub-clip-inner">
+                    <ul
+                      id="nav-projects-sublist"
+                      className="nav-sub-list"
+                      aria-label="대표 프로젝트 바로가기"
+                      aria-hidden={activeSection !== "projects"}
+                      inert={activeSection !== "projects"}
+                    >
+                      {featuredProjects.map((project) => {
+                        const isSubActive = activeSection === "projects" && activeProjectId === project.id;
+                        return (
+                          <li key={project.id}>
+                            <a
+                              href={`#${project.id}`}
+                              className={`nav-sub-link ${isSubActive ? "active" : ""}`}
+                              tabIndex={activeSection === "projects" ? 0 : -1}
+                            >
+                              <span className="nav-sub-indicator"></span>
+                              <span className="nav-sub-text">{project.name}</span>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li>
                 <a
