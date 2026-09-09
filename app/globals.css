@@ -110,52 +110,60 @@ a {
 }
 
 .profile-workflow {
-  margin: 28px 0;
+  margin: 22px 0 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .profile-workflow h2 {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   margin-bottom: 12px;
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-}
-
-.profile-workflow h2::before {
-  width: 24px;
-  height: 1px;
-  background: var(--accent);
-  content: "";
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .profile-workflow ol {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 12px;
   list-style: none;
+  counter-reset: work-step;
 }
 
 .profile-workflow li {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  align-items: baseline;
-  gap: 10px;
-  padding-left: 36px;
+  grid-template-columns: auto 1fr;
+  column-gap: 6px;
+  row-gap: 2px;
+  counter-increment: work-step;
+}
+
+.profile-workflow li::before {
+  content: counter(work-step, decimal-leading-zero);
+  grid-row: 1 / span 2;
+  padding-top: 0.15em;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
 }
 
 .profile-workflow strong {
-  color: var(--text-muted);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  grid-column: 2;
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 
 .profile-workflow span {
+  grid-column: 2;
   color: var(--text-light);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 500;
   line-height: 1.45;
 }
@@ -199,8 +207,8 @@ a {
 
 /* Sidebar Primary Menu */
 .nav-menu {
-  margin-bottom: auto;
   padding-bottom: 24px;
+  margin-bottom: auto;
 }
 
 .nav-menu ul {
@@ -1228,7 +1236,7 @@ a {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent-strong);
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   display: inline-flex;
   align-items: center;
   gap: 8px;

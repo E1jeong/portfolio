@@ -114,7 +114,7 @@ export default function Home() {
           ) : null}
 
           <section className="profile-workflow" aria-labelledby="workflow-heading">
-            <h2 id="workflow-heading">AI-Native Workflow</h2>
+            <h2 id="workflow-heading">{profile.workflowTitle}</h2>
             <ol>
               {profile.aiWorkflow.map((item) => (
                 <li key={item.step}>

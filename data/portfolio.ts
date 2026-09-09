@@ -66,13 +66,20 @@ export const profile = {
   email: "sumastra@naver.com",
   summary:
     "AI 모델 설계부터 임베디드 NPU 배포와 Android 앱 아키텍처까지 직접 구현하는\nAI-Native Android 개발자",
+  workflowTitle: "How I Work",
   aiWorkflow: [
-    { step: "Define", description: "문제와 제약 정의" },
     {
-      step: "Expand with AI",
-      description: "대안·엣지 케이스·테스트 확장"
+      step: "Second-Brain Wiki",
+      description: "에이전트에 장기 기억 부여"
     },
-    { step: "Verify", description: "코드·수치·실기기 검증" }
+    {
+      step: "AI with Voice",
+      description: "음성 대화를 통한 효율 극대화"
+    },
+    {
+      step: "Own the Check",
+      description: "초안은 AI, 판단은 사람"
+    }
   ],
   contacts: [
     { label: "GitHub", href: "https://github.com/E1jeong" },
