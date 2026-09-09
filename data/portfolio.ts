@@ -77,8 +77,8 @@ export const profile = {
       description: "생각의 속도로 주고 받는 실시간 대화"
     },
     {
-      step: "Human Responsibility",
-      description: "초안은 AI가, 판단은 사람이"
+      step: "AI start, Human finish",
+      description: "AI가 시작하고, 사람이 완성한다"
     }
   ],
   contacts: [
@@ -104,15 +104,6 @@ export const skillGroups = [
       "NNAPI",
       "NXP i.MX 8M Plus NPU",
       "MediaPipe Tasks Vision"
-    ]
-  },
-  {
-    title: "AI-Native Engineering & Ops",
-    items: [
-      "AI-Driven Unit Testing (Boundary/Mock)",
-      "Multi-Agent Orchestration (AGENTS.md)",
-      "AI-Ops Tooling (Audit Checkers)",
-      "Prompt & Workflow Engineering"
     ]
   },
   {
