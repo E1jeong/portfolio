@@ -20,6 +20,12 @@ export const metadata: Metadata = {
   title: "이원정 | AI-Native Android Developer",
   description:
     "온디바이스 AI(Edge ML), Android 애플리케이션, 하드웨어 연동, Clean Architecture 기반 개발 포트폴리오",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.png?v=size2", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "이원정 | AI-Native Android Developer",
     description:
