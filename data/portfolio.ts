@@ -70,15 +70,15 @@ export const profile = {
   aiWorkflow: [
     {
       step: "Second-Brain Wiki",
-      description: "에이전트에 장기 기억 부여"
+      description: "에이전트와 공유하고 관리하는 장기기억"
     },
     {
       step: "AI with Voice",
-      description: "음성 대화를 통한 효율 극대화"
+      description: "생각의 속도로 주고 받는 실시간 대화"
     },
     {
-      step: "Own the Check",
-      description: "초안은 AI, 판단은 사람"
+      step: "Human Responsibility",
+      description: "초안은 AI가, 판단은 사람이"
     }
   ],
   contacts: [

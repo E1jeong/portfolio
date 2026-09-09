@@ -182,20 +182,25 @@ export default function Home() {
             </ul>
           </nav>
 
-          <div className="contacts-wrapper" aria-label="연락처 정보">
-            {profile.contacts.map((contact) => (
-              <a
-                key={contact.label}
-                href={contact.href}
-                className={`contact-link ${contact.href === "#" ? "disabled-link" : ""}`}
-                target={contact.href.startsWith("http") ? "_blank" : undefined}
-                rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                aria-disabled={contact.href === "#" ? "true" : undefined}
-                tabIndex={contact.href === "#" ? -1 : undefined}
-              >
-                {contact.label}
-              </a>
-            ))}
+          <div className="contacts-wrapper" aria-label="연락처 및 저작권 정보">
+            <div className="contacts-links">
+              {profile.contacts.map((contact) => (
+                <a
+                  key={contact.label}
+                  href={contact.href}
+                  className={`contact-link ${contact.href === "#" ? "disabled-link" : ""}`}
+                  target={contact.href.startsWith("http") ? "_blank" : undefined}
+                  rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  aria-disabled={contact.href === "#" ? "true" : undefined}
+                  tabIndex={contact.href === "#" ? -1 : undefined}
+                >
+                  {contact.label}
+                </a>
+              ))}
+            </div>
+            <p className="sidebar-copyright">
+              © {new Date().getFullYear()} {profile.name}. All Rights Reserved.
+            </p>
           </div>
         </div>
       </aside>
@@ -350,8 +355,8 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="main-footer">
-          <p>© {new Date().getFullYear()} 이원정. All Rights Reserved.</p>
+        <footer className="main-footer mobile-only">
+          <p>© {new Date().getFullYear()} {profile.name}. All Rights Reserved.</p>
         </footer>
       </main>
     </div>
