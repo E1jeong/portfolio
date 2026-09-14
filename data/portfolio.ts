@@ -66,6 +66,8 @@ export const profile = {
   email: "sumastra@naver.com",
   summary:
     "AI 모델 설계부터 임베디드 NPU 배포와 Android 앱 아키텍처까지 직접 구현하는\nAI-Native Android 개발자",
+  aboutBody:
+    "온디바이스 딥러닝(Edge ML) 파이프라인 수립과 INT8 양자화, NPU 실기기 추론 최적화 경험을 보유하고 있으며, AIDL IPC·NFC·단말 프로토콜 등의 시스템 연동 및 Kotlin/Compose 기반 Clean Architecture 전환 경험을 바탕으로 하드웨어와 소프트웨어의 경계를 안정적으로 연결합니다.",
   workflowTitle: "How I Work",
   aiWorkflow: [
     {

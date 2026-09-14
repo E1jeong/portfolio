@@ -2,46 +2,30 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { coreStrengths, experiences, profile, projects, skillGroups } from "../data/portfolio";
 
 const CATEGORIES = [
   { id: "all", label: "All Projects" },
-  { id: "android-device", label: "Android Device" },
-  { id: "android-mobile", label: "Android Mobile" },
-  { id: "on-device-ai", label: "On-Device AI" }
+  { id: "Android Device", label: "Android Device" },
+  { id: "Android Mobile", label: "Android Mobile" },
+  { id: "On-Device AI", label: "On-Device AI" }
 ] as const;
 
 type CategoryId = typeof CATEGORIES[number]["id"];
 
 export default function Home() {
-  const router = useRouter();
   const [activeSection, setActiveSection] = useState("about");
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>("all");
   const featuredProjects = projects;
 
-  const filteredProjects = projects.filter((project) => {
-    if (selectedCategory === "all") return true;
-    if (selectedCategory === "android-device") return project.id === "ubio-n-face-pro";
-    if (selectedCategory === "android-mobile") {
-      return project.id === "fisherlotto" || project.id === "renew-smartset" || project.id === "smartset";
-    }
-    if (selectedCategory === "on-device-ai") return project.id === "anti-spoofing-ai";
-    return true;
-  });
+  const filteredProjects =
+    selectedCategory === "all"
+      ? projects
+      : projects.filter((project) => project.type === selectedCategory);
 
-  const getCategoryCount = (id: CategoryId) => {
-    if (id === "all") return projects.length;
-    if (id === "android-device") return projects.filter((p) => p.id === "ubio-n-face-pro").length;
-    if (id === "android-mobile") {
-      return projects.filter(
-        (p) => p.id === "fisherlotto" || p.id === "renew-smartset" || p.id === "smartset"
-      ).length;
-    }
-    if (id === "on-device-ai") return projects.filter((p) => p.id === "anti-spoofing-ai").length;
-    return 0;
-  };
+  const getCategoryCount = (id: CategoryId) =>
+    id === "all" ? projects.length : projects.filter((project) => project.type === id).length;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -234,7 +218,7 @@ export default function Home() {
             {profile.summary}
           </p>
           <p className="lead-subdescription">
-            온디바이스 딥러닝(Edge ML) 파이프라인 수립과 INT8 양자화, NPU 실기기 추론 최적화 경험을 보유하고 있으며, AIDL IPC·NFC·단말 프로토콜 등의 시스템 연동 및 Kotlin/Compose 기반 Clean Architecture 전환 경험을 바탕으로 하드웨어와 소프트웨어의 경계를 안정적으로 연결합니다.
+            {profile.aboutBody}
           </p>
           <ul className="strength-list about-strength-list" aria-label="핵심 강점">
             {coreStrengths.map((strength) => (
