@@ -40,11 +40,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.lead-subdescription,
+.project-result-preview,
+.experience-points li,
+.background-block-standalone p,
+.learning-block-standalone p,
+.feature-card-description,
+.step-content,
+.pipeline-step-desc,
+.detail-metric-sub {
+  white-space: pre-line;
 }
 
 /* Utilities */

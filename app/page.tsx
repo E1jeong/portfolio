@@ -196,7 +196,7 @@ export default function Home() {
               ))}
             </div>
             <p className="sidebar-copyright">
-              © {new Date().getFullYear()} {profile.name}. All Rights Reserved.
+              © {new Date().getFullYear()} {profile.name} All Rights Reserved
             </p>
           </div>
         </div>
@@ -353,7 +353,7 @@ export default function Home() {
         </section>
 
         <footer className="main-footer mobile-only">
-          <p>© {new Date().getFullYear()} {profile.name}. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} {profile.name} All Rights Reserved</p>
         </footer>
       </main>
     </div>
