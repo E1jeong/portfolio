@@ -12,7 +12,7 @@ Next.js App Router 기반의 정적 생성(SSG) 포트폴리오 웹사이트입�
 
 | 프로젝트명 | 도메인 | 기간 | 주요 기술 & 역할 |
 | --- | --- | --- | --- |
-| **UBio-N Face Pro** | Android Device | `2025.07 - 현재` | • 일본 NEC 고객사 출입통제 플랫폼 연동 프로덕션 단말 앱<br>• AIDL IPC 멀티 프로세스 통신, WPA2-Enterprise(EAP-TLS) 보안, FeliCa IDm 스마트카드 로컬 캐싱, SQLCipher 암호화 DB |
+| **UBio-N Face Pro** | Android Device | `2025.07 - 현재` | • 일본 NEC 고객사 출입통제 플랫폼 연동 프로덕션 단말 앱<br>• AIDL IPC 멀티 프로세스 통신, WPA2-Enterprise(EAP-TLS) 보안, FeliCa 카드 인증 연동과 로컬 DB·메모리 조회, SQLCipher 암호화 DB |
 | **UBio-Vision (안티스푸핑 AI)** | On-Device AI | `2026.06 - 현재` | • 상용 SDK 없는 자체 안티스푸핑 딥러닝 모델 설계 & NXP i.MX 8M Plus NPU 실기기 추론 앱<br>• PyTorch/Keras, INT8 PTQ 양자화, NNAPI 하드웨어 가속, 듀얼 카메라(RGB/IR) 파이프라인 |
 | **Fisher Lotto** | Android Mobile | `2024.12 - 현재` | • 1인 풀스택 안드로이드 앱 & Next.js BFF 백엔드<br>• Jetpack Compose, Clean Architecture 4-멀티모듈, Google Play Billing 정기구독, FCM 푸시 |
 | **SmartSet Renewal** | Android Mobile | `2024.07 - 2025.04` | • 원격 수도 검침 단말 제어 차세대 Android 앱 전면 재설계<br>• Clean Architecture, MVI(Orbit), Hilt, Coroutines/Flow, Room DB 캐싱 |

@@ -64,6 +64,10 @@ export const profile = {
   title: "AI-Native Android Developer",
   currentCompany: "(주)유니온바이오메트릭스 재직 중",
   email: "sumastra@naver.com",
+  metaDescription:
+    "온디바이스 AI(Edge ML), Android 애플리케이션, 하드웨어 연동, Clean Architecture 기반 개발 포트폴리오",
+  ogDescription:
+    "AI 모델을 직접 설계하여 임베디드 NPU에 배포하고 Android 애플리케이션 및 클라이언트 아키텍처를 구축하는 엔지니어링 포트폴리오",
   summary:
     "AI 모델 설계부터 임베디드 NPU 배포와 Android 앱 아키텍처까지 직접 구현하는\nAI-Native Android 개발자",
   aboutBody:
@@ -696,6 +700,21 @@ export const projects: Project[] = ([
         label: "학습 데이터셋 규모",
         value: "14,398장",
         description: "과거 6클래스 기준: Train 12,000 / Val 1,200 / Test 1,198"
+      },
+      {
+        label: "얼굴인증 NPU 위임",
+        value: "31/31",
+        description: "평가 앱 테스트, mobilenet_emore_npu_int8.tflite\nCPU 폴백 없음"
+      },
+      {
+        label: "동일인 유사도",
+        value: "~90%",
+        description: "실기기 관찰 평균(최대 93%)\nFAR/FRR·인증 임계값 아님"
+      },
+      {
+        label: "얼굴인증 모델 크기",
+        value: "3.66 MB",
+        description: "Full INT8, 500장 실얼굴 PTQ 캘리브레이션"
       }
     ],
     pipelineSteps: [
@@ -803,6 +822,17 @@ export const projects: Project[] = ([
           "초기에는 AI를 활용해 100회 캡처 스케줄, LIVE 79.9% Rejected vs 80.0% Allowed 판정 경계, 24-bit BMP 헤더·4바이트 row padding·바이트 오더를 검증하는 17개 JVM 테스트 구축\n이후 SDK 전처리·세션 상태와 앱 테스트로 확장",
         outcome:
           "초기 17개 테스트 이후 SDK·앱으로 범위 확장\n2026-09-18 회사 기록상 vision 31개·app 88개 JVM 테스트와 컴파일·release lint·AAR 빌드 통과\n최신 API의 Lab/NPro 실기기 회귀는 대기 중"
+      },
+      {
+        title: "평가 앱 온디바이스 1:N 얼굴인증 테스트",
+        description:
+          "안티스푸핑 검증 앱에서 1:N 매칭 파이프라인을 구현해 본 실험 기능",
+        challenge:
+          "기존 MobileFaceNet의 PReLU가 NPU에서 연산이 분해되고, 비얼굴 캘리브레이션으로 특징이 붕괴하는 제약 존재",
+        solution:
+          "ReLU MobileNet 백본으로 전환하고 ArcFace Emore 가중치를 NPU 제약에 맞춰 재구성\n500장 실얼굴 INT8 PTQ와 평가 앱의 5-point 정렬·Room 1:N 검색을 연결",
+        outcome:
+          "평가 앱에서 실기기 NPU 구동 확인\n제품 인증이 아닌 테스트 범위"
       }
     ],
     learning:

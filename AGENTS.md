@@ -17,7 +17,7 @@ Report plans and results in Korean.
 
 ### Data & Career Integrity
 - Ground career claims, metrics, contribution levels, and disclosure scope in Career-Hub; record unresolved claims in the project wiki.
-- Keep `data/portfolio.ts` as the single site-content source; never hardcode portfolio facts, metrics, or metadata in UI components.
+- Keep `data/portfolio.ts` as the single site-content source; never hardcode portfolio facts, metrics, or metadata in UI components. Document title, meta description, and Open Graph identity copy live on `profile`.
 - Preserve required fields and valid relationships in the exported data model.
 - Preserve the established five-project order unless explicitly requested otherwise.
 
