@@ -47,22 +47,18 @@ export default function Home() {
       if (currentSection === "projects") {
         const cards = document.querySelectorAll<HTMLElement>(".project-card");
         let currentProject: string | null = null;
+
+        // 트리거 라인을 지난 마지막 카드를 활성화해 카드 사이 간격에서
+        // 목록 맨 아래 항목으로 튀지 않게 한다.
         cards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          if (rect.top <= triggerY && rect.bottom > triggerY) {
+          if (card.getBoundingClientRect().top <= triggerY) {
             const id = card.getAttribute("id");
             if (id) currentProject = id;
           }
         });
 
-        // 경계 보정: 아직 첫 카드 위쪽 영역이면 첫 번째 카드 활성화
         if (!currentProject && cards.length > 0) {
-          const firstRect = cards[0].getBoundingClientRect();
-          if (firstRect.top > triggerY) {
-            currentProject = cards[0].getAttribute("id");
-          } else {
-            currentProject = cards[cards.length - 1].getAttribute("id");
-          }
+          currentProject = cards[0].getAttribute("id");
         }
         setActiveProjectId(currentProject);
       } else {
