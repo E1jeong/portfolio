@@ -197,7 +197,7 @@ export const projects: Project[] = ([
     ],
     outcomes: [
       "사내 수용평가(RQA) 이슈 121건 중 118건 종결(97.5%, 2026.04 기준) 및 NEC 고객사 검수 이슈 25건 해결",
-      "6차 릴리즈 고객사 검수 통과\nVision SDK 제품 연동 진행 중이며 최신 API 실기기 회귀는 대기"
+      "6차 릴리즈 고객사 검수 통과\nVision SDK/AAR를 제품 앱 기능 브랜치에 연동해 실기기 기본 동작 확인"
     ],
     evidence: [
       "사내 RQA 이슈 트래커 종결 기록 (121건 중 118건 종결)",
@@ -217,7 +217,7 @@ export const projects: Project[] = ([
       "FeliCa 카드 인식·인증 연동과 카드 데이터의 로컬 DB·메모리 조회 처리 구현"
     ],
     result:
-      "고객사 요구 기능을 기존 제품 구조에 통합하고, 2인 공동 담당으로 사내 RQA 121건 중 118건 종결(2026.04 기준), NEC 검수 이슈 25건 해결 및 6차 릴리즈 검수 통과\nVision SDK 제품 연동은 진행 중이며 최신 API 이관·실기기 회귀는 대기 중",
+      "고객사 요구 기능을 기존 제품 구조에 통합하고, 2인 공동 담당으로 사내 RQA 121건 중 118건 종결(2026.04 기준), NEC 검수 이슈 25건 해결 및 6차 릴리즈 검수 통과\nVision SDK/AAR는 제품 앱 기능 브랜치에 연동해 실기기 기본 동작을 확인했으며 세부 검증 진행 중",
     metrics: [
       {
         label: "사내 RQA 이슈 종결",
@@ -243,9 +243,9 @@ export const projects: Project[] = ([
         challenge:
           "프레임별 모델 출력과 제품 인증 판정을 구분하고 IR 조명 안정화 이후의 입력으로 판정해야 하는 과제 존재",
         solution:
-          "이전 Vision SDK를 연동하여 IR 400ms 안정화 후 3프레임 평균 판정을 제품 호스트 흐름에 적용",
+          "Vision SDK/AAR의 create·infer API를 제품 앱 기능 브랜치에 연동하여 IR 400ms 안정화 후 3프레임 평균 판정을 제품 호스트 흐름에 적용",
         outcome:
-          "2026-09-17 사용자 실기기 확인에서 live/display 출력 관찰\n09-18 최신 API/AAR 이관과 회귀·오버레이 검증은 대기 중이며 7차 릴리즈 완료나 최종 안티스푸핑 검수를 뜻하지 않음"
+          "2026-10-02 제품 앱 기능 브랜치에서 실기기 기본 동작 확인\n세부 검증 진행 중이며 7차 릴리즈 완료나 최종 안티스푸핑 검수를 뜻하지 않음"
       },
       {
         title: "AIDL IPC 기반 외부 보안 앱 연동 인터페이스 정비",
@@ -340,7 +340,7 @@ export const projects: Project[] = ([
     ],
     outcomes: [
       "공개 GitHub 코드로 확인 가능한 모바일 클라이언트와 전용 백엔드의 End-to-End 아키텍처 확보",
-      "Google Play Closed Testing의 최근 확인 버전은 v0.0.7\n기존 결제·구독 만료·FCM 흐름은 실기기 검증 완료\n새 계정 귀속 결제와 v0.0.8 출시는 검증 대기"
+      "Google Play Closed Testing(v0.0.7)에서 결제·구독 만료·FCM 흐름 실기기 검증\n결제 영수증 계정 귀속 보완 후 v0.0.8 Google Play 프로덕션 출시 (2026-10)"
     ],
     evidence: [
       "FisherLotto Android GitHub: https://github.com/E1jeong/FisherLotto",
@@ -362,7 +362,7 @@ export const projects: Project[] = ([
       "GitHub Actions를 통한 빌드/배포 자동화 및 Gabia PM2 운영 파이프라인 구축"
     ],
     result:
-      "Android 앱·서버·인증·결제·푸시·CI/CD를 직접 설계하고 기존 결제·알림 흐름을 실기기에서 검증\nGoogle Play Closed Testing의 최근 확인 버전은 v0.0.7\n이후 추가한 계정 귀속 결제의 신규 구매·타 계정 토큰 거부, 첫 예약 당첨 번호 수집, v0.0.8 및 공개 출시는 검증 대기 중",
+      "Android 앱·서버·인증·결제·푸시·CI/CD를 직접 설계하고 Google Play Closed Testing(v0.0.7)에서 결제·구독 만료·FCM 흐름을 실기기로 검증\n결제 영수증 계정 귀속을 보완해 v0.0.8을 Google Play 프로덕션에 출시 (2026-10)\n당첨 번호 자동 수집은 2026-09-19부터 4주 연속 성공",
     metrics: [
       {
         label: "모듈 아키텍처",
@@ -390,7 +390,7 @@ export const projects: Project[] = ([
         solution:
           "Next.js BFF에서 Pub/Sub Webhook과 Play Developer API로 구매 토큰·구독 상태를 검증\n신규 구매에는 이메일의 SHA-256 기반 obfuscatedAccountId를 기록하고, 서버에서 제공자 식별자를 대조한 뒤 영수증을 계정에 귀속",
         outcome:
-          "기존 결제·취소·만료·FCM 흐름은 실기기 검증 완료\n새 계정 귀속 계약의 신규 구매와 타 계정 토큰 거부는 앱·서버 연동 검증 대기"
+          "기존 결제·취소·만료·FCM 흐름은 실기기 검증 완료\n2026-09-19 앱·서버 연동에서 계정 귀속 신규 구매 승인과 다른 이메일의 토큰 재사용 거부(HTTP 400) 확인"
       },
       {
         title: "순수 Kotlin domain 모듈 기반 Multi-module Clean Architecture & Orbit MVI",
@@ -412,7 +412,7 @@ export const projects: Project[] = ([
         solution:
           "인증된 직접 수집 경로에 동일 회차 멱등성·충돌 방지와 10분 간격 재시도를 구현",
         outcome:
-          "2026-09-18 운영 기록에서 수동 중복 요청의 무변경 처리와 미공개 회차 재시도 확인\n첫 토요일 예약 실행과 앱의 새 회차 조회 검증은 대기 중"
+          "2026-09-18 운영 기록에서 수동 중복 요청의 무변경 처리와 미공개 회차 재시도 확인\n2026-09-19부터 4주 연속 예약 수집 성공(1242–1245회), 이 중 2회는 당첨 번호 발표 전이라 자동 재시도 후 수집\n앱 화면 표시는 1242회를 실기기로 확인"
       },
       {
         title: "CameraX + ML Kit 기반 QR 코드 분석 및 당첨 자동 대조",
@@ -653,16 +653,16 @@ export const projects: Project[] = ([
       "6클래스 단일 IR 독립 Test 기준 확보 후 고정 split 기반 12클래스·덴탈 마스크 처리로 확장",
       "Keras MobileNetV2 INT8 양자화 후 2026-07-23 단일 IR Validation split에서 Float32와 동일 ACER 확인",
       "기존 6클래스 고정 IR 모델을 NXP i.MX 8M Plus NPU(NNAPI)에서 invoke P50 10–11ms로 구동하고, 별도의 RGB/IR 듀얼 카메라 추론 파이프라인 구축",
-      "추론을 Vision SDK/AAR로 분리\n2026-09-18 기록상 vision 31개·app 88개 JVM 테스트 통과, 최신 실기기 회귀 대기"
+      "추론을 Vision SDK/AAR로 분리\n2026-10-15 기록상 app 107개·vision 45개 JVM 테스트 통과, 제품 앱 기능 브랜치 기본 동작 확인"
     ],
     outcomes: [
-      "6클래스 단일 IR Keras 모델: 2026-07-14 독립 Test ACER 0.60%, 07-23 Validation ACER 0.05%\n현재 12클래스는 새 통과 정책 재평가·독립 Test 대기",
+      "6클래스 단일 IR Keras 모델: 2026-07-14 독립 Test ACER 0.60%, 07-23 Validation ACER 0.05%\n현재 12클래스는 2026-10-14 확장 검증셋 ACER 0.41% (NPU INT8, 독립 Test 아님)",
       "과거 6클래스 고정 IR NPU invoke P50 10–11ms와 2026-07-31 앱 End-to-End P50 47–49ms 검증 (최신 SDK 성능과 별개)"
     ],
     evidence: [
       "Career-Hub Evidence: UBio-Vision (In-House Anti-Spoofing Deep Learning Model)",
       "GitHub access-liveness-model (Python 학습 및 양자화 파이프라인 코드)",
-      "Career-Hub android-anti-spoofing-lab Evidence: Vision SDK/AAR 및 2026-09-18 회사 테스트 기록 (vision 31개 + app 88개)",
+      "Career-Hub android-anti-spoofing-lab Evidence: Vision SDK/AAR 및 2026-10-15 회사 테스트 기록 (app 107개 + vision 45개)",
       "실기기 NXP i.MX 8M Plus NPU 회귀 테스트 로그 (2026-07-28)"
     ],
     confidence: "git",
@@ -679,7 +679,7 @@ export const projects: Project[] = ([
       "NPU BPCER 폭등 현상의 원인을 역추적하여 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 장애 해결"
     ],
     result:
-      "6클래스 단일 IR Keras/MobileNetV2에서 Test ACER 0.60%(2026-07-14), Validation ACER 0.05%(07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책(09-16)에 따른 재평가와 독립 Test 검증 대기\n09-18 Vision SDK/AAR는 회사 기록상 컴파일·테스트·lint·빌드를 통과했으며, 최신 API의 Lab 실기기 회귀·NPro 연동·캘리브레이션 일치는 확인 대기 중",
+      "6클래스 단일 IR Keras/MobileNetV2에서 Test ACER 0.60%(2026-07-14), Validation ACER 0.05%(07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책 기준 확장 검증셋(5,375장)에서 ACER 0.41%(NPU INT8, Float32 0.40%) 기록, 인쇄물 재현율은 이전 split 대비 73.68% → 92.32% (2026-10-14, 독립 Test 아님)\nVision SDK/AAR는 2026-10-15 회사 기록상 app 107개·vision 45개 테스트를 통과했고, 제품 앱 기능 브랜치에서 실기기 기본 동작 확인 후 세부 검증 진행 중",
     metrics: [
       {
         label: "단일 IR ACER",
@@ -697,9 +697,9 @@ export const projects: Project[] = ([
         description: "과거 6클래스 고정 IR 모델, NXP NPU(NNAPI)\n최신 SDK 측정 아님"
       },
       {
-        label: "학습 데이터셋 규모",
-        value: "14,398장",
-        description: "과거 6클래스 기준: Train 12,000 / Val 1,200 / Test 1,198"
+        label: "12클래스 검증 ACER",
+        value: "0.41%",
+        description: "2026-10-14, 확장 검증셋 5,375장 NPU INT8\n독립 Test 아님"
       },
       {
         label: "얼굴인증 NPU 위임",
@@ -741,7 +741,7 @@ export const projects: Project[] = ([
       {
         step: "05",
         title: "Vision SDK & Regression Tests",
-        desc: "추론·세션 판정을 SDK/AAR로 분리\n09-18 기록상 vision 31개·app 88개 테스트 통과\n최신 Lab/NPro 실기기 검증 대기"
+        desc: "추론·세션 판정을 SDK/AAR로 분리\n2026-10-15 기록상 app 107개·vision 45개 테스트 통과\n제품 앱 기능 브랜치 기본 동작 확인"
       }
     ],
     repositories: [
@@ -788,7 +788,7 @@ export const projects: Project[] = ([
         solution:
           "VisionSdk.loadAll과 AntiSpoofingEngine으로 SDK 진입점을 구성하고, 제품 세션은 IR 조명 요청 후 400ms 안정화와 3프레임 평균을 거쳐 live/spoof/error 결과 반환",
         outcome:
-          "이전 SDK의 제품 흐름은 2026-09-17 사용자 실기기 확인\n09-18 API/AAR는 빌드 검증까지 완료했으며 최신 NPro 연동, Lab 회귀, 캘리브레이션 좌우 의미·바이트 순서 일치는 대기 중"
+          "2026-10-02 제품 앱 기능 브랜치에서 create·infer API 기반 실기기 기본 동작 확인\nLab 회귀와 캘리브레이션 좌우 의미·바이트 순서 일치는 세부 검증 진행 중"
       },
       {
         title: "NPU 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 실패 원인 분석",
@@ -821,7 +821,7 @@ export const projects: Project[] = ([
         solution:
           "초기에는 AI를 활용해 100회 캡처 스케줄, LIVE 79.9% Rejected vs 80.0% Allowed 판정 경계, 24-bit BMP 헤더·4바이트 row padding·바이트 오더를 검증하는 17개 JVM 테스트 구축\n이후 SDK 전처리·세션 상태와 앱 테스트로 확장",
         outcome:
-          "초기 17개 테스트 이후 SDK·앱으로 범위 확장\n2026-09-18 회사 기록상 vision 31개·app 88개 JVM 테스트와 컴파일·release lint·AAR 빌드 통과\n최신 API의 Lab/NPro 실기기 회귀는 대기 중"
+          "초기 17개 테스트 이후 SDK·앱으로 범위 확장\n2026-10-15 회사 기록상 app 107개·vision 45개 JVM 테스트 통과"
       },
       {
         title: "평가 앱 온디바이스 1:N 얼굴인증 테스트",
@@ -851,9 +851,9 @@ export const experiences: Experience[] = [
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
-      "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n6클래스 단일 IR Keras Test ACER 0.60%(2026-07-14), Validation 0.05%(07-23) 기록\n현재 12클래스는 새 통과 정책 재평가·독립 Test 대기",
+      "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n6클래스 단일 IR Keras Test ACER 0.60%(2026-07-14), Validation 0.05%(07-23) 기록\n현재 12클래스는 확장 검증셋 ACER 0.41%(2026-10-14, 독립 Test 아님)",
       "UBio-N Face Pro: 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과",
-      "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-09-18 회사 기록: vision 31개·app 88개 통과, 최신 실기기 연동 검증 대기)"
+      "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-10-15 회사 기록: app 107개·vision 45개 통과)\n제품 앱 기능 브랜치에 직접 연동해 실기기 기본 동작 확인"
     ]
   },
   {
