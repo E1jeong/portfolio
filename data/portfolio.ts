@@ -650,13 +650,13 @@ export const projects: Project[] = ([
       "JUnit4"
     ],
     highlights: [
-      "6클래스 단일 IR 독립 Test 기준 확보 후 고정 split 기반 12클래스·덴탈 마스크 처리로 확장",
+      "6클래스 단일 IR 기준 모델 확보 후 고정 split 기반 12클래스·덴탈 마스크 처리로 확장",
       "Keras MobileNetV2 INT8 양자화 후 2026-07-23 단일 IR Validation split에서 Float32와 동일 ACER 확인",
       "기존 6클래스 고정 IR 모델을 NXP i.MX 8M Plus NPU(NNAPI)에서 invoke P50 10–11ms로 구동하고, 별도의 RGB/IR 듀얼 카메라 추론 파이프라인 구축",
       "추론을 Vision SDK/AAR로 분리\n2026-10-15 기록상 app 107개·vision 45개 JVM 테스트 통과, 제품 앱 기능 브랜치 기본 동작 확인"
     ],
     outcomes: [
-      "6클래스 단일 IR Keras 모델: 2026-07-14 독립 Test ACER 0.60%, 07-23 Validation ACER 0.05%\n현재 12클래스는 2026-10-14 확장 검증셋 ACER 0.41% (NPU INT8, 독립 Test 아님)",
+      "12클래스 확장 검증셋 ACER 0.41% (NPU INT8, 2026-10-14)\n과거 6클래스 단일 IR Keras 모델은 Validation ACER 0.05% (2026-07-23)",
       "과거 6클래스 고정 IR NPU invoke P50 10–11ms와 2026-07-31 앱 End-to-End P50 47–49ms 검증 (최신 SDK 성능과 별개)"
     ],
     evidence: [
@@ -671,7 +671,7 @@ export const projects: Project[] = ([
     problem:
       "정확도 손실을 최소화하며 모델을 INT8로 양자화해 임베디드 NPU에 배포하고, 모델 invoke와 앱 End-to-End 지연을 구분해 측정 신뢰성을 확보해야 하는 과제 존재",
     actions: [
-      "과거 6클래스 데이터셋(Train 12,000 / Val 1,200 / Test 1,198)과 Subject Group K-Fold 실험 후, 현재 12클래스 단일 IR 고정 split 및 인물·페어 누수 검사로 전환",
+      "과거 6클래스 데이터셋(Train 12,000)과 Subject Group K-Fold 실험 후, 현재 12클래스 단일 IR 고정 split 및 인물·페어 누수 검사로 전환",
       "MobileNetV2 기반 양자화 친화적 구조 개조 및 Keras TFLite INT8 PTQ 파이프라인 수립",
       "Android 타깃 보드에서 RGB/IR 150ms 타임스탬프 허용 오차 기반 프레임 페어링 및 3-Executor 스레드 격리",
       "초기 17개 JVM 테스트로 확률 경계값·BMP 바이트 정합성을 검증하고, Vision SDK의 전처리·세션 판정과 앱 회귀 테스트로 범위 확장",
@@ -679,27 +679,22 @@ export const projects: Project[] = ([
       "NPU BPCER 폭등 현상의 원인을 역추적하여 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 장애 해결"
     ],
     result:
-      "6클래스 단일 IR Keras/MobileNetV2에서 Test ACER 0.60%(2026-07-14), Validation ACER 0.05%(07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책 기준 확장 검증셋(5,375장)에서 ACER 0.41%(NPU INT8, Float32 0.40%) 기록, 인쇄물 재현율은 이전 split 대비 73.68% → 92.32% (2026-10-14, 독립 Test 아님)\nVision SDK/AAR는 2026-10-15 회사 기록상 app 107개·vision 45개 테스트를 통과했고, 제품 앱 기능 브랜치에서 실기기 기본 동작 확인 후 세부 검증 진행 중",
+      "6클래스 단일 IR Keras/MobileNetV2에서 Validation ACER 0.05%(2026-07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책 기준 확장 검증셋(5,375장)에서 ACER 0.41%(NPU INT8, Float32 0.40%) 기록, 인쇄물 재현율은 이전 split 대비 73.68% → 92.32% (2026-10-14)\nVision SDK/AAR는 2026-10-15 회사 기록상 app 107개·vision 45개 테스트를 통과했고, 제품 앱 기능 브랜치에서 실기기 기본 동작 확인 후 세부 검증 진행 중",
     metrics: [
+      {
+        label: "12클래스 검증 ACER",
+        value: "0.41%",
+        description: "2026-10-14, 확장 검증셋 5,375장 NPU INT8"
+      },
       {
         label: "단일 IR ACER",
         value: "0.05%",
         description: "2026-07-23, 6클래스 단일 IR Validation (현재 12클래스와 구분)"
       },
       {
-        label: "독립 Test ACER",
-        value: "0.60%",
-        description: "2026-07-14, 6클래스 단일 IR Keras/MobileNetV2 INT8 고정 Test split"
-      },
-      {
         label: "6클래스 NPU 모델 invoke",
         value: "P50 10–11ms",
         description: "과거 6클래스 고정 IR 모델, NXP NPU(NNAPI)\n최신 SDK 측정 아님"
-      },
-      {
-        label: "12클래스 검증 ACER",
-        value: "0.41%",
-        description: "2026-10-14, 확장 검증셋 5,375장 NPU INT8\n독립 Test 아님"
       },
       {
         label: "얼굴인증 NPU 위임",
@@ -808,7 +803,7 @@ export const projects: Project[] = ([
         challenge:
           "동일 인물의 프레임이 Train과 Val/Test에 섞여 들어갈 경우 지표가 과도하게 낙관적으로 왜곡(Data Leakage)되고, 1채널 IR 이미지 주입 시 기존 3채널 사전학습 모델의 Conv1 활성화 스케일이 왜곡되는 문제 발생",
         solution:
-          "과거 Subject Group K-Fold 실험 후 현재는 고정 train/validation/test split의 인물·페어 누수를 검사\nIR Conv1 가중치 전이를 'mean'에서 'sum'으로 변경하여 초기 활성화 스케일 왜곡 방지",
+          "과거 Subject Group K-Fold 실험 후 현재는 고정 split의 인물·페어 누수를 검사\nIR Conv1 가중치 전이를 'mean'에서 'sum'으로 변경하여 초기 활성화 스케일 왜곡 방지",
         outcome:
           "인물 누수를 차단한 기존 6클래스 검증에서 단일 IR Validation ACER 0.05% 달성 (현재 12클래스 파이프라인과 구분 관리)"
       },
@@ -851,7 +846,7 @@ export const experiences: Experience[] = [
     role: "Android Developer / 대리",
     period: "2025.04 - 현재",
     points: [
-      "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n6클래스 단일 IR Keras Test ACER 0.60%(2026-07-14), Validation 0.05%(07-23) 기록\n현재 12클래스는 확장 검증셋 ACER 0.41%(2026-10-14, 독립 Test 아님)",
+      "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n12클래스 확장 검증셋 ACER 0.41%(NPU INT8, 2026-10-14), 과거 6클래스 단일 IR Validation 0.05%(07-23) 기록",
       "UBio-N Face Pro: 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과",
       "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-10-15 회사 기록: app 107개·vision 45개 통과)\n제품 앱 기능 브랜치에 직접 연동해 실기기 기본 동작 확인"
     ]
