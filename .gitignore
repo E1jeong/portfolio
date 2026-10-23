@@ -27,3 +27,6 @@ __pycache__/
 .env
 .env.local
 *.tsbuildinfo
+
+# graphify local cache (disposable)
+graphify-out/
