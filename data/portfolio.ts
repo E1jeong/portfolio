@@ -174,7 +174,7 @@ export const projects: Project[] = ([
     id: "ubio-n-face-pro",
     name: "UBio-N Face Pro",
     summary:
-      "일본 NEC 고객사 출입통제 플랫폼 요구사항을 Android 단말 앱에 통합한 프로덕션 앱 프로젝트",
+      "일본 고객사 출입통제 플랫폼 요구사항을 Android 단말 앱에 통합한 프로덕션 앱 프로젝트",
     period: "2025.07 - 현재",
     type: "Android Device",
     role: "Android 단말 앱 인증 확장, AIDL IPC 연동, DB 보안, 안정성 개선 전담",
@@ -196,38 +196,33 @@ export const projects: Project[] = ([
       "FeliCa 카드 인증 연동 및 카드 데이터의 로컬 DB·메모리 조회 경로 개선"
     ],
     outcomes: [
-      "사내 수용평가(RQA) 이슈 121건 중 118건 종결(97.5%, 2026.04 기준) 및 NEC 고객사 검수 이슈 25건 해결",
+      "사내 수용평가(RQA) 이슈 대응 및 고객사 검수 이슈 전건 해결 (2인 공동 담당)",
       "6차 릴리즈 고객사 검수 통과\nVision SDK/AAR를 제품 앱 기능 브랜치에 연동해 실기기 기본 동작 확인"
     ],
     evidence: [
-      "사내 RQA 이슈 트래커 종결 기록 (121건 중 118건 종결)",
-      "일본 NEC 고객사 6차 릴리즈 수용평가 검수 통과 자료",
+      "사내 RQA 이슈 트래커 종결 기록",
+      "일본 고객사 6차 릴리즈 수용평가 검수 통과 자료",
       "로컬 Gradle 멀티 모듈 소스 코드 구조"
     ],
     confidence: "code-and-notion",
     background:
-      "일본 NEC 고객사의 요구에 맞춰 출입통제 얼굴인식 단말의 외부 보안 플랫폼 연동을 확장하고, QR/NFC/EAP-TLS 등 엔터프라이즈 인증 수단을 기존 단말 소프트웨어에 통합한 프로덕션 개발 및 안정화 프로젝트",
+      "일본 고객사의 요구에 맞춰 출입통제 얼굴인식 단말의 외부 플랫폼 연동을 확장하고, QR/NFC/EAP-TLS 등 엔터프라이즈 인증 수단을 기존 단말 소프트웨어에 통합한 프로덕션 개발 및 안정화 프로젝트",
     problem:
-      "외부 보안 플랫폼 연동, 복수 인증 수단, 엔터프라이즈 Wi-Fi(EAP-TLS), 로컬 DB 보안, 대용량 오프라인 카드 매칭 요구를 기존 단말 제품 구조 안에 통합해야 하는 과제 존재",
+      "외부 플랫폼 연동, 복수 인증 수단, 엔터프라이즈 Wi-Fi(EAP-TLS), 로컬 DB 보안, 대용량 오프라인 카드 매칭 요구를 기존 단말 제품 구조 안에 통합해야 하는 과제 존재",
     actions: [
-      "외부 보안 앱과의 AIDL IPC 연동 흐름 정비 및 BindService 구조 설계",
+      "외부 앱과의 AIDL IPC 연동 흐름 정비 및 BindService 구조 설계",
       "WPA2-Enterprise(EAP-TLS) 인증서 가져오기·구성 및 예외 처리 구현",
       "BigDecimal 기반 SafeIntegerAdapter 주입으로 범위 초과 정수 응답의 JSON 파싱 예외 처리",
       "MediaPipe Tasks Vision 랜드마크 분석 기반 제스처 오인식 완화용 2차 필터링 설계",
       "FeliCa 카드 인식·인증 연동과 카드 데이터의 로컬 DB·메모리 조회 처리 구현"
     ],
     result:
-      "고객사 요구 기능을 기존 제품 구조에 통합하고, 2인 공동 담당으로 사내 RQA 121건 중 118건 종결(2026.04 기준), NEC 검수 이슈 25건 해결 및 6차 릴리즈 검수 통과\nVision SDK/AAR는 제품 앱 기능 브랜치에 연동해 실기기 기본 동작을 확인했으며 세부 검증 진행 중",
+      "고객사 요구 기능을 기존 제품 구조에 통합하고, 2인 공동 담당으로 사내 RQA 이슈 대응, 고객사 검수 이슈 전건 해결 및 6차 릴리즈 검수 통과\nVision SDK/AAR는 제품 앱 기능 브랜치에 연동해 실기기 기본 동작을 확인했으며 세부 검증 진행 중",
     metrics: [
-      {
-        label: "사내 RQA 이슈 종결",
-        value: "97.5%",
-        description: "121건 중 118건 종결 (2인 공동 담당, 2026.04 기준)"
-      },
       {
         label: "고객사 수용평가 이슈",
         value: "100% 해결",
-        description: "NEC 검수 이슈 25건 전건 해결 (버전 960.09~960.15)"
+        description: "고객사 검수 이슈 전건 해결 (2인 공동 담당)"
       },
       {
         label: "릴리즈 차수",
@@ -248,9 +243,9 @@ export const projects: Project[] = ([
           "2026-10-02 제품 앱 기능 브랜치에서 실기기 기본 동작 확인\n세부 검증 진행 중이며 7차 릴리즈 완료나 최종 안티스푸핑 검수를 뜻하지 않음"
       },
       {
-        title: "AIDL IPC 기반 외부 보안 앱 연동 인터페이스 정비",
+        title: "AIDL IPC 기반 외부 앱 연동 인터페이스 정비",
         description:
-          "Android 단말 앱과 타사 외부 보안 앱 사이의 멀티 프로세스 통신(IPC) 경계를 설정하고, 단말 잠금 해제와 이벤트 통지 흐름을 제어하는 통신 계층 개발",
+          "Android 단말 앱과 외부 앱 사이의 멀티 프로세스 통신(IPC) 경계를 설정하고, 단말 잠금 해제와 이벤트 통지 흐름을 제어하는 통신 계층 개발",
         challenge:
           "비동기 다중 프로세스 환경에서 IPC 호출 시의 타이밍 불일치 및 예외 상황 분기 누락으로 인해 단말이 잠금 해제 통지를 누락하거나 일시적으로 IPC 교착 상태에 빠지는 안정성 위험 존재",
         solution:
@@ -847,7 +842,7 @@ export const experiences: Experience[] = [
     period: "2025.04 - 현재",
     points: [
       "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n12클래스 확장 검증셋 ACER 0.41%(NPU INT8, 2026-10-14), 과거 6클래스 단일 IR Validation 0.05%(07-23) 기록",
-      "UBio-N Face Pro: 일본 NEC 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과",
+      "UBio-N Face Pro: 일본 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과",
       "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-10-15 회사 기록: app 107개·vision 45개 통과)\n제품 앱 기능 브랜치에 직접 연동해 실기기 기본 동작 확인"
     ]
   },
