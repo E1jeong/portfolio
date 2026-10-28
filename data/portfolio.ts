@@ -149,7 +149,7 @@ export const skillGroups = [
     items: [
       "Next.js App Router API",
       "Google Play Billing",
-      "Firebase Auth / FCM",
+      "Firebase FCM / Crashlytics",
       "MySQL",
       "GitHub Actions CI/CD"
     ]
@@ -648,7 +648,7 @@ export const projects: Project[] = ([
       "6클래스 단일 IR 기준 모델 확보 후 고정 split 기반 12클래스·덴탈 마스크 처리로 확장",
       "Keras MobileNetV2 INT8 양자화 후 2026-07-23 단일 IR Validation split에서 Float32와 동일 ACER 확인",
       "기존 6클래스 고정 IR 모델을 NXP i.MX 8M Plus NPU(NNAPI)에서 invoke P50 10–11ms로 구동하고, 별도의 RGB/IR 듀얼 카메라 추론 파이프라인 구축",
-      "추론을 Vision SDK/AAR로 분리\n2026-10-15 기록상 app 107개·vision 45개 JVM 테스트 통과, 제품 앱 기능 브랜치 기본 동작 확인"
+      "추론을 Vision SDK/AAR로 분리\n2026-10-25 기록상 app 115개·vision 61개 JVM 테스트 통과, 제품 앱 기능 브랜치 기본 동작 확인"
     ],
     outcomes: [
       "12클래스 확장 검증셋 ACER 0.41% (NPU INT8, 2026-10-14)\n과거 6클래스 단일 IR Keras 모델은 Validation ACER 0.05% (2026-07-23)",
@@ -657,7 +657,7 @@ export const projects: Project[] = ([
     evidence: [
       "Career-Hub Evidence: UBio-Vision (In-House Anti-Spoofing Deep Learning Model)",
       "GitHub access-liveness-model (Python 학습 및 양자화 파이프라인 코드)",
-      "Career-Hub android-anti-spoofing-lab Evidence: Vision SDK/AAR 및 2026-10-15 회사 테스트 기록 (app 107개 + vision 45개)",
+      "Career-Hub android-anti-spoofing-lab Evidence: Vision SDK/AAR 및 2026-10-25 회사 테스트 기록 (app 115개 + vision 61개)",
       "실기기 NXP i.MX 8M Plus NPU 회귀 테스트 로그 (2026-07-28)"
     ],
     confidence: "git",
@@ -674,7 +674,7 @@ export const projects: Project[] = ([
       "NPU BPCER 폭등 현상의 원인을 역추적하여 평가 스크립트 정규화 버그 규명 및 NNAPI 캐싱 장애 해결"
     ],
     result:
-      "6클래스 단일 IR Keras/MobileNetV2에서 Validation ACER 0.05%(2026-07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책 기준 확장 검증셋(5,375장)에서 ACER 0.41%(NPU INT8, Float32 0.40%) 기록, 인쇄물 재현율은 이전 split 대비 73.68% → 92.32% (2026-10-14)\nVision SDK/AAR는 2026-10-15 회사 기록상 app 107개·vision 45개 테스트를 통과했고, 제품 앱 기능 브랜치에서 실기기 기본 동작 확인 후 세부 검증 진행 중",
+      "6클래스 단일 IR Keras/MobileNetV2에서 Validation ACER 0.05%(2026-07-23) 기록\n현재 12클래스는 live·덴탈 2종 통과 정책 기준 확장 검증셋(5,375장)에서 ACER 0.41%(NPU INT8, Float32 0.40%) 기록, 인쇄물 재현율은 이전 split 대비 73.68% → 92.32% (2026-10-14)\nVision SDK/AAR는 2026-10-25 회사 기록상 app 115개·vision 61개 테스트를 통과했고, 제품 앱 기능 브랜치에서 실기기 기본 동작 확인 후 세부 검증 진행 중",
     metrics: [
       {
         label: "12클래스 검증 ACER",
@@ -731,7 +731,7 @@ export const projects: Project[] = ([
       {
         step: "05",
         title: "Vision SDK & Regression Tests",
-        desc: "추론·세션 판정을 SDK/AAR로 분리\n2026-10-15 기록상 app 107개·vision 45개 테스트 통과\n제품 앱 기능 브랜치 기본 동작 확인"
+        desc: "추론·세션 판정을 SDK/AAR로 분리\n2026-10-25 기록상 app 115개·vision 61개 테스트 통과\n제품 앱 기능 브랜치 기본 동작 확인"
       }
     ],
     repositories: [
@@ -811,7 +811,7 @@ export const projects: Project[] = ([
         solution:
           "초기에는 AI를 활용해 100회 캡처 스케줄, LIVE 79.9% Rejected vs 80.0% Allowed 판정 경계, 24-bit BMP 헤더·4바이트 row padding·바이트 오더를 검증하는 17개 JVM 테스트 구축\n이후 SDK 전처리·세션 상태와 앱 테스트로 확장",
         outcome:
-          "초기 17개 테스트 이후 SDK·앱으로 범위 확장\n2026-10-15 회사 기록상 app 107개·vision 45개 JVM 테스트 통과"
+          "초기 17개 테스트 이후 SDK·앱으로 범위 확장\n2026-10-25 회사 기록상 app 115개·vision 61개 JVM 테스트 통과"
       },
       {
         title: "평가 앱 온디바이스 1:N 얼굴인증 테스트",
@@ -843,7 +843,7 @@ export const experiences: Experience[] = [
     points: [
       "UBio-Vision: 자체 안티스푸핑 모델과 NPU 추론 구현\n12클래스 확장 검증셋 ACER 0.41%(NPU INT8, 2026-10-14), 과거 6클래스 단일 IR Validation 0.05%(07-23) 기록",
       "UBio-N Face Pro: 일본 고객사향 단말 앱의 AIDL IPC, EAP-TLS 인증서 구성, JSON 파싱 방어, DB 암호화 전담 및 6차 릴리즈 납품 검수 통과",
-      "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-10-15 회사 기록: app 107개·vision 45개 통과)\n제품 앱 기능 브랜치에 직접 연동해 실기기 기본 동작 확인"
+      "Vision SDK/AAR로 추론·세션 판정을 분리하고 회귀 테스트 확장 (2026-10-25 회사 기록: app 115개·vision 61개 통과)\n제품 앱 기능 브랜치에 직접 연동해 실기기 기본 동작 확인"
     ]
   },
   {
